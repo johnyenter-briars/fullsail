@@ -43,12 +43,7 @@ def get_magnet_link(ch_url):
 
 
 def solidtorrent_search(query):
-    '''
-        search on solid torrent for long result(upto 20) and print magnet link of torrent and also copy it to clipboard
-    '''
-
     url = 'https://solidtorrents.net/search?q='+query
-    # print(url)
 
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.2840.71 Safari/539.36'}
@@ -56,7 +51,6 @@ def solidtorrent_search(query):
 
     soup = bs(source.text, 'html.parser')
 
-    # name of all torrents (20)
     result = soup.find_all('h3', class_='subtitle-2 text-truncate')
 
     size = soup.find_all('strong')  # find size of torrent
@@ -71,12 +65,7 @@ def solidtorrent_search(query):
 
     for link in magnet:
         b: str = link.get('href')
-        print(b)
         if b is not None and re.match("^magnet:", b):
             magnet_links.append(b)
 
     print(magnet_links[0])
-
-query = "avengers end game"
-solidtorrent_search(query)
-# t1337x_search(query)
