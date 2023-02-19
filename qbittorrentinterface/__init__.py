@@ -26,40 +26,33 @@ futures = []
 future_id = 0
 
 
-async def get_index(request):
-    username = fsconfig.CONFIG["media-system-username"]
-    password = fsconfig.CONFIG["media-system-password"]
-
-    # future = asyncio.create_task(
-    #     doesnt_block_current_thread(username, password, fsconfig.CONFIG, f"test11.txt"))
-
-    future = asyncio.create_task(
-        blocks_current_thread(username, password, fsconfig.CONFIG, f"test11.txt"))
+async def start_job(request):
+    future = asyncio.create_task(blocks_current_thread())
 
     futures.append(future)
 
     global future_id
     future_id += 1
 
+    return web.Response(text=f"Future scheduled!")
+
+
+async def list_jobs(request):
     return web.Response(text=f"num futures:{len(futures)}")
 
 
 def start_qbittorrentinterface(config: dict):
+    hostname = fsconfig.CONFIG["fullsail-hostname"]
+    port = fsconfig.CONFIG["fullsail-port"]
+
     app = web.Application()
-    app.add_routes([web.get('/', get_index)])
-    web.run_app(app, host="localhost", port=8082)
+    app.add_routes([web.get('/', start_job)])
+    app.add_routes([web.get('/list', list_jobs)])
+    web.run_app(app, host=hostName, port=port)
 
 
-async def doesnt_block_current_thread(username: str, password: str, config: dict, file_name: str):
+async def blocks_current_thread():
     for i in range(10, 20):
-        await asyncio.sleep(1)
-        print(f"sent file: {i}")
-
-    futures.remove(asyncio.current_task())
-
-
-async def blocks_current_thread(username: str, password: str, config: dict, file_name: str, result=None):
-    for i in range(10, 20):
-        await send_file(username, password, fsconfig.CONFIG, f"test{i}-{future_id}.txt")
+        await send_file(f"test{i}-{future_id}.txt")
 
     futures.remove(asyncio.current_task())
