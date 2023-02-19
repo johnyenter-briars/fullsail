@@ -51,7 +51,7 @@ async def search_torrents(request):
     elif torrent_site == "solid":
         results = solidtorrent_search(search_term)
 
-    data = json.dumps(results)
+    data = jsonpickle.encode(results)
 
     return web.json_response(data)
 

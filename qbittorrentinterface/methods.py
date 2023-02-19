@@ -9,10 +9,6 @@ import jsonpickle
 
 from qbittorrentinterface.qbittorrentfile import QBitTorrentFile
 
-class StudentEncoder(JSONEncoder):
-        def default(self, o):
-            return o.__dict__
-
 
 async def get_running_torrents() -> List[QBitTorrentFile]:
     async with aiohttp.ClientSession() as session:
@@ -20,8 +16,5 @@ async def get_running_torrents() -> List[QBitTorrentFile]:
         async with session.get(qbittorrent_url) as resp:
             raw_json: List[dict] = await resp.json()
 
-            foo: List[QBitTorrentFile] = [QBitTorrentFile.from_dict(idk) for idk in raw_json]
-
-            return foo
-
-
+            return [
+                QBitTorrentFile.from_dict(idk) for idk in raw_json]
