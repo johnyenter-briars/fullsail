@@ -2,3 +2,5 @@ __pycache__/
 .vscode/
 config.json
 test.txt
+.mypy_cache/
+test.json

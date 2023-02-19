@@ -1,11 +1,6 @@
-from typing import Dict
-from magnetlinkscraper import solidtorrent_search
-from qbittorrentinterface import start_qbittorrentinterface
-from filetransfer import send_file
 import json
-import asyncio
-from asyncio import Task
 import fsconfig
+from webinterface import start_webinterface
 
 
 CONFIG = {}
@@ -17,7 +12,7 @@ def main():
 
         fsconfig.CONFIG = {key:value for key,value in config.items()}
 
-        start_qbittorrentinterface(config)
+        start_webinterface(config)
 
 if __name__ == "__main__":
     # asyncio.run(main())
