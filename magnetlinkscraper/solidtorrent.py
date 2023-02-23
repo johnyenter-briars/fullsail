@@ -4,7 +4,7 @@ import pyperclip as pc
 import requests
 import re
 
-from magnetlinkscraper.search_result import SearchResult
+from models import SearchResult
 
 
 def solidtorrent_search(query) -> List[SearchResult]:
