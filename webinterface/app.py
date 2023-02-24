@@ -18,9 +18,13 @@ media_transfer_jobs = []
 routes = web.RouteTableDef()
 
 
-@routes.get('/api/mediatransfer/start/{file_name}')
+@routes.post('/api/mediatransfer/start')
 async def _start_job(request):
-    future = asyncio.create_task(_schedule_send_file_job())
+    r = await request.json()
+
+    file_name = r["fileName"]
+
+    future = asyncio.create_task(_schedule_send_file_job(file_name))
 
     media_transfer_jobs.append(future)
 
@@ -48,6 +52,7 @@ async def _list_media(request):
 
     return web.json_response(response)
 
+
 @routes.get('/api/media/list/subs')
 async def _list_subs(request):
     response = await subtitle_files()
@@ -65,12 +70,11 @@ async def _list_torrents(request):
 @routes.post('/api/torrents/add')
 async def _add_torrents(request):
     r = await request.json()
-    y = r["magnet_links"]
 
-    for magnet_link in r["magnet_links"]:
+    for magnet_link in r["magnetLinks"]:
         response = await add_torrent(magnet_link)
 
-    return web.Response(text="idk")
+    return web.Response(text="torrents added")
 
 
 @routes.post('/api/torrents/resume')
@@ -80,7 +84,7 @@ async def _resume_torrents(request):
     for hash in r["hashes"]:
         response = await resume_torrent(hash)
 
-    return web.Response(text="idk")
+    return web.Response(text="torrents resumed")
 
 
 @routes.post('/api/torrents/pause')
@@ -90,7 +94,7 @@ async def pause_torrents(request):
     for hash in r["hashes"]:
         response = await pause_torrent(hash)
 
-    return web.Response(text="idk")
+    return web.Response(text="torrents paused")
 
 
 @routes.post('/api/torrents/delete')
@@ -100,7 +104,7 @@ async def _delete_torrents(request):
     for hash in r["hashes"]:
         response = await delete_torrent(hash)
 
-    return web.Response(text="idk")
+    return web.Response(text="torrents deleted")
 
 
 @routes.get('/api/search/{torrent_site}/{search_term}')
