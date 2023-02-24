@@ -17,10 +17,8 @@ async def get_running_torrents() -> List[dict]:
         qbittorrent_url = 'http://localhost:8080/api/v2/torrents/info'
         async with session.get(qbittorrent_url) as resp:
             foo = await resp.json()
-            print(foo)
             raw_json: List[dict] = await resp.json()
             # parsed = [QBTFile.from_dict(d) for d in raw_json]
-            # print(parsed)
             return raw_json
 
 
@@ -121,5 +119,5 @@ async def delete_torrent(hash: str):
 
         body = "\r\n".join(dataList)
         async with session.post(url, data=body, headers=headers) as resp:
-            data = await resp.text()
-            print(data)
+            response_text = await resp.text()
+            return response_text

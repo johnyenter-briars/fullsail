@@ -8,8 +8,6 @@ from magnetlinkscraper import t1337x_search
 from magnetlinkscraper import solidtorrent_search
 import json
 import jsonpickle
-from models import StartTorrentsRequest
-from models import UpdateTorrentsRequest
 from models.qbtfile import QBTFile, current_torrents_response_from_dict, current_torrents_response_to_dict
 from distutils.util import strtobool
 
@@ -66,9 +64,10 @@ async def _list_torrents(request):
 
 @routes.post('/api/torrents/add')
 async def _add_torrents(request):
-    r = StartTorrentsRequest.from_dict(await request.json())
+    r = await request.json()
+    y = r["magnet_links"]
 
-    for magnet_link in r.magnet_links:
+    for magnet_link in r["magnet_links"]:
         response = await add_torrent(magnet_link)
 
     return web.Response(text="idk")
@@ -76,9 +75,9 @@ async def _add_torrents(request):
 
 @routes.post('/api/torrents/resume')
 async def _resume_torrents(request):
-    r = UpdateTorrentsRequest.from_dict(await request.json())
+    r = await request.json()
 
-    for hash in r.hashes:
+    for hash in r["hashes"]:
         response = await resume_torrent(hash)
 
     return web.Response(text="idk")
@@ -86,9 +85,9 @@ async def _resume_torrents(request):
 
 @routes.post('/api/torrents/pause')
 async def pause_torrents(request):
-    r = UpdateTorrentsRequest.from_dict(await request.json())
+    r = await request.json()
 
-    for hash in r.hashes:
+    for hash in r["hashes"]:
         response = await pause_torrent(hash)
 
     return web.Response(text="idk")
@@ -96,9 +95,9 @@ async def pause_torrents(request):
 
 @routes.post('/api/torrents/delete')
 async def _delete_torrents(request):
-    r = UpdateTorrentsRequest.from_dict(await request.json())
+    r = await request.json()
 
-    for hash in r.hashes:
+    for hash in r["hashes"]:
         response = await delete_torrent(hash)
 
     return web.Response(text="idk")
