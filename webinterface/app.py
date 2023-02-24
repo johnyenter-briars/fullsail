@@ -10,7 +10,7 @@ import json
 import jsonpickle
 from models import StartTorrentsRequest
 from models import UpdateTorrentsRequest
-from models.qbtfile import QBTFile
+from models.qbtfile import QBTFile, current_torrents_response_from_dict, current_torrents_response_to_dict
 
 from qbittorrentinterface.methods import delete_torrent, get_running_torrents, pause_torrent, add_torrent, resume_torrent
 
@@ -46,15 +46,14 @@ async def list_jobs(request):
 
 @routes.get('/api/media/list')
 async def list_jobs(request):
-    resposne = await list_files()
-    return web.Response(text=f"num futures:{len(futures)}")
+    response = await list_files()
+
+    return web.json_response(response)
 
 
 @routes.get('/api/torrents/list')
 async def list_torrents(request):
-    files: List[QBTFile] = await get_running_torrents()
-
-    response = json.dumps(files)
+    files: List[dict] = await get_running_torrents()
 
     return web.json_response(files)
 

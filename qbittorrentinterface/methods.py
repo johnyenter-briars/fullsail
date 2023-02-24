@@ -12,15 +12,16 @@ import jsonpickle
 from models.qbtfile import QBTFile
 
 
-async def get_running_torrents() -> List[QBTFile]:
+async def get_running_torrents() -> List[dict]:
     async with aiohttp.ClientSession() as session:
         qbittorrent_url = 'http://localhost:8080/api/v2/torrents/info'
         async with session.get(qbittorrent_url) as resp:
             foo = await resp.json()
             print(foo)
             raw_json: List[dict] = await resp.json()
-            parsed = [QBTFile.from_dict(d) for d in raw_json]
-            return parsed
+            # parsed = [QBTFile.from_dict(d) for d in raw_json]
+            # print(parsed)
+            return raw_json
 
 
 async def add_torrent(magnet_link: str) -> str:
