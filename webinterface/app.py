@@ -10,6 +10,7 @@ import json
 import jsonpickle
 from models.qbtfile import QBTFile, current_torrents_response_from_dict, current_torrents_response_to_dict
 from distutils.util import strtobool
+from concurrent.futures import ThreadPoolExecutor
 
 from qbittorrentinterface.methods import delete_torrent, get_running_torrents, pause_torrent, add_torrent, resume_torrent
 
@@ -24,22 +25,20 @@ async def _start_job(request):
 
     file_name = r["fileName"]
 
-    future = asyncio.create_task(_schedule_send_file_job(file_name))
-
-    media_transfer_jobs.append(future)
+    media_transfer_jobs.append(asyncio.create_task(send_file(file_name)))
 
     return web.Response(text=f"Future scheduled!")
 
 
-async def _schedule_send_file_job(file_name):
-    await send_file(file_name)
-
-    media_transfer_jobs.remove(asyncio.current_task())
-
-
 @routes.get('/api/mediatransfer/listjobs')
 async def _list_jobs(request):
-    return web.Response(text=f"num futures:{len(media_transfer_jobs)}")
+    done_jobs = list(filter(lambda j: j.done(), media_transfer_jobs))
+
+    if len(done_jobs) != 0:
+        for job in done_jobs:
+            media_transfer_jobs.remove(job)
+
+    return web.Response(text=f"Number of jobs: {len(media_transfer_jobs)}")
 
 
 @routes.get('/api/media/list')
