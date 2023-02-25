@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="FullSail.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:FullSail.Views"
+    Shell.FlyoutBehavior="Disabled">
+
+    <TabBar Title="FullSail">
+        <ShellContent Title="Files in Media Store" Icon="icons8_database_export_50.png" Route="filesInMediaStore" ContentTemplate="{DataTemplate local:FilesInMediaStorePage}" />
+        <ShellContent Title="Files in Media Store" Icon="icons8_database_export_50.png" Route="filesInMediaStore" ContentTemplate="{DataTemplate local:FilesInMediaStorePage}" />
+    </TabBar>
+
+
+</Shell>
