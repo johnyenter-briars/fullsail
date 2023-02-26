@@ -9,6 +9,14 @@
     FlyoutBackgroundColor="{StaticResource Primary}"
     >
     <FlyoutItem 
+                Title="Media Controls" 
+                Icon="icons8_youtube_50.png"
+                >
+        <Tab>
+            <ShellContent  Route="mediaControls" ContentTemplate="{DataTemplate local:MediaControlPage}" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem 
                 Title="Files in Media Store" 
                 Icon="icons8_database_export_50.png"
                  >

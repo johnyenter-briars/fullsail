@@ -3,10 +3,99 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FullSail.Views.MediaControlPage"
              Title="MediaControlPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
-</ContentPage>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <BoxView Color="Green" />
+        <Label Text="Escape button"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+
+        <BoxView Grid.Column="1"
+                 Color="Blue" />
+        <Label Grid.Column="1"
+               Text="up button"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+
+        <BoxView Grid.Column="3"
+                 Color="Blue" />
+        <Label Grid.Column="3"
+               Text="toggle osd"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+
+        <BoxView Grid.Row="1"
+                 Color="Teal" />
+        <Label Grid.Row="1"
+               Text="left button"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+
+        <BoxView Grid.Row="1"
+                 Grid.Column="1"
+                 Color="Purple" />
+        <Label Grid.Row="1"
+               Grid.Column="1"
+               Text="enter button"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+
+        <BoxView Grid.Row="1"
+                 Grid.Column="2"
+                 Color="Purple" />
+        <Label Grid.Row="1"
+               Grid.Column="2"
+               Text="right button"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+
+        <BoxView Grid.Row="2"
+                 Grid.Column="1"
+                 Color="Purple" />
+        <Label Grid.Row="2"
+               Grid.Column="1"
+               Text="down button"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+
+        <BoxView Grid.Row="3"
+                 Grid.ColumnSpan="3"
+                 Color="Red" />
+        <Label Grid.Row="3"
+               Grid.ColumnSpan="3"
+               Text="track and volume slider"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+
+        <BoxView Grid.Row="4"
+                 Grid.ColumnSpan="3"
+                 Color="Red" />
+        <Label Grid.Row="4"
+               Grid.ColumnSpan="3"
+               Text="rr, play/pause, ff"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+
+        <BoxView Grid.Row="5"
+                 Grid.ColumnSpan="3"
+                 Color="Red" />
+        <Label Grid.Row="5"
+               Grid.ColumnSpan="3"
+               Text="Text input area"
+               HorizontalOptions="Center"
+               VerticalOptions="Center" />
+    </Grid>
+ </ContentPage>
