@@ -1,41 +1,47 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FullSail.Views.FilesInMediaStorePage"
+             x:Class="FullSail.Views.TorrentSearchPage"
              xmlns:ViewModels="clr-namespace:FullSail.ViewModels"
              xmlns:Models="clr-namespace:FullSail.Models"
-             x:DataType="{x:Type ViewModels:FilesInMediaStoreViewModel}"
-             Title="Files in Media Store">
+             x:DataType="{x:Type ViewModels:TorrentSearchViewModel}"
+             Title="Torrent Search">
+
     <StackLayout>
         <SearchBar x:Name="searchBar"
-                   Placeholder="Filter..."
+                   Placeholder="Search torrents..."
                    SearchCommand="{Binding PerformSearch}"
                    SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
+
+        <StackLayout RadioButtonGroup.GroupName="Search Site"
+                     RadioButtonGroup.SelectedValue="{Binding SelectedSearchSite}">
+            <Label Text="Search website:" />
+            <RadioButton Content="solid" Value="solid"  />
+            <RadioButton Content="xt1337" Value="t1337x"  />
+        </StackLayout>
+
         <ScrollView VerticalOptions="FillAndExpand" Margin="20">
-            <StackLayout BindableLayout.ItemsSource="{Binding FilteredMediaFiles}">
+            <StackLayout BindableLayout.ItemsSource="{Binding SearchResults}">
                 <BindableLayout.ItemTemplate>
-                    <DataTemplate x:DataType="{x:Type Models:MediaFile}">
+                    <DataTemplate x:DataType="{x:Type Models:SearchResult}">
                         <StackLayout
                             Margin="0,10,0,10"
                             Orientation="Vertical">
                             <Line Stroke="#CF9FFF"
                                     X2="500" />
-                            <Label Text="{Binding ShortName}"
+                            <Label Text="{Binding TorrentName}"
                                    FontSize="11"
                                    VerticalOptions="Center" />
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="Duration: "
+                                <Label Text="Number Seeders: "
                                        FontSize="10"
                                        VerticalOptions="Center"
                                        />
-                                <Label Text="{Binding Duration}"
+                                <Label Text="{Binding NumberSeeders}"
                                        FontSize="10"
                                        VerticalOptions="Center"
                                        />
                             </StackLayout>
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="ExecuteFileSelectedCommand" CommandParameter="{Binding .}" />
-                            </StackLayout.GestureRecognizers>
                         </StackLayout>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
@@ -43,6 +49,5 @@
         </ScrollView>
 
     </StackLayout>
-
 
 </ContentPage>

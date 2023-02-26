@@ -9,7 +9,7 @@ public partial class FilesInMediaStorePage : ContentPage
         InitializeComponent();
         BindingContext = new FilesInMediaStoreViewModel();
     }
-    private void ExecuteEventSelectedCommand(object sender, EventArgs e)
+    private void ExecuteFileSelectedCommand(object sender, EventArgs e)
     {
         var foo = 10;
     }

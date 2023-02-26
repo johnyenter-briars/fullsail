@@ -13,13 +13,11 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
     {
         Task.Run(async () =>
         {
-            MediaFiles = await FullSailClientSingleton.GetMediaFilesAsync(true);
+            MediaFiles = await FullSailClientSingleton.GetMediaFilesAsync(false);
             FilteredMediaFiles = MediaFiles;
         });
     }
-    private List<MediaFile> mediaFiles = new()
-    {
-    };
+    private List<MediaFile> mediaFiles = new();
 
     public List<MediaFile> MediaFiles
     {

@@ -60,7 +60,8 @@ public class FullSailClient
 
         if (clientResponse.IsSuccessStatusCode)
         {
-            return JsonConvert.DeserializeObject<TResponse>(await clientResponse.Content.ReadAsStringAsync()) ?? throw new NullReferenceException("JsonConvert.DeserializeObject<TResponse>");
+            var str = await clientResponse.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject<TResponse>(str) ?? throw new NullReferenceException("JsonConvert.DeserializeObject<TResponse>");
         }
         else
         {
@@ -72,5 +73,11 @@ public class FullSailClient
     public async Task<List<MediaFile>> GetMediaFilesAsync(bool getDuration = false)
     {
         return await FullSailRequest<List<MediaFile>>($"media/list?duration={getDuration}", HttpMethod.Get);
+    }
+    public async Task<List<SearchResult>> GetTorrentSearchResults(string query, SearchWebsite searchWebsite = SearchWebsite.solid)
+    {
+        var encodedQuery = query.Replace(" ", "+").ToString();
+
+        return await FullSailRequest<List<SearchResult>>($"search/{searchWebsite}/{encodedQuery}", HttpMethod.Get);
     }
 }
