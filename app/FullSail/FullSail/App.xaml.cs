@@ -1,4 +1,6 @@
-﻿namespace FullSail;
+﻿using FullSail.Managers;
+
+namespace FullSail;
 
 public partial class App : Application
 {
@@ -6,7 +8,12 @@ public partial class App : Application
     {
         InitializeComponent();
 
-        DependencyService.RegisterSingleton(new FullSailClient());
+        DependencyService.RegisterSingleton(new FullSailClient()
+            .UpdateSettings(PreferencesManager.GetHostname(),
+                            PreferencesManager.GetPort(),
+                            PreferencesManager.GetApiKey()
+                            )
+            );
 
         MainPage = new AppShell();
     }

@@ -32,6 +32,14 @@
             <ShellContent  Route="torrentSearch" ContentTemplate="{DataTemplate local:TorrentSearchPage}" />
         </Tab>
     </FlyoutItem>
+    <FlyoutItem 
+                Title="Settings" 
+                Icon="icons8_automatic_50.png"
+                >
+        <Tab>
+            <ShellContent  Route="settings" ContentTemplate="{DataTemplate local:SettingsPage}" />
+        </Tab>
+    </FlyoutItem>
 
     <TabBar Title="FullSail">
     </TabBar>

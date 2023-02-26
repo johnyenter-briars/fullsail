@@ -14,7 +14,6 @@ public class FullSailClient
 {
 
     private string _apiKey = "";
-    private string _userId = "";
     private string _hostName = "192.168.0.8";
     private int _port = 8082;
     private static readonly HttpClient _httpClient = new()
@@ -83,5 +82,12 @@ public class FullSailClient
         var encodedQuery = query.Replace(" ", "+").ToString();
 
         return await FullSailRequest<List<SearchResult>>($"search/{searchWebsite}/{encodedQuery}", HttpMethod.Get);
+    }
+    public FullSailClient UpdateSettings(string hostname, int port, string apiKey)
+    {
+        _hostName = hostname;
+        _port = port;
+        _apiKey = apiKey;
+        return this;
     }
 }
