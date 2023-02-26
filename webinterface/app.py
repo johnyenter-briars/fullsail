@@ -1,18 +1,17 @@
 import asyncio
+import logging
 from typing import List
-from mediatransfer.listfiles import media_files, subtitle_files
+from mediatransfer import media_files, subtitle_files
 import fsconfig
 from mediatransfer import send_file
 from aiohttp import web
 from magnetlinkscraper import t1337x_search
 from magnetlinkscraper import solidtorrent_search
-import json
-import jsonpickle
-from models.qbtfile import QBTFile, current_torrents_response_from_dict, current_torrents_response_to_dict
 from distutils.util import strtobool
 from concurrent.futures import ThreadPoolExecutor
+from mediatransfer.listfilesmediasystem import list_files_mediasystem
 
-from qbittorrentinterface.methods import delete_torrent, get_running_torrents, pause_torrent, add_torrent, resume_torrent
+from qbittorrentinterface import delete_torrent, get_running_torrents, pause_torrent, add_torrent, resume_torrent
 
 media_transfer_jobs = []
 
@@ -25,20 +24,24 @@ async def _start_job(request):
 
     file_name = r["fileName"]
 
-    media_transfer_jobs.append(asyncio.create_task(send_file(file_name)))
+    media_transfer_jobs.append((asyncio.create_task(send_file(file_name)), file_name))
 
-    return web.Response(text=f"Future scheduled!")
+    return web.json_response({
+        "numberRunningJobs": len(media_transfer_jobs)
+    })
 
 
 @routes.get('/api/mediatransfer/listjobs')
 async def _list_jobs(request):
-    done_jobs = list(filter(lambda j: j.done(), media_transfer_jobs))
+    done_jobs = list(filter(lambda j: j[0].done(), media_transfer_jobs))
 
     if len(done_jobs) != 0:
         for job in done_jobs:
             media_transfer_jobs.remove(job)
 
-    return web.Response(text=f"Number of jobs: {len(media_transfer_jobs)}")
+    files = [job[1] for job in media_transfer_jobs]
+
+    return web.json_response(files)
 
 
 @routes.get('/api/media/list')
@@ -48,6 +51,12 @@ async def _list_media(request):
     get_duration = bool(strtobool(get_duration))
 
     response = await media_files(get_duration)
+
+    return web.json_response(response)
+
+@routes.get('/api/media-system/list')
+async def _list_medimediasystem(request):
+    response = await list_files_mediasystem()
 
     return web.json_response(response)
 
@@ -124,6 +133,8 @@ def start_webinterface(config: dict):
     port = fsconfig.CONFIG["fullsail-port"]
 
     app = web.Application()
+
+    logging.basicConfig(level=logging.DEBUG)
 
     app.add_routes(routes)
 
