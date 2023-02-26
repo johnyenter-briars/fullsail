@@ -70,9 +70,13 @@ public class FullSailClient
         }
 
     }
-    public async Task<List<MediaFile>> GetMediaFilesAsync(bool getDuration = false)
+    public async Task<List<MediaFile>> GetMediaFilesInStore(bool getDuration = false)
     {
         return await FullSailRequest<List<MediaFile>>($"media/list?duration={getDuration}", HttpMethod.Get);
+    }
+    public async Task<List<MediaFile>> GetMediaFilesInMediaSystem()
+    {
+        return await FullSailRequest<List<MediaFile>>($"media-system/list", HttpMethod.Get);
     }
     public async Task<List<SearchResult>> GetTorrentSearchResults(string query, SearchWebsite searchWebsite = SearchWebsite.solid)
     {

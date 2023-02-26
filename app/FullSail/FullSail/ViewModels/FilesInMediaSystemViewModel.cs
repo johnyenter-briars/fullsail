@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace FullSail.ViewModels;
-internal class FilesInMediaStoreViewModel : BaseViewModel
+
+public class FilesInMediaSystemViewModel : BaseViewModel
 {
-    public FilesInMediaStoreViewModel()
+    public FilesInMediaSystemViewModel()
     {
         Task.Run(async () =>
         {
-            MediaFiles = await FullSailClientSingleton.GetMediaFilesInStore(false);
+            MediaFiles = await FullSailClientSingleton.GetMediaFilesInMediaSystem();
             FilteredMediaFiles = MediaFiles;
         });
     }

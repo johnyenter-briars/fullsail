@@ -17,6 +17,14 @@
         </Tab>
     </FlyoutItem>
     <FlyoutItem 
+                Title="Files in Media-System" 
+                Icon="icons8_laptop_play_video_64"
+                 >
+        <Tab>
+            <ShellContent  Route="filesInMediaSystem" ContentTemplate="{DataTemplate local:FilesInMediaSystemPage}" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem 
                 Title="Torrent Search" 
                 Icon="icons8_search_more_50.png"
                 >

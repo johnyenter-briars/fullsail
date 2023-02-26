@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FullSail.Views.FilesInMediaSystemPage"
+             xmlns:ViewModels="clr-namespace:FullSail.ViewModels"
+             xmlns:Models="clr-namespace:FullSail.Models"
+             x:DataType="{x:Type ViewModels:FilesInMediaSystemViewModel}"
+             Title="Files In Media-System">
+    <StackLayout>
+        <SearchBar x:Name="searchBar"
+                   Placeholder="Filter..."
+                   SearchCommand="{Binding PerformSearch}"
+                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
+        <ScrollView VerticalOptions="FillAndExpand" Margin="20">
+            <StackLayout BindableLayout.ItemsSource="{Binding FilteredMediaFiles}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type Models:MediaFile}">
+                        <StackLayout
+                            Margin="0,10,0,10"
+                            Orientation="Vertical">
+                            <Line Stroke="#CF9FFF"
+                                    X2="500" />
+                            <Label Text="{Binding ShortName}"
+                                   FontSize="11"
+                                   VerticalOptions="Center" />
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Duration: "
+                                       FontSize="10"
+                                       VerticalOptions="Center"
+                                       />
+                                <Label Text="{Binding Duration}"
+                                       FontSize="10"
+                                       VerticalOptions="Center"
+                                       />
+                            </StackLayout>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ExecuteFileSelectedCommand" CommandParameter="{Binding .}" />
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </ScrollView>
+
+    </StackLayout>
+</ContentPage>
