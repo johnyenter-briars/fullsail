@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FullSail.Views.MediaControlPage"
              xmlns:ViewModels="clr-namespace:FullSail.ViewModels"
+             xmlns:Behaviors="clr-namespace:FullSail.Behaviors"
              xmlns:Models="clr-namespace:FullSail.Models"
              x:DataType="{x:Type ViewModels:MediaControlViewModel}"
              Title="Media Control">
@@ -150,13 +151,52 @@
             x:Name="fastfoward"
             />
 
-        <BoxView Grid.Row="5"
+        <!--<BoxView Grid.Row="5"
                  Grid.ColumnSpan="3"
                  Color="Red" />
-        <Label Grid.Row="5"
+        <Label 
+                Grid.Row="5"
                Grid.ColumnSpan="3"
                Text="Text input area"
                HorizontalOptions="Center"
-               VerticalOptions="Center" />
+               VerticalOptions="Center" />-->
+        <!--<Entry 
+            TextColor="BlueViolet" 
+            Grid.Row="5"
+            Grid.ColumnSpan="2"
+            Text="test"  
+            FontSize="Large"
+            HeightRequest = "75"  
+           
+           />-->
+        <Frame 
+            BorderColor="LightGray" 
+            HasShadow="False" 
+            Padding="15" 
+            Grid.Row="5"
+            Grid.ColumnSpan="2"
+            BackgroundColor="Black"
+            >
+            <Editor 
+                    Text="{Binding SearchText}"
+                    AutoSize="TextChanges" 
+                    FontSize="Medium" 
+                    Margin="0">
+                <Editor.Behaviors>
+                    <Behaviors:TextChangedBehavior Command="{Binding EnterTextChangedCommand}"/>
+                </Editor.Behaviors>
+            </Editor>
+        </Frame>
+
+        <Button 
+            Margin="10, 25, 10, 25" 
+            Grid.Row="5" 
+            Grid.Column="2"
+            BackgroundColor="{StaticResource Blue100Accent}"
+            TextColor="white"
+            ImageSource="icons8_enter_mac_key_50.png"
+            Command="{Binding EnterTextCommand}"
+            />
+
     </Grid>
 </ContentPage>

@@ -17,5 +17,21 @@ namespace FullSail.ViewModels
         public ICommand RightCommand => new Command<Button>(async (Button button) => { await KodiClientSingleton.InputRightAsync(); });
         public ICommand DownCommand => new Command<Button>(async (Button button) => { await KodiClientSingleton.InputDownAsync(); });
         public ICommand TogglePlayPauseCommand => new Command<Button>(async (Button button) => { await KodiClientSingleton.TogglePlayPausePlayerAsync(); });
+        private string searchText = "";
+
+        public string SearchText
+        {
+            get { return searchText; }
+            set { SetProperty(ref searchText, value); }
+        }
+        public ICommand EnterTextCommand => new Command(async () =>
+        {
+            await KodiClientSingleton.InputSendText(searchText);
+            SearchText = "";
+        });
+        public ICommand EnterTextChangedCommand => new Command<string>(async (string e) =>
+        {
+            await KodiClientSingleton.InputText(searchText);
+        });
     }
 }
