@@ -147,7 +147,7 @@ public class KodiClient
         await PostRequestAsync(requestObject);
     }
 
-    async Task SetVolumeAsync(int level)
+    public async Task SetVolumeAsync(int volumePercentage)
     {
         var requestObject = $@"
     {{
@@ -155,7 +155,7 @@ public class KodiClient
         ""id"": 1,
         ""method"": ""Application.SetVolume"",
         ""params"": {{
-            ""volume"": {level}
+            ""volume"": {volumePercentage}
         }}
     }}";
         await PostRequestAsync(requestObject);

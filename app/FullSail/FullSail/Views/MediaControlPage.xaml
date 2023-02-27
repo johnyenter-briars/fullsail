@@ -101,23 +101,30 @@
             CommandParameter="{x:Reference down}"
             />
 
-        <BoxView Grid.Row="3"
+        <!--<BoxView Grid.Row="3"
                  Grid.ColumnSpan="3"
                  Color="Red" />
         <Label Grid.Row="3"
                Grid.ColumnSpan="3"
                Text="track and volume slider"
                HorizontalOptions="Center"
-               VerticalOptions="Center" />
-
-        <!--<BoxView Grid.Row="4"
-                 Grid.ColumnSpan="3"
-                 Color="Red" />
-        <Label Grid.Row="4"
-               Grid.ColumnSpan="3"
-               Text="rr, play/pause, ff"
-               HorizontalOptions="Center"
                VerticalOptions="Center" />-->
+
+        <VerticalStackLayout
+                    Grid.Row="3"
+                    Grid.ColumnSpan="3"
+                    BackgroundColor="blue"
+            >
+            <Slider 
+                    Margin="10, 20, 10, 20"
+                    ValueChanged="VolumeSlider_Changed" 
+                />
+
+            <Slider 
+                    Margin="10, 20, 10, 20"
+                    ValueChanged="SeekSlider_Changed" 
+                />
+        </VerticalStackLayout>
 
         <Button 
             Margin="20, 20, 20, 20" 
@@ -151,24 +158,6 @@
             x:Name="fastfoward"
             />
 
-        <!--<BoxView Grid.Row="5"
-                 Grid.ColumnSpan="3"
-                 Color="Red" />
-        <Label 
-                Grid.Row="5"
-               Grid.ColumnSpan="3"
-               Text="Text input area"
-               HorizontalOptions="Center"
-               VerticalOptions="Center" />-->
-        <!--<Entry 
-            TextColor="BlueViolet" 
-            Grid.Row="5"
-            Grid.ColumnSpan="2"
-            Text="test"  
-            FontSize="Large"
-            HeightRequest = "75"  
-           
-           />-->
         <Frame 
             BorderColor="LightGray" 
             HasShadow="False" 
