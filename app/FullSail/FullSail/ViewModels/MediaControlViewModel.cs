@@ -9,35 +9,13 @@ namespace FullSail.ViewModels
 {
     internal class MediaControlViewModel : BaseViewModel
     {
-        public ICommand ButtonClickedCommand => new Command<string>(async (string buttonName) =>
-        {
-            switch (buttonName)
-            {
-                case "Esc":
-                    await KodiClientSingleton.InputBackAsync();
-                    break;
-                case "OSD":
-                    await KodiClientSingleton.ShowOSD();
-                    break;
-                case "Up":
-                    await KodiClientSingleton.InputUpAsync();
-                    break;
-                case "Down":
-                    await KodiClientSingleton.InputDownAsync();
-                    break;
-                case "Left":
-                    await KodiClientSingleton.InputLeftAsync();
-                    break;
-                case "Right":
-                    await KodiClientSingleton.InputRightAsync();
-                    break;
-                case "Enter":
-                    await KodiClientSingleton.InputSelectAsync();
-                    break;
-
-                default:
-                    throw new ApplicationException($"Unknown button value: {buttonName}");
-            }
-        });
+        public ICommand EscCommand => new Command<Button>(async (Button button) => { await KodiClientSingleton.InputBackAsync(); });
+        public ICommand UpCommand => new Command<Button>(async (Button button) => { await KodiClientSingleton.InputUpAsync(); });
+        public ICommand OSDCommand => new Command<Button>(async (Button button) => { await KodiClientSingleton.ShowOSD(); });
+        public ICommand LeftCommand => new Command<Button>(async (Button button) => { await KodiClientSingleton.InputLeftAsync(); });
+        public ICommand EnterCommand => new Command<Button>(async (Button button) => { await KodiClientSingleton.InputSelectAsync(); });
+        public ICommand RightCommand => new Command<Button>(async (Button button) => { await KodiClientSingleton.InputRightAsync(); });
+        public ICommand DownCommand => new Command<Button>(async (Button button) => { await KodiClientSingleton.InputDownAsync(); });
+        public ICommand TogglePlayPauseCommand => new Command<Button>(async (Button button) => { await KodiClientSingleton.TogglePlayPausePlayerAsync(); });
     }
 }

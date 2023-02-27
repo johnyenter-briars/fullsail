@@ -27,8 +27,8 @@
             BackgroundColor="{StaticResource Blue100Accent}"
             TextColor="white"
             x:Name="esc"
-            Command="{Binding ButtonClickedCommand }"
-            CommandParameter="{Binding Text, Source={x:Reference esc}}"
+            Command="{Binding EscCommand }"
+            CommandParameter="{x:Reference esc}"
             />
 
         <Button 
@@ -38,8 +38,8 @@
             BackgroundColor="{StaticResource Primary}"
             TextColor="white"
             x:Name="up"
-            Command="{Binding ButtonClickedCommand }"
-            CommandParameter="{Binding Text, Source={x:Reference up}}"
+            Command="{Binding UpCommand }"
+            CommandParameter="{x:Reference up}"
             />
 
         <Button 
@@ -49,8 +49,8 @@
             BackgroundColor="{StaticResource Blue100Accent}"
             TextColor="white"
             x:Name="osd"
-            Command="{Binding ButtonClickedCommand }"
-            CommandParameter="{Binding Text, Source={x:Reference osd}}"
+            Command="{Binding OSDCommand }"
+            CommandParameter="{x:Reference osd}"
             />
 
         <Button 
@@ -60,8 +60,8 @@
             BackgroundColor="{StaticResource Primary}"
             TextColor="white"
             x:Name="left"
-            Command="{Binding ButtonClickedCommand }"
-            CommandParameter="{Binding Text, Source={x:Reference left}}"
+            Command="{Binding LeftCommand }"
+            CommandParameter="{x:Reference left}"
             />
 
         <Button 
@@ -72,8 +72,8 @@
             BackgroundColor="{StaticResource Cyan200Accent}"
             TextColor="white"
             x:Name="enter"
-            Command="{Binding ButtonClickedCommand }"
-            CommandParameter="{Binding Text, Source={x:Reference enter}}"
+            Command="{Binding EnterCommand }"
+            CommandParameter="{x:Reference enter}"
             />
 
         <Button 
@@ -84,8 +84,8 @@
             BackgroundColor="{StaticResource Primary}"
             TextColor="white"
             x:Name="right"
-            Command="{Binding ButtonClickedCommand }"
-            CommandParameter="{Binding Text, Source={x:Reference right}}"
+            Command="{Binding RightCommand}"
+            CommandParameter="{x:Reference right}"
             />
 
         <Button 
@@ -96,8 +96,8 @@
             BackgroundColor="{StaticResource Primary}"
             TextColor="white"
             x:Name="down"
-            Command="{Binding ButtonClickedCommand }"
-            CommandParameter="{Binding Text, Source={x:Reference down}}"
+            Command="{Binding DownCommand }"
+            CommandParameter="{x:Reference down}"
             />
 
         <BoxView Grid.Row="3"
@@ -109,14 +109,47 @@
                HorizontalOptions="Center"
                VerticalOptions="Center" />
 
-        <BoxView Grid.Row="4"
+        <!--<BoxView Grid.Row="4"
                  Grid.ColumnSpan="3"
                  Color="Red" />
         <Label Grid.Row="4"
                Grid.ColumnSpan="3"
                Text="rr, play/pause, ff"
                HorizontalOptions="Center"
-               VerticalOptions="Center" />
+               VerticalOptions="Center" />-->
+
+        <Button 
+            Margin="20, 20, 20, 20" 
+            Text="Rewind" 
+            Grid.Row="4" 
+            Grid.Column="0"
+            BackgroundColor="{StaticResource Primary}"
+            TextColor="white"
+            ImageSource="icons8_fast_forward_30.png"
+            x:Name="rewind"
+            />
+        <Button 
+            Margin="20, 20, 20, 20" 
+            Text="PlayPause" 
+            Grid.Row="4" 
+            Grid.Column="1"
+            BackgroundColor="{StaticResource Primary}"
+            TextColor="white"
+            ImageSource="icons8_fast_forward_30.png"
+            x:Name="playpause"
+            Command="{Binding TogglePlayPauseCommand }"
+            CommandParameter="{x:Reference playpause}"
+            />
+        <Button 
+            Margin="20, 20, 20, 20" 
+            Text="" 
+            Grid.Row="4" 
+            Grid.Column="2"
+            BackgroundColor="{StaticResource Primary}"
+            TextColor="white"
+            ImageSource="icons8_fast_forward_30.png"
+            x:Name="fastfoward"
+            />
 
         <BoxView Grid.Row="5"
                  Grid.ColumnSpan="3"
