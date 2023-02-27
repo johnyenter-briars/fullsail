@@ -1,30 +1,32 @@
 ﻿using FullSail.Managers;
 using System;
 using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 
 namespace FullSail;
 
-class KodiClient
+public class KodiClient
 {
     private static readonly HttpClient client = new HttpClient();
+    private string _hostName;
+    private int _port;
+    private string _username;
+    private string _password;
+
     private async Task PostRequestAsync(string requestObject)
     {
-        var username = PreferencesManager.GetKodiUsername();
-        var password = PreferencesManager.GetKodiPassword();
-        var hostname = PreferencesManager.GetKodiHostname();
-        var port = PreferencesManager.GetKodiPort();
-
         var requestBody = new StringContent(requestObject);
         requestBody.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-        var credential = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{username}:{password}"));
+        var credential = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{_username}:{_password}"));
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credential);
 
-        var request = new HttpRequestMessage(HttpMethod.Post, $"http://{hostname}:{port}/jsonrpc");
+        var request = new HttpRequestMessage(HttpMethod.Post, $"http://{_hostName}:{_port}/jsonrpc");
         request.Content = requestBody;
 
         var response = await client.SendAsync(request);
@@ -128,7 +130,7 @@ class KodiClient
 
         await PostRequestAsync(requestObject);
     }
-    async Task SeekPlayerAsync(int percentage)
+    public async Task SeekPlayerAsync(int percentage)
     {
         var requestObject = $@"
     {{
@@ -159,7 +161,7 @@ class KodiClient
         await PostRequestAsync(requestObject);
     }
 
-    async Task InputSelectAsync()
+    public async Task InputSelectAsync()
     {
         var requestObject = $@"
     {{
@@ -170,7 +172,7 @@ class KodiClient
         await PostRequestAsync(requestObject);
     }
 
-    async Task InputBackAsync()
+    public async Task InputBackAsync()
     {
         var requestObject = $@"
     {{
@@ -181,7 +183,7 @@ class KodiClient
         await PostRequestAsync(requestObject);
     }
 
-    async Task InputExecuteActionAsync()
+    public async Task InputExecuteActionAsync()
     {
         var requestObject = $@"
     {{
@@ -192,7 +194,7 @@ class KodiClient
         await PostRequestAsync(requestObject);
     }
 
-    async Task InputLeftAsync()
+    public async Task InputLeftAsync()
     {
         var requestObject = $@"
     {{
@@ -203,7 +205,7 @@ class KodiClient
         await PostRequestAsync(requestObject);
     }
 
-    async Task InputRightAsync()
+    public async Task InputRightAsync()
     {
         var requestObject = $@"
     {{
@@ -214,7 +216,7 @@ class KodiClient
         await PostRequestAsync(requestObject);
     }
 
-    async Task InputDownAsync()
+    public async Task InputDownAsync()
     {
         var requestObject = $@"
     {{
@@ -225,7 +227,7 @@ class KodiClient
         await PostRequestAsync(requestObject);
     }
 
-    async Task InputUpAsync()
+    public async Task InputUpAsync()
     {
         var requestObject = $@"
     {{
@@ -236,7 +238,7 @@ class KodiClient
         await PostRequestAsync(requestObject);
     }
 
-    async Task StopPlayerAsync()
+    public async Task StopPlayerAsync()
     {
         var requestObject = $@"
     {{
@@ -250,7 +252,7 @@ class KodiClient
         await PostRequestAsync(requestObject);
     }
 
-    async Task TogglePlayPausePlayerAsync()
+    public async Task TogglePlayPausePlayerAsync()
     {
         var requestObject = $@"
         {{
@@ -263,5 +265,13 @@ class KodiClient
         }}";
 
         await PostRequestAsync(requestObject);
+    }
+    public KodiClient UpdateSettings(string hostname, int port, string username, string password)
+    {
+        _hostName = hostname;
+        _port = port;
+        _username = username;
+        _password = password;
+        return this;
     }
 }

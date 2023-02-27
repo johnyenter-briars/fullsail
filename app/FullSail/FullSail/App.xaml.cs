@@ -15,6 +15,14 @@ public partial class App : Application
                             )
             );
 
+        DependencyService.RegisterSingleton(new KodiClient()
+            .UpdateSettings(PreferencesManager.GetKodiHostname(),
+                            PreferencesManager.GetKodiPort(),
+                            PreferencesManager.GetKodiUsername(),
+                            PreferencesManager.GetKodiPassword()
+                            )
+            );
+
         MainPage = new AppShell();
     }
 }

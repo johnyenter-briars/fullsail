@@ -1,9 +1,14 @@
+using FullSail.ViewModels;
+
 namespace FullSail.Views;
 
 public partial class MediaControlPage : ContentPage
 {
-	public MediaControlPage()
-	{
-		InitializeComponent();
-	}
+    private KodiClient kodiClient;
+    public MediaControlPage()
+    {
+        InitializeComponent();
+
+        BindingContext = new MediaControlViewModel();
+    }
 }

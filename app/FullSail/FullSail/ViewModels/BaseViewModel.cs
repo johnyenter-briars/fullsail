@@ -7,6 +7,7 @@ namespace FullSail.ViewModels;
 public class BaseViewModel : INotifyPropertyChanged
 {
     protected FullSailClient FullSailClientSingleton = DependencyService.Get<FullSailClient>();
+    protected KodiClient KodiClientSingleton = DependencyService.Get<KodiClient>();
     bool isBusy = false;
     public bool IsBusy
     {

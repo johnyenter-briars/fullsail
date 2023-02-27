@@ -64,8 +64,13 @@ namespace FullSail.ViewModels
                                             PreferencesManager.GetPort(),
                                             PreferencesManager.GetApiKey()
                                             );
+
+                KodiClientSingleton.UpdateSettings(PreferencesManager.GetKodiHostname(),
+                                            PreferencesManager.GetKodiPort(),
+                                            PreferencesManager.GetKodiUsername(),
+                                            PreferencesManager.GetKodiPassword()
+                                            );
             }
         }
-
     }
 }

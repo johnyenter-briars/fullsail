@@ -2,7 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FullSail.Views.MediaControlPage"
-             Title="MediaControlPage">
+             xmlns:ViewModels="clr-namespace:FullSail.ViewModels"
+             xmlns:Models="clr-namespace:FullSail.Models"
+             x:DataType="{x:Type ViewModels:MediaControlViewModel}"
+             Title="Media Control">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -18,58 +21,84 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <BoxView Color="Green" />
-        <Label Text="Escape button"
-               HorizontalOptions="Center"
-               VerticalOptions="Center" />
+        <Button 
+            Margin="10, 35, 10, 35" 
+            Text="Esc" 
+            BackgroundColor="{StaticResource Blue100Accent}"
+            TextColor="white"
+            x:Name="esc"
+            Command="{Binding ButtonClickedCommand }"
+            CommandParameter="{Binding Text, Source={x:Reference esc}}"
+            />
 
-        <BoxView Grid.Column="1"
-                 Color="Blue" />
-        <Label Grid.Column="1"
-               Text="up button"
-               HorizontalOptions="Center"
-               VerticalOptions="Center" />
+        <Button 
+            Margin="20, 20, 20, 20" 
+            Text="Up" 
+            Grid.Column="1" 
+            BackgroundColor="{StaticResource Primary}"
+            TextColor="white"
+            x:Name="up"
+            Command="{Binding ButtonClickedCommand }"
+            CommandParameter="{Binding Text, Source={x:Reference up}}"
+            />
 
-        <BoxView Grid.Column="3"
-                 Color="Blue" />
-        <Label Grid.Column="3"
-               Text="toggle osd"
-               HorizontalOptions="Center"
-               VerticalOptions="Center" />
+        <Button 
+            Margin="10, 35, 10, 35" 
+            Text="OSD" 
+            Grid.Column="3" 
+            BackgroundColor="{StaticResource Blue100Accent}"
+            TextColor="white"
+            x:Name="osd"
+            Command="{Binding ButtonClickedCommand }"
+            CommandParameter="{Binding Text, Source={x:Reference osd}}"
+            />
 
-        <BoxView Grid.Row="1"
-                 Color="Teal" />
-        <Label Grid.Row="1"
-               Text="left button"
-               HorizontalOptions="Center"
-               VerticalOptions="Center" />
+        <Button 
+            Margin="20, 20, 20, 20" 
+            Text="Left" 
+            Grid.Row="1" 
+            BackgroundColor="{StaticResource Primary}"
+            TextColor="white"
+            x:Name="left"
+            Command="{Binding ButtonClickedCommand }"
+            CommandParameter="{Binding Text, Source={x:Reference left}}"
+            />
 
-        <BoxView Grid.Row="1"
-                 Grid.Column="1"
-                 Color="Purple" />
-        <Label Grid.Row="1"
-               Grid.Column="1"
-               Text="enter button"
-               HorizontalOptions="Center"
-               VerticalOptions="Center" />
+        <Button 
+            Margin="20, 20, 20, 20" 
+            Text="Enter" 
+            Grid.Row="1" 
+            Grid.Column="1"
+            BackgroundColor="{StaticResource Cyan200Accent}"
+            TextColor="white"
+            x:Name="enter"
+            Command="{Binding ButtonClickedCommand }"
+            CommandParameter="{Binding Text, Source={x:Reference enter}}"
+            />
 
-        <BoxView Grid.Row="1"
-                 Grid.Column="2"
-                 Color="Purple" />
-        <Label Grid.Row="1"
-               Grid.Column="2"
-               Text="right button"
-               HorizontalOptions="Center"
-               VerticalOptions="Center" />
+        <Button 
+            Margin="20, 20, 20, 20" 
+            Text="Right" 
+            Grid.Row="1" 
+            Grid.Column="2"
+            BackgroundColor="{StaticResource Primary}"
+            TextColor="white"
+            x:Name="right"
+            Command="{Binding ButtonClickedCommand }"
+            CommandParameter="{Binding Text, Source={x:Reference right}}"
+            />
 
-        <BoxView Grid.Row="2"
-                 Grid.Column="1"
-                 Color="Purple" />
-        <Label Grid.Row="2"
-               Grid.Column="1"
-               Text="down button"
-               HorizontalOptions="Center"
-               VerticalOptions="Center" />
+        <Button 
+            Margin="20, 20, 20, 20" 
+            Text="Down" 
+            Grid.Row="2" 
+            Grid.Column="1"
+            BackgroundColor="{StaticResource Primary}"
+            TextColor="white"
+            x:Name="down"
+            Command="{Binding ButtonClickedCommand }"
+            CommandParameter="{Binding Text, Source={x:Reference down}}"
+            />
 
         <BoxView Grid.Row="3"
                  Grid.ColumnSpan="3"
@@ -98,4 +127,4 @@
                HorizontalOptions="Center"
                VerticalOptions="Center" />
     </Grid>
- </ContentPage>
+</ContentPage>
