@@ -22,10 +22,10 @@
         </Grid.ColumnDefinitions>
 
         <Button 
-            Margin="10, 35, 10, 35" 
-            Text="Esc" 
+            Margin="10, 25, 10, 25" 
             BackgroundColor="{StaticResource Blue100Accent}"
             TextColor="white"
+            ImageSource="icons8_u_turn_to_left_64.png"
             x:Name="esc"
             Command="{Binding EscCommand }"
             CommandParameter="{x:Reference esc}"
@@ -33,21 +33,21 @@
 
         <Button 
             Margin="20, 20, 20, 20" 
-            Text="Up" 
             Grid.Column="1" 
             BackgroundColor="{StaticResource Primary}"
             TextColor="white"
+            ImageSource="icons8_up_arrow_60.png"
             x:Name="up"
             Command="{Binding UpCommand }"
             CommandParameter="{x:Reference up}"
             />
 
         <Button 
-            Margin="10, 35, 10, 35" 
-            Text="OSD" 
+            Margin="10, 25, 10, 25" 
             Grid.Column="3" 
             BackgroundColor="{StaticResource Blue100Accent}"
             TextColor="white"
+            ImageSource="icons8_slider_48.png"
             x:Name="osd"
             Command="{Binding OSDCommand }"
             CommandParameter="{x:Reference osd}"
@@ -55,10 +55,10 @@
 
         <Button 
             Margin="20, 20, 20, 20" 
-            Text="Left" 
             Grid.Row="1" 
             BackgroundColor="{StaticResource Primary}"
             TextColor="white"
+            ImageSource="icons8_left_arrow_60.png"
             x:Name="left"
             Command="{Binding LeftCommand }"
             CommandParameter="{x:Reference left}"
@@ -66,11 +66,11 @@
 
         <Button 
             Margin="20, 20, 20, 20" 
-            Text="Enter" 
             Grid.Row="1" 
             Grid.Column="1"
             BackgroundColor="{StaticResource Cyan200Accent}"
             TextColor="white"
+            ImageSource="icons8_checked_checkbox_50.png"
             x:Name="enter"
             Command="{Binding EnterCommand }"
             CommandParameter="{x:Reference enter}"
@@ -78,11 +78,11 @@
 
         <Button 
             Margin="20, 20, 20, 20" 
-            Text="Right" 
             Grid.Row="1" 
             Grid.Column="2"
             BackgroundColor="{StaticResource Primary}"
             TextColor="white"
+            ImageSource="icons8_right_arrow_60.png"
             x:Name="right"
             Command="{Binding RightCommand}"
             CommandParameter="{x:Reference right}"
@@ -90,11 +90,11 @@
 
         <Button 
             Margin="20, 20, 20, 20" 
-            Text="Down" 
             Grid.Row="2" 
             Grid.Column="1"
             BackgroundColor="{StaticResource Primary}"
             TextColor="white"
+            ImageSource="icons8_down_arrow_60.png"
             x:Name="down"
             Command="{Binding DownCommand }"
             CommandParameter="{x:Reference down}"
@@ -125,17 +125,16 @@
             Grid.Column="0"
             BackgroundColor="{StaticResource Primary}"
             TextColor="white"
-            ImageSource="icons8_fast_forward_30.png"
+            ImageSource="icons8_rewind_50.png"
             x:Name="rewind"
             />
         <Button 
             Margin="20, 20, 20, 20" 
-            Text="PlayPause" 
             Grid.Row="4" 
             Grid.Column="1"
             BackgroundColor="{StaticResource Primary}"
             TextColor="white"
-            ImageSource="icons8_fast_forward_30.png"
+            ImageSource="icons8_play_pause_48_2.png"
             x:Name="playpause"
             Command="{Binding TogglePlayPauseCommand }"
             CommandParameter="{x:Reference playpause}"
@@ -147,7 +146,7 @@
             Grid.Column="2"
             BackgroundColor="{StaticResource Primary}"
             TextColor="white"
-            ImageSource="icons8_fast_forward_30.png"
+            ImageSource="icons8_fast_forward_50.png"
             x:Name="fastfoward"
             />
 

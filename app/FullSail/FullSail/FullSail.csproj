@@ -50,12 +50,28 @@
 
 	<ItemGroup>
 		<None Remove="Resources\Images\icons8_automatic_50.png" />
+		<None Remove="Resources\Images\icons8_checked_checkbox_50.png" />
 		<None Remove="Resources\Images\icons8_controls_64.png" />
 		<None Remove="Resources\Images\icons8_database_export_50.png" />
+		<None Remove="Resources\Images\icons8_down_arrow_60.png" />
+		<None Remove="Resources\Images\icons8_down_button_50.png" />
 		<None Remove="Resources\Images\icons8_fast_forward_30.png" />
+		<None Remove="Resources\Images\icons8_fast_forward_50.png" />
 		<None Remove="Resources\Images\icons8_laptop_play_video_64.png" />
+		<None Remove="Resources\Images\icons8_left_arrow_60.png" />
+		<None Remove="Resources\Images\icons8_play_pause_24.png" />
+		<None Remove="Resources\Images\icons8_play_pause_48.png" />
+		<None Remove="Resources\Images\icons8_play_pause_48_2.png" />
+		<None Remove="Resources\Images\icons8_play_pause_96.png" />
+		<None Remove="Resources\Images\icons8_rewind_50.png" />
+		<None Remove="Resources\Images\icons8_right_arrow_60.png" />
+		<None Remove="Resources\Images\icons8_right_arrow_64.png" />
 		<None Remove="Resources\Images\icons8_search_more_50.png" />
 		<None Remove="Resources\Images\icons8_search_more_50_bak.png" />
+		<None Remove="Resources\Images\icons8_slider_48.png" />
+		<None Remove="Resources\Images\icons8_slide_up_50.png" />
+		<None Remove="Resources\Images\icons8_up_arrow_60.png" />
+		<None Remove="Resources\Images\icons8_u_turn_to_left_64.png" />
 		<None Remove="Resources\Images\icons8_youtube_50.png" />
 	</ItemGroup>
 
