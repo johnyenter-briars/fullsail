@@ -80,7 +80,7 @@ async def _add_torrents(request):
     r = await request.json()
 
     for magnet_link in r["magnetLinks"]:
-        response = await add_torrent(magnet_link)
+        _ = await add_torrent(magnet_link)
 
     return web.Response(text="torrents added")
 
@@ -90,7 +90,7 @@ async def _resume_torrents(request):
     r = await request.json()
 
     for hash in r["hashes"]:
-        response = await resume_torrent(hash)
+        _ = await resume_torrent(hash)
 
     return web.Response(text="torrents resumed")
 
@@ -100,7 +100,7 @@ async def pause_torrents(request):
     r = await request.json()
 
     for hash in r["hashes"]:
-        response = await pause_torrent(hash)
+        _ = await pause_torrent(hash)
 
     return web.Response(text="torrents paused")
 
@@ -110,7 +110,7 @@ async def _delete_torrents(request):
     r = await request.json()
 
     for hash in r["hashes"]:
-        response = await delete_torrent(hash)
+        _ = await delete_torrent(hash)
 
     return web.Response(text="torrents deleted")
 
