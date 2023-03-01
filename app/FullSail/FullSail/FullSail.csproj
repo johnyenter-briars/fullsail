@@ -60,6 +60,9 @@
 		<None Remove="Resources\Images\icons8_fast_forward_50.png" />
 		<None Remove="Resources\Images\icons8_laptop_play_video_64.png" />
 		<None Remove="Resources\Images\icons8_left_arrow_60.png" />
+		<None Remove="Resources\Images\icons8_music_album_50.png" />
+		<None Remove="Resources\Images\icons8_music_album_50_pink.png" />
+		<None Remove="Resources\Images\icons8_music_album_50_purple.png" />
 		<None Remove="Resources\Images\icons8_play_pause_24.png" />
 		<None Remove="Resources\Images\icons8_play_pause_48.png" />
 		<None Remove="Resources\Images\icons8_play_pause_48_2.png" />
@@ -73,6 +76,8 @@
 		<None Remove="Resources\Images\icons8_slide_up_50.png" />
 		<None Remove="Resources\Images\icons8_up_arrow_60.png" />
 		<None Remove="Resources\Images\icons8_u_turn_to_left_64.png" />
+		<None Remove="Resources\Images\icons8_voice_50.png" />
+		<None Remove="Resources\Images\icons8_voice_50_pink.png" />
 		<None Remove="Resources\Images\icons8_youtube_50.png" />
 	</ItemGroup>
 
