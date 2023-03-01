@@ -29,6 +29,7 @@
                     HeightRequest="40"  
                     HorizontalOptions="Center" 
                     Scale = "1"
+                    Padding = "5"
                     />
         </HorizontalStackLayout>
         <ScrollView VerticalOptions="FillAndExpand" Margin="20">
@@ -78,6 +79,7 @@
                                         HeightRequest="40"  
                                         HorizontalOptions="Center" 
                                         Scale = "1"
+                                        Margin="30, 0, 30, 0"
                                     />
                                     <ImageButton VerticalOptions="CenterAndExpand"
                                         BackgroundColor="Red"
@@ -90,20 +92,11 @@
                                         HorizontalOptions="Center" 
                                         Scale = "1"
                                         Padding = "1"
+                                        Margin="30, 0, 30, 0"
                                     />
 
                                 </HorizontalStackLayout>
-                                <!--<Button 
-                                    HeightRequest="25"
-                                    Text="" 
-                                    Grid.Row="5" 
-                                    Grid.Column="2"
-                                    BackgroundColor="{StaticResource Primary}"
-                                    TextColor="white"
-                                    ImageSource="icons8_fast_forward_50.png"
-                                    x:Name="fastfoward"
-                                    />
-                                 <Image x:Name="myImage" Source="icons8_fast_forward_50.png" HeightRequest="56"  BackgroundColor="PowderBlue" HorizontalOptions="Center"/>-->
+
                                 <StackLayout.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="ExecuteFileSelectedCommand" CommandParameter="{Binding .}" />
                                 </StackLayout.GestureRecognizers>

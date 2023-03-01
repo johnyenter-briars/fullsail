@@ -18,7 +18,7 @@ public class FullSailClient
     private int _port = 8082;
     private static readonly HttpClient _httpClient = new()
     {
-        Timeout = new TimeSpan(0, 0, 10),
+        Timeout = new TimeSpan(0, 0, 100),
     };
     private static readonly JsonSerializerSettings JsonSettings =
             new JsonSerializerSettings

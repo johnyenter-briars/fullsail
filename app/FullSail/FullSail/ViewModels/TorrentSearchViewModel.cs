@@ -12,6 +12,10 @@ namespace FullSail.ViewModels
     {
         public TorrentSearchViewModel()
         {
+            Task.Run(async () =>
+            {
+                SearchResults = await FullSailClientSingleton.GetTorrentSearchResults("ant man and the wasp", selectedSearchSite);
+            });
         }
         private List<SearchResult> searchResults = new();
         public List<SearchResult> SearchResults
