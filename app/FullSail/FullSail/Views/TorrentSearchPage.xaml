@@ -13,12 +13,25 @@
                    SearchCommand="{Binding PerformSearch}"
                    SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
 
-        <StackLayout RadioButtonGroup.GroupName="Search Site"
-                     RadioButtonGroup.SelectedValue="{Binding SelectedSearchSite}">
-            <Label Text="Search website:" />
-            <RadioButton Content="solid" Value="solid"  />
-            <RadioButton Content="xt1337" Value="t1337x"  />
-        </StackLayout>
+        <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand"  RadioButtonGroup.GroupName="Search Site"
+                         RadioButtonGroup.SelectedValue="{Binding SelectedSearchSite}">
+                <RadioButton Content="solid" Value="solid"  />
+                <RadioButton Content="xt1337" Value="t1337x"  />
+            </StackLayout>
+            <ImageButton VerticalOptions="CenterAndExpand"
+                    BackgroundColor="Red"
+                    Aspect="AspectFit"
+                    Source="icons8_update_left_rotation_50.png" 
+                    BorderWidth="1"  
+                    CornerRadius="15"
+                    BorderColor="White" 
+                    HeightRequest="40"  
+                    HorizontalOptions="Center" 
+                    Scale = "1"
+                    Padding = "5"
+                    />
+        </HorizontalStackLayout>
 
         <ScrollView VerticalOptions="FillAndExpand" Margin="20">
             <StackLayout BindableLayout.ItemsSource="{Binding SearchResults}">

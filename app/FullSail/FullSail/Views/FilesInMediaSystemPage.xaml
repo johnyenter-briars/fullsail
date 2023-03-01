@@ -8,35 +8,107 @@
              Title="Files In Media-System">
     <StackLayout>
         <SearchBar x:Name="searchBar"
-                   Placeholder="Filter..."
-                   SearchCommand="{Binding PerformSearch}"
-                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
+                       Placeholder="Filter..."
+                       SearchCommand="{Binding PerformSearch}"
+                       SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
+
+
+        <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand"
+                             RadioButtonGroup.GroupName="Include Duration">
+                <RadioButton Content="solid" Value="solid"  />
+                <RadioButton Content="xt1337" Value="t1337x"  />
+            </StackLayout>
+            <ImageButton VerticalOptions="CenterAndExpand"
+                    BackgroundColor="{StaticResource Blue100Accent}"
+                    Aspect="AspectFit"
+                    Source="icons8_update_left_rotation_50.png" 
+                    BorderWidth="1"  
+                    CornerRadius="15"
+                    BorderColor="White" 
+                    HeightRequest="40"  
+                    HorizontalOptions="Center" 
+                    Scale = "1"
+                    />
+        </HorizontalStackLayout>
         <ScrollView VerticalOptions="FillAndExpand" Margin="20">
             <StackLayout BindableLayout.ItemsSource="{Binding FilteredMediaFiles}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type Models:MediaFile}">
-                        <StackLayout
-                            Margin="0,10,0,10"
-                            Orientation="Vertical">
-                            <Line Stroke="#CF9FFF"
-                                    X2="500" />
-                            <Label Text="{Binding ShortName}"
-                                   FontSize="11"
-                                   VerticalOptions="Center" />
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="Duration: "
-                                       FontSize="10"
-                                       VerticalOptions="Center"
-                                       />
-                                <Label Text="{Binding Duration}"
-                                       FontSize="10"
-                                       VerticalOptions="Center"
-                                       />
+
+                        <Frame 
+                            BorderColor="#CF9FFF" 
+                            HasShadow="False" 
+                            Padding="10" 
+                            Margin="0, 5, 0, 5"
+                            Grid.ColumnSpan="2"
+                            BackgroundColor="Black"
+                            >
+                            <StackLayout
+                                Margin="0,10,0,10"
+                                Orientation="Vertical">
+
+                                <HorizontalStackLayout>
+                                    <Label Text="{Binding ShortName, StringFormat='{0:F0}'}"
+                                           FontSize="13"
+                                           VerticalOptions="Center" 
+                                           LineBreakMode="WordWrap"
+                                           />
+                                </HorizontalStackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Duration: "
+                                           FontSize="11"
+                                           VerticalOptions="Center"
+                                           />
+
+                                    <Label Text="15"
+                                           FontSize="11"
+                                           VerticalOptions="Center"
+                                           />
+                                </StackLayout>
+                                <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+                                    <ImageButton VerticalOptions="CenterAndExpand"
+                                        BackgroundColor="{StaticResource Cyan200Accent}"
+                                        Aspect="AspectFit"
+                                        Source="icons8_youtube_50.png" 
+                                        BorderWidth="1"  
+                                        CornerRadius="15"
+                                        BorderColor="White" 
+                                        HeightRequest="40"  
+                                        HorizontalOptions="Center" 
+                                        Scale = "1"
+                                    />
+                                    <ImageButton VerticalOptions="CenterAndExpand"
+                                        BackgroundColor="Red"
+                                        Aspect="AspectFit"
+                                        Source="icons8_trash_50.png" 
+                                        BorderWidth="1"  
+                                        CornerRadius="15"
+                                        BorderColor="White" 
+                                        HeightRequest="40"  
+                                        HorizontalOptions="Center" 
+                                        Scale = "1"
+                                        Padding = "1"
+                                    />
+
+                                </HorizontalStackLayout>
+                                <!--<Button 
+                                    HeightRequest="25"
+                                    Text="" 
+                                    Grid.Row="5" 
+                                    Grid.Column="2"
+                                    BackgroundColor="{StaticResource Primary}"
+                                    TextColor="white"
+                                    ImageSource="icons8_fast_forward_50.png"
+                                    x:Name="fastfoward"
+                                    />
+                                 <Image x:Name="myImage" Source="icons8_fast_forward_50.png" HeightRequest="56"  BackgroundColor="PowderBlue" HorizontalOptions="Center"/>-->
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ExecuteFileSelectedCommand" CommandParameter="{Binding .}" />
+                                </StackLayout.GestureRecognizers>
                             </StackLayout>
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="ExecuteFileSelectedCommand" CommandParameter="{Binding .}" />
-                            </StackLayout.GestureRecognizers>
-                        </StackLayout>
+                        </Frame>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </StackLayout>

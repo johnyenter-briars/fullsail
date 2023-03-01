@@ -74,6 +74,8 @@
 		<None Remove="Resources\Images\icons8_search_more_50_bak.png" />
 		<None Remove="Resources\Images\icons8_slider_48.png" />
 		<None Remove="Resources\Images\icons8_slide_up_50.png" />
+		<None Remove="Resources\Images\icons8_trash_50.png" />
+		<None Remove="Resources\Images\icons8_update_left_rotation_50.png" />
 		<None Remove="Resources\Images\icons8_up_arrow_60.png" />
 		<None Remove="Resources\Images\icons8_u_turn_to_left_64.png" />
 		<None Remove="Resources\Images\icons8_voice_50.png" />
