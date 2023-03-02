@@ -82,7 +82,7 @@ async def _add_torrents(request):
     for magnet_link in r["magnetLinks"]:
         _ = await add_torrent(magnet_link)
 
-    return web.Response(text="torrents added")
+    return web.json_response({"message": "torrents added"})
 
 
 @routes.post('/api/torrents/resume')
@@ -92,7 +92,7 @@ async def _resume_torrents(request):
     for hash in r["hashes"]:
         _ = await resume_torrent(hash)
 
-    return web.Response(text="torrents resumed")
+    return web.json_response({"message": "torrents resumed"})
 
 
 @routes.post('/api/torrents/pause')
@@ -102,7 +102,7 @@ async def pause_torrents(request):
     for hash in r["hashes"]:
         _ = await pause_torrent(hash)
 
-    return web.Response(text="torrents paused")
+    return web.json_response({"message": "torrents paused"})
 
 
 @routes.post('/api/torrents/delete')
@@ -112,7 +112,7 @@ async def _delete_torrents(request):
     for hash in r["hashes"]:
         _ = await delete_torrent(hash)
 
-    return web.Response(text="torrents deleted")
+    return web.json_response({"message": "torrents deleted"})
 
 
 @routes.get('/api/search/{torrent_site}/{search_term}')
