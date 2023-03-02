@@ -43,9 +43,7 @@ namespace FullSail.ViewModels
 
             if (startTorrent)
             {
-                var torrentClient = DependencyService.Get<FullSailClient>();
-
-                var response = await torrentClient.StartTorrent(searchResult.MagnetLink);
+                var response = await FullSailClientSingleton.StartTorrent(searchResult.MagnetLink);
 
                 await AlertServiceSingleton.ShowAlertAsync("Success", "Torrent added successfully");
             }

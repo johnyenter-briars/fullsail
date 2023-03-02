@@ -92,6 +92,15 @@ public class FullSailClient
 
         return await FullSailRequest<AddTorrentsRequest, UpdateTorrentsResponse>(body, $"torrents/add", HttpMethod.Post);
     }
+    public async Task<UpdateFileMediaSystemResponse> DeleteFileInMediaSystem(string fileName)
+    {
+        var body = new UpdateFileMediaSystemRequest
+        {
+            FileName = fileName,
+        };
+
+        return await FullSailRequest<UpdateFileMediaSystemRequest, UpdateFileMediaSystemResponse>(body, $"media-system/delete", HttpMethod.Delete);
+    }
     public FullSailClient UpdateSettings(string hostname, int port, string apiKey)
     {
         _hostName = hostname;

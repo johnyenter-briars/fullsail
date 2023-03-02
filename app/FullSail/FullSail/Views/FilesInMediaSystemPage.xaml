@@ -1,105 +1,213 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FullSail.Views.FilesInMediaSystemPage"
-             xmlns:ViewModels="clr-namespace:FullSail.ViewModels"
-             xmlns:Models="clr-namespace:FullSail.Models"
-             x:DataType="{x:Type ViewModels:FilesInMediaSystemViewModel}"
-             Title="Files In Media-System">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FullSail.Views.FilesInMediaSystemPage"
+    xmlns:ViewModels="clr-namespace:FullSail.ViewModels"
+    xmlns:Models="clr-namespace:FullSail.Models"
+    x:DataType="{x:Type ViewModels:FilesInMediaSystemViewModel}"
+    Title="Files In Media-System">
     <StackLayout>
         <SearchBar x:Name="searchBar"
-                       Placeholder="Filter..."
-                       SearchCommand="{Binding PerformSearch}"
-                       SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
+            Placeholder="Filter..."
+            SearchCommand="{Binding PerformSearch}"
+            SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" />
 
 
         <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand"
-                             RadioButtonGroup.GroupName="Include Duration">
-                <RadioButton Content="solid" Value="solid"  />
-                <RadioButton Content="xt1337" Value="t1337x"  />
+                RadioButtonGroup.GroupName="Include Duration">
+                <RadioButton Content="solid" Value="solid" />
+                <RadioButton Content="xt1337" Value="t1337x" />
             </StackLayout>
             <ImageButton VerticalOptions="CenterAndExpand"
-                    BackgroundColor="{StaticResource Blue100Accent}"
-                    Aspect="AspectFit"
-                    Source="icons8_update_left_rotation_50.png" 
-                    BorderWidth="1"  
-                    CornerRadius="15"
-                    BorderColor="White" 
-                    HeightRequest="40"  
-                    HorizontalOptions="Center" 
-                    Scale = "1"
-                    Padding = "5"
-                    />
+                BackgroundColor="{StaticResource Blue100Accent}"
+                Aspect="AspectFit"
+                Source="icons8_update_left_rotation_50.png"
+                BorderWidth="1"
+                CornerRadius="15"
+                BorderColor="White"
+                HeightRequest="40"
+                HorizontalOptions="Center"
+                Scale="1"
+                Padding="5"
+            />
         </HorizontalStackLayout>
         <ScrollView VerticalOptions="FillAndExpand" Margin="20">
             <StackLayout BindableLayout.ItemsSource="{Binding FilteredMediaFiles}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type Models:MediaFile}">
 
-                        <Frame 
-                            BorderColor="#CF9FFF" 
-                            HasShadow="False" 
-                            Padding="10" 
+                        <Frame
+                            BorderColor="#CF9FFF"
+                            HasShadow="False"
+                            Padding="10"
                             Margin="0, 5, 0, 5"
                             Grid.ColumnSpan="2"
                             BackgroundColor="Black"
-                            >
+                        >
                             <StackLayout
                                 Margin="0,10,0,10"
                                 Orientation="Vertical">
 
                                 <HorizontalStackLayout>
                                     <Label Text="{Binding ShortName, StringFormat='{0:F0}'}"
-                                           FontSize="13"
-                                           VerticalOptions="Center" 
-                                           LineBreakMode="WordWrap"
-                                           />
+                                        FontSize="13"
+                                        VerticalOptions="Center"
+                                        LineBreakMode="WordWrap"
+                                        FontAttributes="Bold"
+                                    />
                                 </HorizontalStackLayout>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
 
-                                <StackLayout Orientation="Horizontal">
+
+                                    <ImageButton VerticalOptions="CenterAndExpand"
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        BackgroundColor="{StaticResource Yellow100Accent}"
+                                        Aspect="AspectFit"
+                                        Source="icons8_database_export_50.png"
+                                        BorderWidth="1"
+                                        CornerRadius="15"
+                                        BorderColor="White"
+                                        HeightRequest="40"
+                                        HorizontalOptions="Center"
+                                        Scale="0.7"
+                                        Margin="0, 0, 0, 0"
+                                        Padding="0, 0, 0, 0"
+                                    />
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Padding="0, 0, 0, 0"
+                                        Margin="0, 0, 0, 0"
+                                        Text="2GB"
+                                        FontSize="11"
+                                        VerticalOptions="Center"
+                                    />
+
+                                    <ImageButton VerticalOptions="CenterAndExpand"
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        BackgroundColor="{StaticResource Yellow100Accent}"
+                                        Aspect="AspectFit"
+                                        Source="icons8_clock_50.png"
+                                        BorderWidth="1"
+                                        CornerRadius="15"
+                                        BorderColor="White"
+                                        HeightRequest="40"
+                                        HorizontalOptions="Center"
+                                        Scale="0.7"
+                                        Margin="0, 0, 0, 0"
+                                        Padding="0, 0, 0, 0"
+                                    />
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Margin="0, 0, 0, 0"
+                                        Padding="0, 0, 0, 0"
+                                        Text="1 hr"
+                                        FontSize="11"
+                                        VerticalOptions="Center"
+                                    />
+
+                                    <ImageButton
+                                        Grid.Row="0"
+                                        Grid.Column="2"
+                                        BackgroundColor="{StaticResource Cyan200Accent}"
+                                        Aspect="AspectFit"
+                                        Source="icons8_youtube_50.png"
+                                        BorderWidth="1"
+                                        CornerRadius="15"
+                                        BorderColor="White"
+                                        HorizontalOptions="Center"
+                                        Scale="1"
+                                    >
+                                        <ImageButton.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:FilesInMediaSystemViewModel}}, Path=PlayFile  }"
+                                                CommandParameter="{Binding}"
+                                            />
+                                        </ImageButton.GestureRecognizers>
+
+                                    </ImageButton>
+
+                                    <ImageButton VerticalOptions="CenterAndExpand"
+                                        Grid.Row="1"
+                                        Grid.Column="2"
+                                        BackgroundColor="Red"
+                                        Aspect="AspectFit"
+                                        Source="icons8_trash_50.png"
+                                        BorderWidth="1"
+                                        CornerRadius="15"
+                                        BorderColor="White"
+                                        HeightRequest="40"
+                                        HorizontalOptions="Center"
+                                        Scale="1"
+                                        Padding="1"
+                                    >
+                                        <ImageButton.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:FilesInMediaSystemViewModel}}, Path=DeleteFile  }"
+                                                CommandParameter="{Binding}"
+                                            />
+                                        </ImageButton.GestureRecognizers>
+                                    </ImageButton>
+                                </Grid>
+
+                                <!--<StackLayout
+                                Orientation="Horizontal">
                                     <Label Text="Duration: "
-                                           FontSize="11"
-                                           VerticalOptions="Center"
-                                           />
+                                        FontSize="11"
+                                        VerticalOptions="Center"
+                                    />
 
                                     <Label Text="15"
-                                           FontSize="11"
-                                           VerticalOptions="Center"
-                                           />
+                                        FontSize="11"
+                                        VerticalOptions="Center"
+                                    />
                                 </StackLayout>
                                 <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
                                     <ImageButton VerticalOptions="CenterAndExpand"
                                         BackgroundColor="{StaticResource Cyan200Accent}"
                                         Aspect="AspectFit"
-                                        Source="icons8_youtube_50.png" 
-                                        BorderWidth="1"  
+                                        Source="icons8_youtube_50.png"
+                                        BorderWidth="1"
                                         CornerRadius="15"
-                                        BorderColor="White" 
-                                        HeightRequest="40"  
-                                        HorizontalOptions="Center" 
-                                        Scale = "1"
+                                        BorderColor="White"
+                                        HeightRequest="40"
+                                        HorizontalOptions="Center"
+                                        Scale="1"
                                         Margin="30, 0, 30, 0"
                                     />
                                     <ImageButton VerticalOptions="CenterAndExpand"
                                         BackgroundColor="Red"
                                         Aspect="AspectFit"
-                                        Source="icons8_trash_50.png" 
-                                        BorderWidth="1"  
+                                        Source="icons8_trash_50.png"
+                                        BorderWidth="1"
                                         CornerRadius="15"
-                                        BorderColor="White" 
-                                        HeightRequest="40"  
-                                        HorizontalOptions="Center" 
-                                        Scale = "1"
-                                        Padding = "1"
+                                        BorderColor="White"
+                                        HeightRequest="40"
+                                        HorizontalOptions="Center"
+                                        Scale="1"
+                                        Padding="1"
                                         Margin="30, 0, 30, 0"
                                     />
 
-                                </HorizontalStackLayout>
+                                </HorizontalStackLayout>-->
 
-                                <StackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="ExecuteFileSelectedCommand" CommandParameter="{Binding .}" />
-                                </StackLayout.GestureRecognizers>
+                                <!--<StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ExecuteFileSelectedCommand"
+                                        CommandParameter="{Binding .}" />
+                                </StackLayout.GestureRecognizers>-->
                             </StackLayout>
                         </Frame>
                     </DataTemplate>

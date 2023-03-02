@@ -42,4 +42,20 @@ public class FilesInMediaSystemViewModel : BaseViewModel
 
         FilteredMediaFiles = filtered;
     });
+    public ICommand DeleteFile => new Command<MediaFile>(async (mediaFile) =>
+    {
+        bool startTorrent = await AlertServiceSingleton.ShowConfirmationAsync("Confirm", "Are you SURE you want to delete this file from the Media-System?", "Yes", "No");
+
+        if (startTorrent)
+        {
+            var response = await FullSailClientSingleton.DeleteFileInMediaSystem(mediaFile.ShortName);
+
+            await AlertServiceSingleton.ShowAlertAsync("Success", "Media-System file deleted successfully");
+        }
+    });
+    public ICommand PlayFile => new Command<MediaFile>(async (mediaFile) =>
+    {
+        await KodiClientSingleton.PlayFile(mediaFile.Name);
+        var foo = 10;
+    });
 }
