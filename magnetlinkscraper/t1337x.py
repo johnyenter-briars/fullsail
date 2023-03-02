@@ -15,22 +15,38 @@ def t1337x_search(query) -> List[SearchResult]:
 
     soup = bs(source.text, 'html.parser')
 
-    if(soup.find_all('td', class_='coll-1 name')):
-        results = soup.find_all('td', class_='coll-1 name')
-        size = soup.find_all('td', class_="coll-4 size mob-vip")
-        return search_result(soup, results, size)  # call for getting results
-
-
-def search_result(soup, results, size):
     magnet_links = []
-    for link in soup.find_all('a'):
-        b: str = link.get('href')
+    seeders = []
+    leechers = []
+    names = []
+    downloads = []
+    sizes = []
+    date_posteds = []
 
-        if re.match("^/torrent", b):
-            magnet_link = get_magnet_link(f"https://1337x.to{b}")
+    for a_tag in soup.find_all('a'):
+        h_ref: str = a_tag.get('href')
+
+        if re.match("^/torrent", h_ref):
+            magnet_link = get_magnet_link(f"https://1337x.to{h_ref}")
             magnet_links.append(magnet_link)
+            names.append(a_tag.text)
+            downloads.append(None)
+    
+    for td in soup.find_all('td', {'class':'coll-2 seeds'}):
+        seeders.append(td.text)
 
-    return [SearchResult(magnet_link, 2) for magnet_link in magnet_links]
+    for td in soup.find_all('td', {'class':'coll-3 leeches'}):
+        leechers.append(td.text)
+
+    for td in soup.find_all('td', {'class':'coll-date'}):
+        date_posteds.append(td.text)
+    
+    for td in soup.find_all('td', {'class':'coll-4 size mob-user'}):
+        sizes.append(td.next)
+    
+    return [SearchResult(magnet_link, number_seeders, number_leechers, name, download, size, date_posted) for
+            magnet_link, number_seeders, number_leechers, name, download, size, date_posted in
+            zip(magnet_links, seeders, leechers, names, downloads, sizes, date_posteds)]
 
 
 def get_magnet_link(ch_url):
@@ -43,6 +59,5 @@ def get_magnet_link(ch_url):
     for link in magnet:
         b = link.get('href')
         if re.match("^magnet:", b):
-            magnet_link = b
-            break
+            return b
 
