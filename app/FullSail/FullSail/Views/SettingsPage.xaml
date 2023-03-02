@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FullSail.Views.SettingsPage"
+             xmlns:ViewModels="clr-namespace:FullSail.ViewModels"
+             xmlns:Models="clr-namespace:FullSail.Models"
+             x:DataType="{x:Type ViewModels:SettingsViewModel}"
+             Title="Settings">
+    <Grid BackgroundColor="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <HorizontalStackLayout>
+            <Label Text="Build Version" FontSize="Medium" />
+            <Label Text="{Binding BuildVersion}" FontSize="Medium" />
+
+        </HorizontalStackLayout>
+
+        <ScrollView VerticalOptions="FillAndExpand" Grid.Row="1">
+            <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+                <Label Text="Domain name / Ip Address" FontSize="Medium" />
+                <Entry TextColor="BlueViolet" x:Name = "IpAddress"  Text="{Binding HostName}"  Placeholder = "IP address"
+                   HeightRequest = "40"  
+                   />
+
+                <Label Text="Port" FontSize="Medium" />
+                <Entry TextColor="BlueViolet" x:Name = "Port" Text="{Binding Port}" Placeholder = "port"  
+                   HeightRequest = "40"  
+                        />
+
+                <Label Text="API Key" FontSize="Medium" />
+                <Entry TextColor="BlueViolet" x:Name = "ApiKey" Text="{Binding ApiKey}" Placeholder = "API Key"  
+                   HeightRequest = "40"  
+                        />
+
+                <Line Stroke="#CF9FFF"
+                                    X2="500" />
+
+                <Label Text="Kodi Hostname" FontSize="Medium" />
+                <Entry TextColor="BlueViolet" x:Name = "KodiHostname" Text="{Binding KodiHostname}" Placeholder = "API Key"  
+                   HeightRequest = "40"  
+                        />
+
+                <Label Text="Kodi Port" FontSize="Medium" />
+                <Entry TextColor="BlueViolet" x:Name = "KodiPort" Text="{Binding KodiPort}" Placeholder = "API Key"  
+                   HeightRequest = "40"  
+                        />
+
+                <Label Text="Kodi Username" FontSize="Medium" />
+                <Entry TextColor="BlueViolet" x:Name = "KodiUsername" Text="{Binding KodiUsername}" Placeholder = "API Key"  
+                   HeightRequest = "40"  
+                        />
+
+                <Label Text="Kodi Password" FontSize="Medium" />
+                <Entry TextColor="BlueViolet" x:Name = "KodiPassword" Text="{Binding KodiPassword}" Placeholder = "API Key"  
+                   HeightRequest = "40"  
+                        />
+
+                <Button x:Name= "saveChangesBtn" Text = "Save Changes"   
+                    Command="{Binding SaveChangesCommand}"  
+                    HorizontalOptions = "FillAndExpand"/>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
