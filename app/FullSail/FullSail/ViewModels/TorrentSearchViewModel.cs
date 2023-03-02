@@ -17,8 +17,8 @@ namespace FullSail.ViewModels
                 SearchResults = await FullSailClientSingleton.GetTorrentSearchResults("ant man and the wasp", selectedSearchSite);
             });
         }
-        private List<SearchResult> searchResults = new();
-        public List<SearchResult> SearchResults
+        private List<TorrentSearchResult> searchResults = new();
+        public List<TorrentSearchResult> SearchResults
         {
             get { return searchResults; }
             set { SetProperty(ref searchResults, value); }
@@ -27,15 +27,28 @@ namespace FullSail.ViewModels
         {
             SearchResults = await FullSailClientSingleton.GetTorrentSearchResults(query, selectedSearchSite);
         });
-        public SearchWebsite selectedSearchSite;
+        public TorrentSearchWebsite selectedSearchSite = TorrentSearchWebsite.solid;
         public string SelectedSearchSite
         {
             get { return selectedSearchSite.ToString(); }
             set
             {
-                var foo = Enum.TryParse(value, out SearchWebsite website);
+                Enum.TryParse(value, out TorrentSearchWebsite website);
                 SetProperty(ref selectedSearchSite, website);
             }
         }
+        public ICommand AddTorrentCommand => new Command<TorrentSearchResult>(async (searchResult) =>
+        {
+            bool startTorrent = await AlertServiceSingleton.ShowConfirmationAsync("Confirm", "Are you sure you want to start this torrent?", "Yes", "No");
+
+            if (startTorrent)
+            {
+                var torrentClient = DependencyService.Get<FullSailClient>();
+
+                var response = await torrentClient.StartTorrent(searchResult.MagnetLink);
+
+                await AlertServiceSingleton.ShowAlertAsync("Success", "Torrent added successfully");
+            }
+        });
     }
 }

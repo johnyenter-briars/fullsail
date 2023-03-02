@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FullSail.Managers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -8,6 +9,7 @@ public class BaseViewModel : INotifyPropertyChanged
 {
     protected FullSailClient FullSailClientSingleton = DependencyService.Get<FullSailClient>();
     protected KodiClient KodiClientSingleton = DependencyService.Get<KodiClient>();
+    protected AlertService AlertServiceSingleton = DependencyService.Get<AlertService>();
     bool isBusy = false;
     public bool IsBusy
     {

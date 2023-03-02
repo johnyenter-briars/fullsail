@@ -37,7 +37,7 @@
         <ScrollView VerticalOptions="FillAndExpand" Margin="20">
             <StackLayout BindableLayout.ItemsSource="{Binding SearchResults}">
                 <BindableLayout.ItemTemplate>
-                    <DataTemplate x:DataType="{x:Type Models:SearchResult}">
+                    <DataTemplate x:DataType="{x:Type Models:TorrentSearchResult}">
                         <Frame
                             BorderColor="#CF9FFF"
                             HasShadow="False"
@@ -157,7 +157,7 @@
                                     <ImageButton VerticalOptions="CenterAndExpand"
                                         BackgroundColor="{StaticResource Cyan200Accent}"
                                         Aspect="AspectFit"
-                                        Source="icons8_youtube_50.png"
+                                        Source="icons8_torrent_50.png"
                                         BorderWidth="1"
                                         CornerRadius="15"
                                         BorderColor="White"
@@ -165,7 +165,16 @@
                                         HorizontalOptions="Center"
                                         Scale="1"
                                         Margin="30, 0, 30, 0"
-                                    />
+                                    >
+                                        <ImageButton.GestureRecognizers>
+                                            <TapGestureRecognizer 
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:TorrentSearchViewModel}}, Path=AddTorrentCommand }"
+                                                CommandParameter="{Binding}"
+                                                />
+                                        </ImageButton.GestureRecognizers>
+
+                                    </ImageButton>
+
                                     <ImageButton VerticalOptions="CenterAndExpand"
                                         BackgroundColor="Red"
                                         Aspect="AspectFit"
@@ -181,11 +190,6 @@
                                     />
 
                                 </HorizontalStackLayout>
-
-                                <StackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="ExecuteTorrentSelectedCommand"
-                                        CommandParameter="{Binding .}" />
-                                </StackLayout.GestureRecognizers>
                             </StackLayout>
                         </Frame>
                     </DataTemplate>

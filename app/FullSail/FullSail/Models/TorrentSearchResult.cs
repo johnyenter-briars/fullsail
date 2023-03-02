@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace FullSail.Models
 {
-    public class SearchResult
+    public class TorrentSearchResult
     {
         [JsonProperty(PropertyName = "magnet_link")]
-        public string MagnetLinnk { get; set; }
+        public string MagnetLink { get; set; }
 
         [JsonProperty(PropertyName = "number_seeders")]
         public string NumberSeeders { get; set; }

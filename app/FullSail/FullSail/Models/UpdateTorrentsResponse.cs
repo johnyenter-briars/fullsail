@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace FullSail.Models
 {
-    public enum SearchWebsite
+    public class UpdateTorrentsResponse
     {
-        t1337x,
-        solid
+        public string Message { get; set; }
     }
 }

@@ -23,6 +23,8 @@ public partial class App : Application
                             )
             );
 
+        DependencyService.RegisterSingleton(new AlertService());
+
         MainPage = new AppShell();
     }
 }

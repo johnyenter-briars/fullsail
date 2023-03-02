@@ -1,4 +1,5 @@
 using FullSail.ViewModels;
+using System.Diagnostics;
 
 namespace FullSail.Views;
 
@@ -9,9 +10,5 @@ public partial class TorrentSearchPage : ContentPage
         InitializeComponent();
 
         BindingContext = new TorrentSearchViewModel();
-    }
-    private void ExecuteTorrentSelectedCommand(object sender, EventArgs e)
-    {
-        var foo = 10;
     }
 }

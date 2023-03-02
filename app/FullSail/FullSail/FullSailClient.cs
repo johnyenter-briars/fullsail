@@ -77,11 +77,20 @@ public class FullSailClient
     {
         return await FullSailRequest<List<MediaFile>>($"media-system/list", HttpMethod.Get);
     }
-    public async Task<List<SearchResult>> GetTorrentSearchResults(string query, SearchWebsite searchWebsite = SearchWebsite.solid)
+    public async Task<List<TorrentSearchResult>> GetTorrentSearchResults(string query, TorrentSearchWebsite searchWebsite = TorrentSearchWebsite.solid)
     {
         var encodedQuery = query.Replace(" ", "+").ToString();
 
-        return await FullSailRequest<List<SearchResult>>($"search/{searchWebsite}/{encodedQuery}", HttpMethod.Get);
+        return await FullSailRequest<List<TorrentSearchResult>>($"search/{searchWebsite}/{encodedQuery}", HttpMethod.Get);
+    }
+    public async Task<UpdateTorrentsResponse> StartTorrent(string magnetLink)
+    {
+        var body = new AddTorrentsRequest
+        {
+            MagnetLinks = new List<string> { magnetLink },
+        };
+
+        return await FullSailRequest<AddTorrentsRequest, UpdateTorrentsResponse>(body, $"torrents/add", HttpMethod.Post);
     }
     public FullSailClient UpdateSettings(string hostname, int port, string apiKey)
     {
