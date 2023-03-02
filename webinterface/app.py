@@ -9,6 +9,7 @@ from magnetlinkscraper import t1337x_search
 from magnetlinkscraper import solidtorrent_search
 from distutils.util import strtobool
 from concurrent.futures import ThreadPoolExecutor
+from mediatransfer.deletefilemediasystem import delete_file_mediasystem
 from mediatransfer.listfilesmediasystem import list_files_mediasystem
 
 from qbittorrentinterface import delete_torrent, get_running_torrents, pause_torrent, add_torrent, resume_torrent
@@ -59,6 +60,16 @@ async def _list_medimediasystem(request):
     response = await list_files_mediasystem()
 
     return web.json_response(response)
+
+@routes.delete('/api/media-system/delete')
+async def _delete_files_mediasystem(request):
+    r = await request.json()
+
+    file_name = r["fileName"]
+
+    await delete_file_mediasystem(file_name)
+
+    return web.json_response({"message": "file deleted"})
 
 
 @routes.get('/api/media/list/subs')
