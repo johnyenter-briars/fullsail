@@ -4,3 +4,4 @@ config.json
 test.txt
 .mypy_cache/
 test.json
+*.pyc
