@@ -176,7 +176,7 @@
                                     >
                                         <ImageButton.GestureRecognizers>
                                             <TapGestureRecognizer
-                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:TorrentSearchViewModel}}, Path=AddTorrentCommand }"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:RunningTorrentsViewModel}}, Path=ResumeTorrent }"
                                                 CommandParameter="{Binding}"
                                             />
                                         </ImageButton.GestureRecognizers>
@@ -196,7 +196,14 @@
                                         HorizontalOptions="Center"
                                         Scale="1"
                                         Padding="1"
-                                    />
+                                    >
+                                        <ImageButton.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:RunningTorrentsViewModel}}, Path=PauseTorrent }"
+                                                CommandParameter="{Binding}"
+                                            />
+                                        </ImageButton.GestureRecognizers>
+                                    </ImageButton>
                                     <ImageButton VerticalOptions="CenterAndExpand"
                                         Grid.Row="0"
                                         Grid.Column="5"
@@ -210,7 +217,14 @@
                                         HorizontalOptions="Center"
                                         Scale="1"
                                         Padding="1"
-                                    />
+                                    >
+                                        <ImageButton.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:RunningTorrentsViewModel}}, Path=DeleteTorrent }"
+                                                CommandParameter="{Binding}"
+                                            />
+                                        </ImageButton.GestureRecognizers>
+                                    </ImageButton>
                                 </Grid>
 
                             </StackLayout>

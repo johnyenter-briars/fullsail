@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Xamarin.Google.Crypto.Tink.Subtle;
 
 namespace FullSail;
 public class FullSailClient
@@ -117,6 +118,33 @@ public class FullSailClient
     public async Task<QBTResponse> GetRunningTorrents()
     {
         return await FullSailRequest<QBTResponse>($"torrents/list", HttpMethod.Get);
+    }
+    public async Task<UpdateTorrentsResponse> PauseTorrent(string hash)
+    {
+        var body = new UpdateTorrentsRequest
+        {
+            Hashes = new() { hash },
+        };
+
+        return await FullSailRequest<UpdateTorrentsRequest, UpdateTorrentsResponse>(body, $"torrents/pause", HttpMethod.Post);
+    }
+    public async Task<UpdateTorrentsResponse> ResumeTorrent(string hash)
+    {
+        var body = new UpdateTorrentsRequest
+        {
+            Hashes = new() { hash },
+        };
+
+        return await FullSailRequest<UpdateTorrentsRequest, UpdateTorrentsResponse>(body, $"torrents/resume", HttpMethod.Post);
+    }
+    public async Task<UpdateTorrentsResponse> DeleteTorrent(string hash)
+    {
+        var body = new UpdateTorrentsRequest
+        {
+            Hashes = new() { hash },
+        };
+
+        return await FullSailRequest<UpdateTorrentsRequest, UpdateTorrentsResponse>(body, $"torrents/delete", HttpMethod.Post);
     }
     public FullSailClient UpdateSettings(string hostname, int port, string apiKey)
     {
