@@ -1,16 +1,16 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FullSail.Views.FilesInMediaStorePage"
-             xmlns:ViewModels="clr-namespace:FullSail.ViewModels"
-             xmlns:Models="clr-namespace:FullSail.Models"
-             x:DataType="{x:Type ViewModels:FilesInMediaStoreViewModel}"
-             Title="Files in Media Store">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FullSail.Views.FilesInMediaStorePage"
+    xmlns:ViewModels="clr-namespace:FullSail.ViewModels"
+    xmlns:Models="clr-namespace:FullSail.Models"
+    x:DataType="{x:Type ViewModels:FilesInMediaStoreViewModel}"
+    Title="Files in Media Store">
     <StackLayout>
         <SearchBar x:Name="searchBar"
-                   Placeholder="Filter..."
-                   SearchCommand="{Binding PerformSearch}"
-                   SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"/>
+            Placeholder="Filter..."
+            SearchCommand="{Binding PerformSearch}"
+            SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" />
         <ScrollView VerticalOptions="FillAndExpand" Margin="20">
             <StackLayout BindableLayout.ItemsSource="{Binding FilteredMediaFiles}">
                 <BindableLayout.ItemTemplate>
