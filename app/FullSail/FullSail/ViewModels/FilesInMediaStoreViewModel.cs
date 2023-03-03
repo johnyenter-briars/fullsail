@@ -41,4 +41,8 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
 
         FilteredMediaFiles = filtered;
     });
+    public ICommand SendFile => new Command<MediaFile>(async (mediaFile) =>
+    {
+        await FullSailClientSingleton.SendFile(mediaFile.Name);
+    });
 }

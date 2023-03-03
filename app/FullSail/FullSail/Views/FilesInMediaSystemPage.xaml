@@ -162,52 +162,6 @@
                                         </ImageButton.GestureRecognizers>
                                     </ImageButton>
                                 </Grid>
-
-                                <!--<StackLayout
-                                Orientation="Horizontal">
-                                    <Label Text="Duration: "
-                                        FontSize="11"
-                                        VerticalOptions="Center"
-                                    />
-
-                                    <Label Text="15"
-                                        FontSize="11"
-                                        VerticalOptions="Center"
-                                    />
-                                </StackLayout>
-                                <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
-                                    <ImageButton VerticalOptions="CenterAndExpand"
-                                        BackgroundColor="{StaticResource Cyan200Accent}"
-                                        Aspect="AspectFit"
-                                        Source="icons8_youtube_50.png"
-                                        BorderWidth="1"
-                                        CornerRadius="15"
-                                        BorderColor="White"
-                                        HeightRequest="40"
-                                        HorizontalOptions="Center"
-                                        Scale="1"
-                                        Margin="30, 0, 30, 0"
-                                    />
-                                    <ImageButton VerticalOptions="CenterAndExpand"
-                                        BackgroundColor="Red"
-                                        Aspect="AspectFit"
-                                        Source="icons8_trash_50.png"
-                                        BorderWidth="1"
-                                        CornerRadius="15"
-                                        BorderColor="White"
-                                        HeightRequest="40"
-                                        HorizontalOptions="Center"
-                                        Scale="1"
-                                        Padding="1"
-                                        Margin="30, 0, 30, 0"
-                                    />
-
-                                </HorizontalStackLayout>-->
-
-                                <!--<StackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="ExecuteFileSelectedCommand"
-                                        CommandParameter="{Binding .}" />
-                                </StackLayout.GestureRecognizers>-->
                             </StackLayout>
                         </Frame>
                     </DataTemplate>

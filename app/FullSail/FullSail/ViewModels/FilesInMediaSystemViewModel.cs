@@ -56,6 +56,5 @@ public class FilesInMediaSystemViewModel : BaseViewModel
     public ICommand PlayFile => new Command<MediaFile>(async (mediaFile) =>
     {
         await KodiClientSingleton.PlayFile(mediaFile.Name);
-        var foo = 10;
     });
 }

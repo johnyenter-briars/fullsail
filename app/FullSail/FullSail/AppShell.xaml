@@ -25,6 +25,22 @@
         </Tab>
     </FlyoutItem>
     <FlyoutItem 
+                Title="Running Jobs" 
+                Icon="icons8_send_file_50.png"
+                 >
+        <Tab>
+            <ShellContent  Route="runningJobs" ContentTemplate="{DataTemplate local:RunningJobsPage}" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem 
+                Title="Running Torrents" 
+                Icon="icons8_torrent_50.png"
+                 >
+        <Tab>
+            <ShellContent  Route="runningTorrents" ContentTemplate="{DataTemplate local:RunningTorrentsPage}" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem 
                 Title="Files in Media-System" 
                 Icon="icons8_laptop_play_video_64"
                  >

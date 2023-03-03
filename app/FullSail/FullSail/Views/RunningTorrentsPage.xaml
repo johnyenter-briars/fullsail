@@ -1,12 +1,224 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FullSail.Views.RunningTorrentsPage"
-             Title="RunningTorrentsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FullSail.Views.RunningTorrentsPage"
+    xmlns:ViewModels="clr-namespace:FullSail.ViewModels"
+    xmlns:Models="clr-namespace:FullSail.Models"
+    x:DataType="{x:Type ViewModels:RunningTorrentsViewModel}"
+    Title="Running Torrents">
+    <StackLayout>
+        <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+            <ImageButton VerticalOptions="CenterAndExpand"
+                BackgroundColor="{StaticResource Blue100Accent}"
+                Aspect="AspectFit"
+                Source="icons8_update_left_rotation_50.png"
+                BorderWidth="1"
+                CornerRadius="15"
+                BorderColor="White"
+                HeightRequest="40"
+                HorizontalOptions="Center"
+                Scale="1"
+                Padding="5"
+            />
+        </HorizontalStackLayout>
+
+        <ScrollView VerticalOptions="FillAndExpand" Margin="20">
+            <StackLayout BindableLayout.ItemsSource="{Binding RunningTorrents}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type Models:QBTFile}">
+                        <Frame
+                            BorderColor="#CF9FFF"
+                            HasShadow="False"
+                            Padding="10"
+                            Margin="0, 5, 0, 5"
+                            Grid.ColumnSpan="2"
+                            BackgroundColor="Black"
+                        >
+                            <StackLayout
+                                Margin="0,3,0, 0"
+                                Orientation="Vertical">
+
+                                <HorizontalStackLayout>
+                                    <Label Text="{Binding Name}"
+                                        FontSize="13"
+                                        VerticalOptions="Center"
+                                        LineBreakMode="WordWrap"
+                                        FontAttributes="Bold"
+                                    />
+                                </HorizontalStackLayout>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="25" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+
+                                    <ImageButton VerticalOptions="CenterAndExpand"
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        BackgroundColor="{StaticResource Yellow100Accent}"
+                                        Aspect="AspectFit"
+                                        Source="icons8_progress_indicator_50.png"
+                                        BorderWidth="1"
+                                        CornerRadius="15"
+                                        BorderColor="White"
+                                        HeightRequest="40"
+                                        HorizontalOptions="Center"
+                                        Scale="0.7"
+                                        Margin="0, 0, 0, 0"
+                                        Padding="0, 0, 0, 0"
+                                    />
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Margin="0, 0, 0, 0"
+                                        Padding="0, 0, 0, 0"
+                                        Text="{Binding Progress, StringFormat='{0:0.00}'}"
+                                        FontSize="11"
+                                        VerticalOptions="Center"
+                                    />
+
+                                    <ImageButton VerticalOptions="CenterAndExpand"
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        BackgroundColor="{StaticResource Yellow100Accent}"
+                                        Aspect="AspectFit"
+                                        Source="icons8_downloading_updates_50.png"
+                                        BorderWidth="1"
+                                        CornerRadius="15"
+                                        BorderColor="White"
+                                        HeightRequest="40"
+                                        HorizontalOptions="Center"
+                                        Scale="0.7"
+                                        Margin="0, 0, 0, 0"
+                                        Padding="0, 0, 0, 0"
+                                    />
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        Margin="0, 0, 0, 0"
+                                        Padding="0, 0, 0, 0"
+                                        Text="{Binding NumSeeds}"
+                                        FontSize="11"
+                                        VerticalOptions="Center"
+                                    />
+
+                                    <ImageButton VerticalOptions="CenterAndExpand"
+                                        Grid.Row="0"
+                                        Grid.Column="2"
+                                        BackgroundColor="{StaticResource Yellow100Accent}"
+                                        Aspect="AspectFit"
+                                        Source="icons8_database_export_50.png"
+                                        BorderWidth="1"
+                                        CornerRadius="15"
+                                        BorderColor="White"
+                                        HeightRequest="40"
+                                        HorizontalOptions="Center"
+                                        Scale="0.7"
+                                        Margin="0, 0, 0, 0"
+                                        Padding="0, 0, 0, 0"
+                                    />
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="3"
+                                        Padding="0, 0, 0, 0"
+                                        Margin="0, 0, 0, 0"
+                                        Text="{Binding SizeGB, StringFormat='{0:0.00}'}"
+                                        FontSize="11"
+                                        VerticalOptions="Center"
+                                    />
+
+                                    <ImageButton VerticalOptions="CenterAndExpand"
+                                        Grid.Row="1"
+                                        Grid.Column="2"
+                                        BackgroundColor="{StaticResource Yellow100Accent}"
+                                        Aspect="AspectFit"
+                                        Source="icons8_data_pending_50.png"
+                                        BorderWidth="1"
+                                        CornerRadius="15"
+                                        BorderColor="White"
+                                        HeightRequest="40"
+                                        HorizontalOptions="Center"
+                                        Scale="0.7"
+                                        Margin="0, 0, 0, 0"
+                                        Padding="0, 0, 0, 0"
+                                    />
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="3"
+                                        Margin="0, 0, 0, 0"
+                                        Padding="0, 0, 0, 0"
+                                        Text="{Binding State}"
+                                        FontSize="11"
+                                        VerticalOptions="Center"
+                                    />
+
+                                    <ImageButton
+                                        Grid.Row="0"
+                                        Grid.Column="4"
+                                        BackgroundColor="{StaticResource Cyan200Accent}"
+                                        Aspect="AspectFit"
+                                        Source="icons8_torrent_50.png"
+                                        BorderWidth="1"
+                                        CornerRadius="15"
+                                        BorderColor="White"
+                                        HeightRequest="40"
+                                        HorizontalOptions="Center"
+                                        Scale="1"
+                                    >
+                                        <ImageButton.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:TorrentSearchViewModel}}, Path=AddTorrentCommand }"
+                                                CommandParameter="{Binding}"
+                                            />
+                                        </ImageButton.GestureRecognizers>
+
+                                    </ImageButton>
+
+                                    <ImageButton VerticalOptions="CenterAndExpand"
+                                        Grid.Row="1"
+                                        Grid.Column="4"
+                                        BackgroundColor="Yellow"
+                                        Aspect="AspectFit"
+                                        Source="icons8_pause_button_50.png"
+                                        BorderWidth="1"
+                                        CornerRadius="15"
+                                        BorderColor="White"
+                                        HeightRequest="40"
+                                        HorizontalOptions="Center"
+                                        Scale="1"
+                                        Padding="1"
+                                    />
+                                    <ImageButton VerticalOptions="CenterAndExpand"
+                                        Grid.Row="0"
+                                        Grid.Column="5"
+                                        BackgroundColor="Red"
+                                        Aspect="AspectFit"
+                                        Source="icons8_trash_50.png"
+                                        BorderWidth="1"
+                                        CornerRadius="15"
+                                        BorderColor="White"
+                                        HeightRequest="40"
+                                        HorizontalOptions="Center"
+                                        Scale="1"
+                                        Padding="1"
+                                    />
+                                </Grid>
+
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </ScrollView>
+
+    </StackLayout>
 </ContentPage>

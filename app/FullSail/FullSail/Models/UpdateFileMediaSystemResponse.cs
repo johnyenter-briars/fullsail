@@ -8,4 +8,5 @@ namespace FullSail.Models;
 public class UpdateFileMediaSystemResponse
 {
     public string Message { get; set; }
+    public List<string> Jobs { get; set; }
 }
