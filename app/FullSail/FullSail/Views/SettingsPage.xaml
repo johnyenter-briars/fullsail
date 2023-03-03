@@ -13,56 +13,83 @@
         </Grid.RowDefinitions>
 
         <HorizontalStackLayout>
-            <Label Text="Build Version" FontSize="Medium" />
-            <Label Text="{Binding BuildVersion}" FontSize="Medium" />
+            <Label Text="{Binding BuildVersion}" FontSize="Medium"
+                LineBreakMode="WordWrap"
+                FontAttributes="Bold"
+            />
 
         </HorizontalStackLayout>
 
         <ScrollView VerticalOptions="FillAndExpand" Grid.Row="1">
             <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
-                <Label Text="Domain name / Ip Address" FontSize="Medium" />
-                <Entry TextColor="BlueViolet" x:Name="IpAddress" Text="{Binding HostName}"
-                    Placeholder="IP address"
-                    HeightRequest="40"
-                />
+                <Frame
+                    BorderColor="#CF9FFF"
+                    HasShadow="False"
+                    Padding="10"
+                    Margin="0, 5, 0, 5"
+                    Grid.ColumnSpan="2"
+                    BackgroundColor="Black"
+                >
+                    <StackLayout>
+                        <Label Text="Domain name / Ip Address" FontSize="Medium" />
+                        <Entry TextColor="BlueViolet" x:Name="IpAddress" Text="{Binding HostName}"
+                            Placeholder="IP address"
+                            HeightRequest="40"
+                        />
 
-                <Label Text="Port" FontSize="Medium" />
-                <Entry TextColor="BlueViolet" x:Name="Port" Text="{Binding Port}" Placeholder="port"
-                    HeightRequest="40"
-                />
+                        <Label Text="Port" FontSize="Medium" />
+                        <Entry TextColor="BlueViolet" x:Name="Port" Text="{Binding Port}"
+                            Placeholder="port"
+                            HeightRequest="40"
+                        />
 
-                <Label Text="API Key" FontSize="Medium" />
-                <Entry TextColor="BlueViolet" x:Name="ApiKey" Text="{Binding ApiKey}"
-                    Placeholder="API Key"
-                    HeightRequest="40"
-                />
+                        <Label Text="API Key" FontSize="Medium" />
+                        <Entry TextColor="BlueViolet" x:Name="ApiKey" Text="{Binding ApiKey}"
+                            Placeholder="API Key"
+                            HeightRequest="40"
+                        />
 
-                <Line Stroke="#CF9FFF"
-                    X2="500" />
+                    </StackLayout>
+                </Frame>
 
-                <Label Text="Kodi Hostname" FontSize="Medium" />
-                <Entry TextColor="BlueViolet" x:Name="KodiHostname" Text="{Binding KodiHostname}"
-                    Placeholder="API Key"
-                    HeightRequest="40"
-                />
+                <Frame
+                    BorderColor="#CF9FFF"
+                    HasShadow="False"
+                    Padding="10"
+                    Margin="0, 5, 0, 5"
+                    Grid.ColumnSpan="2"
+                    BackgroundColor="Black"
+                >
+                    <StackLayout>
+                        <Label Text="Kodi Hostname" FontSize="Medium" />
+                        <Entry TextColor="BlueViolet" x:Name="KodiHostname"
+                            Text="{Binding KodiHostname}"
+                            Placeholder="API Key"
+                            HeightRequest="40"
+                        />
 
-                <Label Text="Kodi Port" FontSize="Medium" />
-                <Entry TextColor="BlueViolet" x:Name="KodiPort" Text="{Binding KodiPort}"
-                    Placeholder="API Key"
-                    HeightRequest="40"
-                />
+                        <Label Text="Kodi Port" FontSize="Medium" />
+                        <Entry TextColor="BlueViolet" x:Name="KodiPort" Text="{Binding KodiPort}"
+                            Placeholder="API Key"
+                            HeightRequest="40"
+                        />
 
-                <Label Text="Kodi Username" FontSize="Medium" />
-                <Entry TextColor="BlueViolet" x:Name="KodiUsername" Text="{Binding KodiUsername}"
-                    Placeholder="API Key"
-                    HeightRequest="40"
-                />
+                        <Label Text="Kodi Username" FontSize="Medium" />
+                        <Entry TextColor="BlueViolet" x:Name="KodiUsername"
+                            Text="{Binding KodiUsername}"
+                            Placeholder="API Key"
+                            HeightRequest="40"
+                        />
 
-                <Label Text="Kodi Password" FontSize="Medium" />
-                <Entry TextColor="BlueViolet" x:Name="KodiPassword" Text="{Binding KodiPassword}"
-                    Placeholder="API Key"
-                    HeightRequest="40"
-                />
+                        <Label Text="Kodi Password" FontSize="Medium" />
+                        <Entry TextColor="BlueViolet" x:Name="KodiPassword"
+                            Text="{Binding KodiPassword}"
+                            Placeholder="API Key"
+                            HeightRequest="40"
+                        />
+
+                    </StackLayout>
+                </Frame>
 
                 <Button x:Name="saveChangesBtn" Text="Save Changes"
                     Command="{Binding SaveChangesCommand}"
