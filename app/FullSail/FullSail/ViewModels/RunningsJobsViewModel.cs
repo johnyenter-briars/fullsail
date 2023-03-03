@@ -8,12 +8,9 @@ using System.Windows.Input;
 namespace FullSail.ViewModels;
 internal class RunningsJobsViewModel : BaseViewModel
 {
-    public RunningsJobsViewModel()
+    public async Task Refresh()
     {
-        Task.Run(async () =>
-        {
-            Jobs = (await FullSailClientSingleton.GetRunningJobs()).Jobs;
-        });
+        Jobs = (await FullSailClientSingleton.GetRunningJobs()).Jobs;
     }
 
     private List<string> jobs = new();

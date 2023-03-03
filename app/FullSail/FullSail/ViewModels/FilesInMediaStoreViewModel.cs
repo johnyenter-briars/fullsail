@@ -9,13 +9,10 @@ using System.Windows.Input;
 namespace FullSail.ViewModels;
 internal class FilesInMediaStoreViewModel : BaseViewModel
 {
-    public FilesInMediaStoreViewModel()
+    public async Task Refresh()
     {
-        Task.Run(async () =>
-        {
-            MediaFiles = await FullSailClientSingleton.GetMediaFilesInStore(false);
-            FilteredMediaFiles = MediaFiles;
-        });
+        MediaFiles = await FullSailClientSingleton.GetMediaFilesInStore(false);
+        FilteredMediaFiles = MediaFiles;
     }
     private List<MediaFile> mediaFiles = new();
 

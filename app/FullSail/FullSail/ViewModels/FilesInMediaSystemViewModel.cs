@@ -10,13 +10,10 @@ namespace FullSail.ViewModels;
 
 public class FilesInMediaSystemViewModel : BaseViewModel
 {
-    public FilesInMediaSystemViewModel()
+    public async Task Refresh()
     {
-        Task.Run(async () =>
-        {
-            MediaFiles = await FullSailClientSingleton.GetMediaFilesInMediaSystem();
-            FilteredMediaFiles = MediaFiles;
-        });
+        MediaFiles = await FullSailClientSingleton.GetMediaFilesInMediaSystem();
+        FilteredMediaFiles = MediaFiles;
     }
     private List<MediaFile> mediaFiles = new();
 

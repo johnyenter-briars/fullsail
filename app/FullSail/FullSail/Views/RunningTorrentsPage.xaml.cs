@@ -9,5 +9,15 @@ public partial class RunningTorrentsPage : ContentPage
         InitializeComponent();
 
         BindingContext = new RunningTorrentsViewModel();
+
+    }
+    protected override void OnAppearing()
+    {
+        Task.Run(async () =>
+        {
+            var bc = (RunningTorrentsViewModel)BindingContext;
+
+            await bc?.Refresh();
+        });
     }
 }

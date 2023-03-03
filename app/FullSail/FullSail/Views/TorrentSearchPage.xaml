@@ -20,18 +20,6 @@
                 <RadioButton Content="solid" Value="solid" />
                 <RadioButton Content="xt1337" Value="t1337x" />
             </StackLayout>
-            <ImageButton VerticalOptions="CenterAndExpand"
-                BackgroundColor="{StaticResource Blue100Accent}"
-                Aspect="AspectFit"
-                Source="icons8_update_left_rotation_50.png"
-                BorderWidth="1"
-                CornerRadius="15"
-                BorderColor="White"
-                HeightRequest="40"
-                HorizontalOptions="Center"
-                Scale="1"
-                Padding="5"
-            />
         </HorizontalStackLayout>
 
         <ScrollView VerticalOptions="FillAndExpand" Margin="20">

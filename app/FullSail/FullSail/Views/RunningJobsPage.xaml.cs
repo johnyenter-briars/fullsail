@@ -10,4 +10,13 @@ public partial class RunningJobsPage : ContentPage
 
         BindingContext = new RunningsJobsViewModel();
     }
+    protected override void OnAppearing()
+    {
+        Task.Run(async () =>
+        {
+            var bc = (RunningsJobsViewModel)BindingContext;
+
+            await bc?.Refresh();
+        });
+    }
 }

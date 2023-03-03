@@ -9,15 +9,14 @@ using System.Windows.Input;
 namespace FullSail.ViewModels;
 internal class RunningTorrentsViewModel : BaseViewModel
 {
-    public RunningTorrentsViewModel()
+    public async Task Refresh()
     {
-        Task.Run(async () =>
-        {
-            var foo = await FullSailClientSingleton.GetRunningTorrents();
+        var foo = await FullSailClientSingleton.GetRunningTorrents();
 
-            RunningTorrents = foo.RunningTorrents;
-        });
+        RunningTorrents = foo.RunningTorrents;
     }
+    public ICommand RefreshCommand => new Command(async () => { await Refresh(); });
+
     private List<QBTFile> runningTorrents = new();
 
     public List<QBTFile> RunningTorrents
@@ -28,10 +27,18 @@ internal class RunningTorrentsViewModel : BaseViewModel
     public ICommand ResumeTorrent => new Command<QBTFile>(async (torrentFile) =>
     {
         await FullSailClientSingleton.ResumeTorrent(torrentFile.Hash);
+
+        await Task.Delay(1000);
+
+        await Refresh();
     });
     public ICommand PauseTorrent => new Command<QBTFile>(async (torrentFile) =>
     {
         await FullSailClientSingleton.PauseTorrent(torrentFile.Hash);
+
+        await Task.Delay(1000);
+
+        await Refresh();
     });
     public ICommand DeleteTorrent => new Command<QBTFile>(async (torrentFile) =>
     {
@@ -40,6 +47,10 @@ internal class RunningTorrentsViewModel : BaseViewModel
         if (deleteTorrent)
         {
             await FullSailClientSingleton.DeleteTorrent(torrentFile.Hash);
+
+            await Task.Delay(1000);
+
+            await Refresh();
         }
     });
 }
