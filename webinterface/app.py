@@ -42,7 +42,7 @@ async def _list_jobs(request):
 
     files = [job[1] for job in media_transfer_jobs]
 
-    return web.json_response(files)
+    return web.json_response({"message": "jobs found", "jobs": files})
 
 
 @routes.get('/api/media/list')
@@ -83,7 +83,7 @@ async def _list_subs(request):
 async def _list_torrents(request):
     files: List[dict] = await get_running_torrents()
 
-    return web.json_response(files)
+    return web.json_response({"running_torrents": files})
 
 
 @routes.post('/api/torrents/add')
