@@ -19,7 +19,13 @@
                 HorizontalOptions="Center"
                 Scale="1"
                 Padding="5"
-            />
+            >
+                <ImageButton.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding RefreshCommand }"
+                    />
+                </ImageButton.GestureRecognizers>
+            </ImageButton>
         </HorizontalStackLayout>
         <ScrollView VerticalOptions="FillAndExpand" Margin="20">
             <StackLayout BindableLayout.ItemsSource="{Binding Jobs}">

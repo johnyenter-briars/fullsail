@@ -14,9 +14,17 @@ public class FilesInMediaSystemViewModel : BaseViewModel
     {
         MediaFiles = await FullSailClientSingleton.GetMediaFilesInMediaSystem();
         FilteredMediaFiles = MediaFiles;
+        SearchText = "";
     }
-    private List<MediaFile> mediaFiles = new();
+    private string searchText = "";
 
+    public string SearchText
+    {
+        get { return searchText; }
+        set { SetProperty(ref searchText, value); }
+    }
+    public ICommand RefreshCommand => new Command(async () => { await Refresh(); });
+    private List<MediaFile> mediaFiles = new();
     public List<MediaFile> MediaFiles
     {
         get { return mediaFiles; }
@@ -48,6 +56,8 @@ public class FilesInMediaSystemViewModel : BaseViewModel
             var response = await FullSailClientSingleton.DeleteFileInMediaSystem(mediaFile.ShortName);
 
             await AlertServiceSingleton.ShowAlertAsync("Success", "Media-System file deleted successfully");
+
+            await Refresh();
         }
     });
     public ICommand PlayFile => new Command<MediaFile>(async (mediaFile) =>

@@ -12,6 +12,7 @@ internal class RunningsJobsViewModel : BaseViewModel
     {
         Jobs = (await FullSailClientSingleton.GetRunningJobs()).Jobs;
     }
+    public ICommand RefreshCommand => new Command(async () => { await Refresh(); });
 
     private List<string> jobs = new();
 
