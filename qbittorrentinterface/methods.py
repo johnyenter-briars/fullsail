@@ -14,9 +14,9 @@ import fsconfig
 
 
 async def get_running_torrents() -> List[dict]:
-    qbt_domain_name = fsconfig.CONFIG["QBT-domain-name"]
-    qbt_port = fsconfig.CONFIG["QBT-port"]
-    qbt_api_version = fsconfig.CONFIG["QBT-version"]
+    qbt_domain_name = fsconfig.CONFIG["qbt-domain-name"]
+    qbt_port = fsconfig.CONFIG["qbt-port"]
+    qbt_api_version = fsconfig.CONFIG["qbt-version"]
     async with aiohttp.ClientSession() as session:
         qbittorrent_url = f'http://{qbt_domain_name}:{qbt_port}/api/{qbt_api_version}/torrents/info'
         async with session.get(qbittorrent_url) as resp:
@@ -27,9 +27,9 @@ async def get_running_torrents() -> List[dict]:
 
 
 async def add_torrent(magnet_link: str) -> str:
-    qbt_domain_name = fsconfig.CONFIG["QBT-domain-name"]
-    qbt_port = fsconfig.CONFIG["QBT-port"]
-    qbt_api_version = fsconfig.CONFIG["QBT-version"]
+    qbt_domain_name = fsconfig.CONFIG["qbt-domain-name"]
+    qbt_port = fsconfig.CONFIG["qbt-port"]
+    qbt_api_version = fsconfig.CONFIG["qbt-version"]
     url = f"http://{qbt_domain_name}:{qbt_port}/api/{qbt_api_version}/torrents/add"
     headers = {
         'Content-type': 'multipart/form-data; boundary=wL36Yn8afVp8Ag7AmP8qZ0SA4n1v9T'
@@ -54,9 +54,9 @@ async def add_torrent(magnet_link: str) -> str:
 
 
 async def pause_torrent(hash: str) -> str:
-    qbt_domain_name = fsconfig.CONFIG["QBT-domain-name"]
-    qbt_port = fsconfig.CONFIG["QBT-port"]
-    qbt_api_version = fsconfig.CONFIG["QBT-version"]
+    qbt_domain_name = fsconfig.CONFIG["qbt-domain-name"]
+    qbt_port = fsconfig.CONFIG["qbt-port"]
+    qbt_api_version = fsconfig.CONFIG["qbt-version"]
     url = f"http://{qbt_domain_name}:{qbt_port}/api/{qbt_api_version}/torrents/pause"
     headers = {
         'Content-type': 'multipart/form-data; boundary=wL36Yn8afVp8Ag7AmP8qZ0SA4n1v9T'
@@ -81,9 +81,9 @@ async def pause_torrent(hash: str) -> str:
 
 
 async def resume_torrent(hash: str) -> str:
-    qbt_domain_name = fsconfig.CONFIG["QBT-domain-name"]
-    qbt_port = fsconfig.CONFIG["QBT-port"]
-    qbt_api_version = fsconfig.CONFIG["QBT-version"]
+    qbt_domain_name = fsconfig.CONFIG["qbt-domain-name"]
+    qbt_port = fsconfig.CONFIG["qbt-port"]
+    qbt_api_version = fsconfig.CONFIG["qbt-version"]
     url = f"http://{qbt_domain_name}:{qbt_port}/api/{qbt_api_version}/torrents/resume"
     headers = {
         'Content-type': 'multipart/form-data; boundary=wL36Yn8afVp8Ag7AmP8qZ0SA4n1v9T'
@@ -108,9 +108,9 @@ async def resume_torrent(hash: str) -> str:
 
 
 async def delete_torrent(hash: str):
-    qbt_domain_name = fsconfig.CONFIG["QBT-domain-name"]
-    qbt_port = fsconfig.CONFIG["QBT-port"]
-    qbt_api_version = fsconfig.CONFIG["QBT-version"]
+    qbt_domain_name = fsconfig.CONFIG["qbt-domain-name"]
+    qbt_port = fsconfig.CONFIG["qbt-port"]
+    qbt_api_version = fsconfig.CONFIG["qbt-version"]
     url = f"http://{qbt_domain_name}:{qbt_port}/api/{qbt_api_version}/torrents/delete"
     boundary = 'wL36Yn8afVp8Ag7AmP8qZ0SA4n1v9T'
     headers = {
