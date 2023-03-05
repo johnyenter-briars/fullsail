@@ -75,7 +75,7 @@
                                         Grid.Column="0"
                                         BackgroundColor="{StaticResource Yellow100Accent}"
                                         Aspect="AspectFit"
-                                        Source="icons8_database_export_50.png"
+                                        Source="icons8_clock_50.png"
                                         BorderWidth="1"
                                         CornerRadius="15"
                                         BorderColor="White"
@@ -90,7 +90,7 @@
                                         Grid.Column="1"
                                         Padding="0, 0, 0, 0"
                                         Margin="0, 0, 0, 0"
-                                        Text="2GB"
+                                        Text="{Binding Duration}"
                                         FontSize="11"
                                         VerticalOptions="Center"
                                     />
@@ -100,7 +100,7 @@
                                         Grid.Column="0"
                                         BackgroundColor="{StaticResource Yellow100Accent}"
                                         Aspect="AspectFit"
-                                        Source="icons8_clock_50.png"
+                                        Source="icons8_file_50.png"
                                         BorderWidth="1"
                                         CornerRadius="15"
                                         BorderColor="White"
@@ -141,9 +141,9 @@
 
                                     </ImageButton>
                                     <ImageButton
-                                        Grid.RowSpan="2"
+                                        Grid.Row="1"
                                         Grid.Column="3"
-                                        BackgroundColor="Red"
+                                        BackgroundColor="{StaticResource Primary}"
                                         Aspect="AspectFit"
                                         Source="icons8_right_arrow_60.png"
                                         BorderWidth="1"

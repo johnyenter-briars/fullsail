@@ -56,6 +56,7 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
         if ((bool)(mediaFile?.IsFile))
         {
             await FullSailClientSingleton.SendFile(mediaFile.Name);
+            AlertServiceSingleton.ShowAlert("Success", "File Sending Job Scheduled");
         }
     });
     public ICommand OpenFolder => new Command<MediaFile>(async (mediaFile) =>
