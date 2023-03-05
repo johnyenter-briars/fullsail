@@ -266,6 +266,22 @@ public class KodiClient
 
         await PostRequestAsync(requestObject);
     }
+    public async Task PlayFile(string fileName)
+    {
+        var requestObject = $@"
+        {{
+            ""jsonrpc"": ""2.0"",
+            ""id"": 1,
+            ""method"": ""Player.Open"",
+            ""params"": {{
+                ""item"": {{
+                    ""file"": ""/storage/videos/{fileName}""
+                }}
+            }}
+        }}";
+
+        await PostRequestAsync(requestObject);
+    }
     public KodiClient UpdateSettings(string hostname, int port, string username, string password)
     {
         _hostName = hostname;

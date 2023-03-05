@@ -1,12 +1,61 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FullSail.Views.RunningJobsPage"
-             Title="RunningJobsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FullSail.Views.RunningJobsPage"
+    xmlns:ViewModels="clr-namespace:FullSail.ViewModels"
+    xmlns:Models="clr-namespace:FullSail.Models"
+    x:DataType="{x:Type ViewModels:RunningsJobsViewModel}"
+    Title="Running Jobs">
+    <StackLayout>
+        <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+            <ImageButton VerticalOptions="CenterAndExpand"
+                BackgroundColor="{StaticResource Blue100Accent}"
+                Aspect="AspectFit"
+                Source="icons8_update_left_rotation_50.png"
+                BorderWidth="1"
+                CornerRadius="15"
+                BorderColor="White"
+                HeightRequest="40"
+                HorizontalOptions="Center"
+                Scale="1"
+                Padding="5"
+            >
+                <ImageButton.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding RefreshCommand }"
+                    />
+                </ImageButton.GestureRecognizers>
+            </ImageButton>
+        </HorizontalStackLayout>
+        <ScrollView VerticalOptions="FillAndExpand" Margin="20">
+            <StackLayout BindableLayout.ItemsSource="{Binding Jobs}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type x:String}">
+
+                        <Frame
+                            BorderColor="#CF9FFF"
+                            HasShadow="False"
+                            Padding="10"
+                            Margin="0, 5, 0, 5"
+                            Grid.ColumnSpan="2"
+                            BackgroundColor="Black"
+                        >
+                            <StackLayout
+                                Margin="0,10,0,10"
+                                Orientation="Vertical">
+
+                                <Label Text="{Binding ., StringFormat='{0:F0}'}"
+                                    FontSize="13"
+                                    VerticalOptions="Center"
+                                    LineBreakMode="WordWrap"
+                                    FontAttributes="Bold"
+                                />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </ScrollView>
+
+    </StackLayout>
 </ContentPage>

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -73,6 +74,13 @@ public class FullSailClient
     {
         return await FullSailRequest<List<MediaFile>>($"media/list?duration={getDuration}", HttpMethod.Get);
     }
+    public async Task<List<MediaFile>> GetMediaFilesInFolder(string folderPath = "media-root")
+    {
+        var folderSlashRemoved = folderPath.First() == '/' ? folderPath.Substring(1, folderPath.Length) : folderPath;
+        var encodedFolder = folderSlashRemoved.Replace("/", "%2F");
+
+        return await FullSailRequest<List<MediaFile>>($"media/list/{encodedFolder}", HttpMethod.Get);
+    }
     public async Task<List<MediaFile>> GetMediaFilesInMediaSystem()
     {
         return await FullSailRequest<List<MediaFile>>($"media-system/list", HttpMethod.Get);
@@ -91,6 +99,59 @@ public class FullSailClient
         };
 
         return await FullSailRequest<AddTorrentsRequest, UpdateTorrentsResponse>(body, $"torrents/add", HttpMethod.Post);
+    }
+    public async Task<UpdateFileMediaSystemResponse> DeleteFileInMediaSystem(string fileName)
+    {
+        var body = new UpdateFileMediaSystemRequest
+        {
+            FileName = fileName,
+        };
+
+        return await FullSailRequest<UpdateFileMediaSystemRequest, UpdateFileMediaSystemResponse>(body, $"media-system/delete", HttpMethod.Delete);
+    }
+    public async Task<UpdateFileMediaSystemResponse> SendFile(string fileNamePlusDirectory)
+    {
+        var body = new UpdateFileMediaSystemRequest
+        {
+            FileName = fileNamePlusDirectory,
+        };
+
+        return await FullSailRequest<UpdateFileMediaSystemRequest, UpdateFileMediaSystemResponse>(body, $"mediatransfer/start", HttpMethod.Post);
+    }
+    public async Task<UpdateFileMediaSystemResponse> GetRunningJobs()
+    {
+        return await FullSailRequest<UpdateFileMediaSystemResponse>($"mediatransfer/listjobs", HttpMethod.Get);
+    }
+    public async Task<QBTResponse> GetRunningTorrents()
+    {
+        return await FullSailRequest<QBTResponse>($"torrents/list", HttpMethod.Get);
+    }
+    public async Task<UpdateTorrentsResponse> PauseTorrent(string hash)
+    {
+        var body = new UpdateTorrentsRequest
+        {
+            Hashes = new() { hash },
+        };
+
+        return await FullSailRequest<UpdateTorrentsRequest, UpdateTorrentsResponse>(body, $"torrents/pause", HttpMethod.Post);
+    }
+    public async Task<UpdateTorrentsResponse> ResumeTorrent(string hash)
+    {
+        var body = new UpdateTorrentsRequest
+        {
+            Hashes = new() { hash },
+        };
+
+        return await FullSailRequest<UpdateTorrentsRequest, UpdateTorrentsResponse>(body, $"torrents/resume", HttpMethod.Post);
+    }
+    public async Task<UpdateTorrentsResponse> DeleteTorrent(string hash)
+    {
+        var body = new UpdateTorrentsRequest
+        {
+            Hashes = new() { hash },
+        };
+
+        return await FullSailRequest<UpdateTorrentsRequest, UpdateTorrentsResponse>(body, $"torrents/delete", HttpMethod.Post);
     }
     public FullSailClient UpdateSettings(string hostname, int port, string apiKey)
     {

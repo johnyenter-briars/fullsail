@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FullSail.Models;
-public class UpdateTorrentsResponse
+public class UpdateFileMediaSystemResponse
 {
     public string Message { get; set; }
+    public List<string> Jobs { get; set; }
 }

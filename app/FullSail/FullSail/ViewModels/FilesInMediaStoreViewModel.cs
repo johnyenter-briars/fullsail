@@ -9,13 +9,23 @@ using System.Windows.Input;
 namespace FullSail.ViewModels;
 internal class FilesInMediaStoreViewModel : BaseViewModel
 {
-    public FilesInMediaStoreViewModel()
+    public async Task Refresh(string folderName = "media-root")
     {
-        Task.Run(async () =>
+        if (folderName == "media-root")
         {
-            MediaFiles = await FullSailClientSingleton.GetMediaFilesInStore(false);
-            FilteredMediaFiles = MediaFiles;
-        });
+            FolderPath.Clear();
+            FolderPath.Push(new());
+        }
+
+        MediaFiles = await FullSailClientSingleton.GetMediaFilesInFolder(folderName);
+        FilteredMediaFiles = MediaFiles;
+    }
+    private Stack<MediaFile> folderPath = new();
+
+    public Stack<MediaFile> FolderPath
+    {
+        get { return folderPath; }
+        set { SetProperty(ref folderPath, value); }
     }
     private List<MediaFile> mediaFiles = new();
 
@@ -40,5 +50,34 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
         var filtered = mediaFiles.Where(f => f.Name.ToLower().Contains(query.ToLower())).ToList();
 
         FilteredMediaFiles = filtered;
+    });
+    public ICommand ClearSearchText => new Command(() =>
+    {
+        FilteredMediaFiles = mediaFiles;
+    });
+    public ICommand SendFile => new Command<MediaFile>(async (mediaFile) =>
+    {
+        if ((bool)(mediaFile?.IsFile))
+        {
+            await FullSailClientSingleton.SendFile(mediaFile.Name);
+            AlertServiceSingleton.ShowAlert("Success", "File Sending Job Scheduled");
+        }
+    });
+    public ICommand OpenFolder => new Command<MediaFile>(async (mediaFile) =>
+    {
+        if ((bool)!mediaFile?.IsFile)
+        {
+            await Refresh(mediaFile.FullPath);
+            FolderPath.Push(mediaFile);
+        }
+    });
+    public ICommand GoBack => new Command(async () =>
+    {
+        if (folderPath.Count > 1)
+        {
+            FolderPath.Pop();
+            var folder = FolderPath.Peek();
+            await Refresh(folder.FullPath);
+        }
     });
 }

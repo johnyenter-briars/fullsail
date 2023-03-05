@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FullSail.Models;
-public class UpdateTorrentsResponse
+internal class UpdateFileMediaSystemRequest
 {
-    public string Message { get; set; }
+    public string FileName { get; set; }
 }

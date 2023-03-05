@@ -9,8 +9,13 @@ public partial class FilesInMediaStorePage : ContentPage
         InitializeComponent();
         BindingContext = new FilesInMediaStoreViewModel();
     }
-    private void ExecuteFileSelectedCommand(object sender, EventArgs e)
+    protected override void OnAppearing()
     {
-        var foo = 10;
+        Task.Run(async () =>
+        {
+            var bc = (FilesInMediaStoreViewModel)BindingContext;
+
+            await bc?.Refresh();
+        });
     }
 }

@@ -10,16 +10,21 @@ namespace FullSail.ViewModels;
 
 public class FilesInMediaSystemViewModel : BaseViewModel
 {
-    public FilesInMediaSystemViewModel()
+    public async Task Refresh()
     {
-        Task.Run(async () =>
-        {
-            MediaFiles = await FullSailClientSingleton.GetMediaFilesInMediaSystem();
-            FilteredMediaFiles = MediaFiles;
-        });
+        MediaFiles = await FullSailClientSingleton.GetMediaFilesInMediaSystem();
+        FilteredMediaFiles = MediaFiles;
+        SearchText = "";
     }
-    private List<MediaFile> mediaFiles = new();
+    private string searchText = "";
 
+    public string SearchText
+    {
+        get { return searchText; }
+        set { SetProperty(ref searchText, value); }
+    }
+    public ICommand RefreshCommand => new Command(async () => { await Refresh(); });
+    private List<MediaFile> mediaFiles = new();
     public List<MediaFile> MediaFiles
     {
         get { return mediaFiles; }
@@ -41,5 +46,22 @@ public class FilesInMediaSystemViewModel : BaseViewModel
         var filtered = mediaFiles.Where(f => f.Name.ToLower().Contains(query.ToLower())).ToList();
 
         FilteredMediaFiles = filtered;
+    });
+    public ICommand DeleteFile => new Command<MediaFile>(async (mediaFile) =>
+    {
+        bool startTorrent = await AlertServiceSingleton.ShowConfirmationAsync("Confirm", "Are you SURE you want to delete this file from the Media-System?", "Yes", "No");
+
+        if (startTorrent)
+        {
+            var response = await FullSailClientSingleton.DeleteFileInMediaSystem(mediaFile.ShortName);
+
+            await AlertServiceSingleton.ShowAlertAsync("Success", "Media-System file deleted successfully");
+
+            await Refresh();
+        }
+    });
+    public ICommand PlayFile => new Command<MediaFile>(async (mediaFile) =>
+    {
+        await KodiClientSingleton.PlayFile(mediaFile.Name);
     });
 }

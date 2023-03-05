@@ -10,8 +10,13 @@ public partial class FilesInMediaSystemPage : ContentPage
 
         BindingContext = new FilesInMediaSystemViewModel();
     }
-    private void ExecuteFileSelectedCommand(object sender, EventArgs e)
+    protected override void OnAppearing()
     {
-        var foo = 10;
+        Task.Run(async () =>
+        {
+            var bc = (FilesInMediaSystemViewModel)BindingContext;
+
+            await bc?.Refresh();
+        });
     }
 }
