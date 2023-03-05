@@ -48,32 +48,14 @@ async def _list_jobs(request):
     return web.json_response({"message": "jobs found", "jobs": files})
 
 
-async def update_cache():
-    with open('./mediacache/cache.json', 'w') as cache_file:
-        current_cache = fsconfig.MEDIACACHE
-        files_to_ignore = [file
-                           for file in current_cache["media-root"]]
-
-        new_file_list = await media_files(True, files_to_ignore)
-
-        for new_file in new_file_list:
-            target_files = list(filter(lambda f: f["name"] == new_file["name"] ,fsconfig.MEDIACACHE["media-root"]))
-
-            if  len(target_files) != 0:
-                target_file = target_files[0]
-                target_file["duration"] = new_file["duration"]
-            else:
-                fsconfig.MEDIACACHE["media-root"].append(new_file)
-
-        cache_file.write(json.dumps(fsconfig.MEDIACACHE))
-
 @routes.get('/api/media/list/{folder}')
 async def _list_media_in_folder(request):
     folder = request.match_info['folder']
 
     files = await list_media_files_in_folder(folder)
 
-    return web.json_response({"message": "files found", "files": files})
+    return web.json_response(files)
+
 
 @routes.get('/api/subs/list/{folder}')
 async def _list_media_in_folder(request):
@@ -81,17 +63,7 @@ async def _list_media_in_folder(request):
 
     files = await list_sub_files_in_folder(folder)
 
-    return web.json_response({"message": "files found", "files": files})
-
-
-@routes.get('/api/media/list')
-async def _list_media(request):
-    media_transfer_jobs.append(
-        (asyncio.create_task(update_cache()), "updating cache"))
-
-    cache = fsconfig.MEDIACACHE
-
-    return web.json_response(cache)
+    return web.json_response(files)
 
 
 @routes.get('/api/media-system/list')
