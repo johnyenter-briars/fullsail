@@ -51,6 +51,10 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
 
         FilteredMediaFiles = filtered;
     });
+    public ICommand ClearSearchText => new Command(() =>
+    {
+        FilteredMediaFiles = mediaFiles;
+    });
     public ICommand SendFile => new Command<MediaFile>(async (mediaFile) =>
     {
         if ((bool)(mediaFile?.IsFile))

@@ -38,14 +38,11 @@
                                 Margin="0,3,0, 0"
                                 Orientation="Vertical">
 
-                                <HorizontalStackLayout>
-                                    <Label Text="{Binding Name}"
-                                        FontSize="13"
-                                        VerticalOptions="Center"
-                                        LineBreakMode="WordWrap"
-                                        FontAttributes="Bold"
-                                    />
-                                </HorizontalStackLayout>
+                                <Label
+                                    Text="{Binding Name}"
+                                    LineBreakMode="WordWrap"
+                                    FontAttributes="Bold"
+                                    MaxLines="2" />
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />

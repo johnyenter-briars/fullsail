@@ -30,8 +30,8 @@
             <SearchBar x:Name="searchBar"
                 Placeholder="Filter..."
                 SearchCommand="{Binding PerformSearch}"
-                SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" />
-
+                SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+            />
         </HorizontalStackLayout>
         <ScrollView VerticalOptions="FillAndExpand" Margin="20">
             <StackLayout BindableLayout.ItemsSource="{Binding FilteredMediaFiles}">
@@ -47,16 +47,13 @@
                         >
                             <StackLayout
                                 Margin="0,10,0,10"
-                                Orientation="Vertical">
-
-                                <HorizontalStackLayout>
-                                    <Label Text="{Binding ShortName, StringFormat='{0:F0}'}"
-                                        FontSize="13"
-                                        VerticalOptions="Center"
-                                        LineBreakMode="WordWrap"
-                                        FontAttributes="Bold"
-                                    />
-                                </HorizontalStackLayout>
+                                Orientation="Vertical"
+                            >
+                                <Label
+                                    Text="{Binding ShortName, StringFormat='{0:F0}'}"
+                                    LineBreakMode="WordWrap"
+                                    FontAttributes="Bold"
+                                    MaxLines="2" />
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
