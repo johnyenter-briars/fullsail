@@ -11,8 +11,21 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
 {
     public async Task Refresh(string folderName = "media-root")
     {
+        if (folderName == "media-root")
+        {
+            FolderPath.Clear();
+            FolderPath.Push(new());
+        }
+
         MediaFiles = await FullSailClientSingleton.GetMediaFilesInFolder(folderName);
         FilteredMediaFiles = MediaFiles;
+    }
+    private Stack<MediaFile> folderPath = new();
+
+    public Stack<MediaFile> FolderPath
+    {
+        get { return folderPath; }
+        set { SetProperty(ref folderPath, value); }
     }
     private List<MediaFile> mediaFiles = new();
 
@@ -50,6 +63,16 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
         if ((bool)!mediaFile?.IsFile)
         {
             await Refresh(mediaFile.FullPath);
+            FolderPath.Push(mediaFile);
+        }
+    });
+    public ICommand GoBack => new Command(async () =>
+    {
+        if (folderPath.Count > 1)
+        {
+            FolderPath.Pop();
+            var folder = FolderPath.Peek();
+            await Refresh(folder.FullPath);
         }
     });
 }
