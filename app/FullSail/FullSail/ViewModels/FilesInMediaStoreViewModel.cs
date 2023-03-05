@@ -9,9 +9,9 @@ using System.Windows.Input;
 namespace FullSail.ViewModels;
 internal class FilesInMediaStoreViewModel : BaseViewModel
 {
-    public async Task Refresh()
+    public async Task Refresh(string folderName = "media-root")
     {
-        MediaFiles = await FullSailClientSingleton.GetMediaFilesInStore(false);
+        MediaFiles = await FullSailClientSingleton.GetMediaFilesInFolder(folderName);
         FilteredMediaFiles = MediaFiles;
     }
     private List<MediaFile> mediaFiles = new();
@@ -40,6 +40,16 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
     });
     public ICommand SendFile => new Command<MediaFile>(async (mediaFile) =>
     {
-        await FullSailClientSingleton.SendFile(mediaFile.Name);
+        if ((bool)(mediaFile?.IsFile))
+        {
+            await FullSailClientSingleton.SendFile(mediaFile.Name);
+        }
+    });
+    public ICommand OpenFolder => new Command<MediaFile>(async (mediaFile) =>
+    {
+        if ((bool)!mediaFile?.IsFile)
+        {
+            await Refresh(mediaFile.FullPath);
+        }
     });
 }

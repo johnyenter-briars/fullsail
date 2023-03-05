@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -72,6 +73,13 @@ public class FullSailClient
     public async Task<List<MediaFile>> GetMediaFilesInStore(bool getDuration = false)
     {
         return await FullSailRequest<List<MediaFile>>($"media/list?duration={getDuration}", HttpMethod.Get);
+    }
+    public async Task<List<MediaFile>> GetMediaFilesInFolder(string folderPath = "media-root")
+    {
+        var folderSlashRemoved = folderPath.First() == '/' ? folderPath.Substring(1, folderPath.Length) : folderPath;
+        var encodedFolder = folderSlashRemoved.Replace("/", "%2F");
+
+        return await FullSailRequest<List<MediaFile>>($"media/list/{encodedFolder}", HttpMethod.Get);
     }
     public async Task<List<MediaFile>> GetMediaFilesInMediaSystem()
     {

@@ -10,7 +10,7 @@ namespace FullSail.Models;
 public class QBTFile
 {
     [JsonProperty("added_on")]
-    public int AddedOn { get; set; }
+    public long AddedOn { get; set; }
 
     [JsonProperty("amount_left")]
     public long AmountLeft { get; set; }
@@ -28,16 +28,16 @@ public class QBTFile
     public long Completed { get; set; }
 
     [JsonProperty("completion_on")]
-    public int CompletionOn { get; set; }
+    public long CompletionOn { get; set; }
 
     [JsonProperty("content_path")]
     public string ContentPath { get; set; }
 
     [JsonProperty("dl_limit")]
-    public int DlLimit { get; set; }
+    public long DlLimit { get; set; }
 
     [JsonProperty("dlspeed")]
-    public int Dlspeed { get; set; }
+    public long Dlspeed { get; set; }
 
     [JsonProperty("download_path")]
     public string DownloadPath { get; set; }
@@ -46,10 +46,10 @@ public class QBTFile
     public long Downloaded { get; set; }
 
     [JsonProperty("downloaded_session")]
-    public int DownloadedSession { get; set; }
+    public long DownloadedSession { get; set; }
 
     [JsonProperty("eta")]
-    public int Eta { get; set; }
+    public long Eta { get; set; }
 
     [JsonProperty("f_l_piece_prio")]
     public bool FLPiecePrio { get; set; }
@@ -67,34 +67,34 @@ public class QBTFile
     public string InfohashV2 { get; set; }
 
     [JsonProperty("last_activity")]
-    public int LastActivity { get; set; }
+    public long LastActivity { get; set; }
 
     [JsonProperty("magnet_uri")]
     public string MagnetUri { get; set; }
 
     [JsonProperty("max_ratio")]
-    public int MaxRatio { get; set; }
+    public long MaxRatio { get; set; }
 
     [JsonProperty("max_seeding_time")]
-    public int MaxSeedingTime { get; set; }
+    public long MaxSeedingTime { get; set; }
 
     [JsonProperty("name")]
     public string Name { get; set; }
 
     [JsonProperty("num_complete")]
-    public int NumComplete { get; set; }
+    public long NumComplete { get; set; }
 
     [JsonProperty("num_incomplete")]
-    public int NumIncomplete { get; set; }
+    public long NumIncomplete { get; set; }
 
     [JsonProperty("num_leechs")]
-    public int NumLeechs { get; set; }
+    public long NumLeechs { get; set; }
 
     [JsonProperty("num_seeds")]
-    public int NumSeeds { get; set; }
+    public long NumSeeds { get; set; }
 
     [JsonProperty("priority")]
-    public int Priority { get; set; }
+    public long Priority { get; set; }
 
     [JsonProperty("progress")]
     public double Progress { get; set; }
@@ -103,19 +103,19 @@ public class QBTFile
     public double Ratio { get; set; }
 
     [JsonProperty("ratio_limit")]
-    public int RatioLimit { get; set; }
+    public long RatioLimit { get; set; }
 
     [JsonProperty("save_path")]
     public string SavePath { get; set; }
 
     [JsonProperty("seeding_time")]
-    public int SeedingTime { get; set; }
+    public long SeedingTime { get; set; }
 
     [JsonProperty("seeding_time_limit")]
-    public int SeedingTimeLimit { get; set; }
+    public long SeedingTimeLimit { get; set; }
 
     [JsonProperty("seen_complete")]
-    public int SeenComplete { get; set; }
+    public long SeenComplete { get; set; }
 
     [JsonProperty("seq_dl")]
     public bool SeqDl { get; set; }
@@ -134,7 +134,7 @@ public class QBTFile
     public string Tags { get; set; }
 
     [JsonProperty("time_active")]
-    public int TimeActive { get; set; }
+    public long TimeActive { get; set; }
 
     [JsonProperty("total_size")]
     public long TotalSize { get; set; }
@@ -143,18 +143,18 @@ public class QBTFile
     public string Tracker { get; set; }
 
     [JsonProperty("trackers_count")]
-    public int TrackersCount { get; set; }
+    public long TrackersCount { get; set; }
 
     [JsonProperty("up_limit")]
-    public int UpLimit { get; set; }
+    public long UpLimit { get; set; }
 
     [JsonProperty("uploaded")]
-    public int Uploaded { get; set; }
+    public long Uploaded { get; set; }
 
     [JsonProperty("uploaded_session")]
-    public int UploadedSession { get; set; }
+    public long UploadedSession { get; set; }
 
     [JsonProperty("upspeed")]
-    public int Upspeed { get; set; }
+    public long Upspeed { get; set; }
 }
 

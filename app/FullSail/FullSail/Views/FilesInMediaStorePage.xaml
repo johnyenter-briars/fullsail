@@ -44,6 +44,7 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
 
 
@@ -92,7 +93,7 @@
                                         Grid.Column="1"
                                         Margin="0, 0, 0, 0"
                                         Padding="0, 0, 0, 0"
-                                        Text="1 hr"
+                                        Text="{Binding IsFile}"
                                         FontSize="11"
                                         VerticalOptions="Center"
                                     />
@@ -112,6 +113,26 @@
                                         <ImageButton.GestureRecognizers>
                                             <TapGestureRecognizer
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:FilesInMediaStoreViewModel}}, Path=SendFile}"
+                                                CommandParameter="{Binding}"
+                                            />
+                                        </ImageButton.GestureRecognizers>
+
+                                    </ImageButton>
+                                    <ImageButton
+                                        Grid.RowSpan="2"
+                                        Grid.Column="3"
+                                        BackgroundColor="Red"
+                                        Aspect="AspectFit"
+                                        Source="icons8_right_arrow_60.png"
+                                        BorderWidth="1"
+                                        CornerRadius="15"
+                                        BorderColor="White"
+                                        HorizontalOptions="Center"
+                                        Scale="1"
+                                    >
+                                        <ImageButton.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:FilesInMediaStoreViewModel}}, Path=OpenFolder}"
                                                 CommandParameter="{Binding}"
                                             />
                                         </ImageButton.GestureRecognizers>
