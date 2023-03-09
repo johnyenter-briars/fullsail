@@ -1,3 +1,4 @@
+using AlohaKit.Animations;
 using FullSail.ViewModels;
 
 namespace FullSail.Views;
@@ -36,5 +37,16 @@ public partial class MediaControlPage : ContentPage
         int sliderPercentAsint = (int)sliderPercent;
 
         Task.Run(async () => await kodiClient.SeekPlayerAsync(sliderPercentAsint));
+    }
+    private void ScaleButton(object sender, EventArgs e)
+    {
+        if (sender is View view)
+        {
+            view.Animate(new StoryBoard(new List<AnimationBase>
+              {
+                 new ScaleToAnimation { Scale = 1.1, Duration = "150" },
+                 new ScaleToAnimation { Scale = 1, Duration = "100" }
+              }));
+        }
     }
 }

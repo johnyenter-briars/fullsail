@@ -31,6 +31,7 @@
             x:Name="esc"
             Command="{Binding EscCommand }"
             CommandParameter="{x:Reference esc}"
+            Clicked="ScaleButton"
         />
 
         <Button
@@ -42,6 +43,7 @@
             x:Name="up"
             Command="{Binding UpCommand }"
             CommandParameter="{x:Reference up}"
+            Clicked="ScaleButton"
         />
 
         <Button
@@ -53,6 +55,7 @@
             x:Name="osd"
             Command="{Binding OSDCommand }"
             CommandParameter="{x:Reference osd}"
+            Clicked="ScaleButton"
         />
 
         <Button
@@ -64,6 +67,7 @@
             x:Name="left"
             Command="{Binding LeftCommand }"
             CommandParameter="{x:Reference left}"
+            Clicked="ScaleButton"
         />
 
         <Button
@@ -76,6 +80,7 @@
             x:Name="enter"
             Command="{Binding EnterCommand }"
             CommandParameter="{x:Reference enter}"
+            Clicked="ScaleButton"
         />
 
         <Button
@@ -88,6 +93,7 @@
             x:Name="right"
             Command="{Binding RightCommand}"
             CommandParameter="{x:Reference right}"
+            Clicked="ScaleButton"
         />
 
         <Button
@@ -100,6 +106,7 @@
             x:Name="down"
             Command="{Binding DownCommand }"
             CommandParameter="{x:Reference down}"
+            Clicked="ScaleButton"
         />
 
         <Slider
@@ -129,6 +136,7 @@
             TextColor="white"
             ImageSource="icons8_rewind_50.png"
             x:Name="rewind"
+            Clicked="ScaleButton"
         />
         <Button
             Margin="20, 20, 20, 20"
@@ -140,6 +148,7 @@
             x:Name="playpause"
             Command="{Binding TogglePlayPauseCommand }"
             CommandParameter="{x:Reference playpause}"
+            Clicked="ScaleButton"
         />
         <Button
             Margin="20, 20, 20, 20"
@@ -150,6 +159,7 @@
             TextColor="white"
             ImageSource="icons8_fast_forward_50.png"
             x:Name="fastfoward"
+            Clicked="ScaleButton"
         />
 
         <Frame
@@ -179,6 +189,7 @@
             TextColor="white"
             ImageSource="icons8_enter_mac_key_50.png"
             Command="{Binding EnterTextCommand}"
+            Clicked="ScaleButton"
         />
 
     </Grid>

@@ -30,6 +30,7 @@
                 HorizontalOptions="Center"
                 Scale="1"
                 Padding="5"
+                Clicked="ScaleButton"
             >
                 <ImageButton.GestureRecognizers>
                     <TapGestureRecognizer
@@ -38,7 +39,15 @@
                 </ImageButton.GestureRecognizers>
             </ImageButton>
         </HorizontalStackLayout>
-        <ScrollView VerticalOptions="FillAndExpand" Margin="20">
+        <ActivityIndicator 
+                IsVisible="{Binding FetchingData}"
+                IsRunning="{Binding FetchingData}"
+                Color="{StaticResource Primary}"
+                />
+        <ScrollView 
+            IsVisible="{Binding NotFetchingData}"
+            VerticalOptions="FillAndExpand" 
+            Margin="20">
             <StackLayout BindableLayout.ItemsSource="{Binding FilteredMediaFiles}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type Models:MediaFile}">
@@ -74,6 +83,7 @@
                                         HorizontalOptions="Center"
                                         Scale="1"
                                         Margin="25, 0, 25, 0"
+                                        Clicked="ScaleButton"
                                     >
                                         <ImageButton.GestureRecognizers>
                                             <TapGestureRecognizer
@@ -96,6 +106,7 @@
                                         Scale="1"
                                         Padding="1"
                                         Margin="25, 0, 25, 0"
+                                        Clicked="ScaleButton"
                                     >
                                         <ImageButton.GestureRecognizers>
                                             <TapGestureRecognizer

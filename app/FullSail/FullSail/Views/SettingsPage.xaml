@@ -93,7 +93,9 @@
 
                 <Button x:Name="saveChangesBtn" Text="Save Changes"
                     Command="{Binding SaveChangesCommand}"
-                    HorizontalOptions="FillAndExpand" />
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="ScaleButton"
+                />
             </StackLayout>
         </ScrollView>
     </Grid>
