@@ -7,7 +7,9 @@
     x:DataType="{x:Type ViewModels:FilesInMediaStoreViewModel}"
     Title="Files in Media Store">
     <StackLayout>
-        <HorizontalStackLayout >
+        <HorizontalStackLayout
+            Margin="5, 0, 5, 0"
+            >
             <ImageButton VerticalOptions="CenterAndExpand"
                 BackgroundColor="{StaticResource Cyan100Accent}"
                 Aspect="AspectFit"
@@ -19,6 +21,7 @@
                 HorizontalOptions="Center"
                 Margin="0, 0, 0, 0"
                 Padding="0, 0, 0, 0"
+                Clicked="ScaleButton"
             >
                 <ImageButton.GestureRecognizers>
                     <TapGestureRecognizer
@@ -89,6 +92,7 @@
                                         Scale="0.7"
                                         Margin="0, 0, 0, 0"
                                         Padding="0, 0, 0, 0"
+                                        Clicked="ScaleButton"
                                     />
                                     <Label
                                         Grid.Row="0"
@@ -114,6 +118,7 @@
                                         Scale="0.7"
                                         Margin="0, 0, 0, 0"
                                         Padding="0, 0, 0, 0"
+                                        Clicked="ScaleButton"
                                     />
                                     <Label
                                         Grid.Row="1"
@@ -136,6 +141,7 @@
                                         BorderColor="White"
                                         HorizontalOptions="Center"
                                         Scale="1"
+                                        Clicked="ScaleButton"
                                     >
                                         <ImageButton.GestureRecognizers>
                                             <TapGestureRecognizer
@@ -156,6 +162,7 @@
                                         BorderColor="White"
                                         HorizontalOptions="Center"
                                         Scale="1"
+                                        Clicked="ScaleButton"
                                     >
                                         <ImageButton.GestureRecognizers>
                                             <TapGestureRecognizer

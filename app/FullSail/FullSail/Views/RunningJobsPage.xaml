@@ -19,6 +19,7 @@
                 HorizontalOptions="Center"
                 Scale="1"
                 Padding="5"
+                Clicked="ScaleButton"
             >
                 <ImageButton.GestureRecognizers>
                     <TapGestureRecognizer
@@ -27,14 +28,14 @@
                 </ImageButton.GestureRecognizers>
             </ImageButton>
         </HorizontalStackLayout>
-        <ActivityIndicator 
-                IsVisible="{Binding FetchingData}"
-                IsRunning="{Binding FetchingData}"
-                Color="{StaticResource Primary}"
-                />
-        <ScrollView 
+        <ActivityIndicator
+            IsVisible="{Binding FetchingData}"
+            IsRunning="{Binding FetchingData}"
+            Color="{StaticResource Primary}"
+        />
+        <ScrollView
             IsVisible="{Binding NotFetchingData}"
-            VerticalOptions="FillAndExpand" 
+            VerticalOptions="FillAndExpand"
             Margin="20">
             <StackLayout BindableLayout.ItemsSource="{Binding Jobs}">
                 <BindableLayout.ItemTemplate>

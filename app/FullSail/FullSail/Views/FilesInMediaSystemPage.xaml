@@ -30,6 +30,7 @@
                 HorizontalOptions="Center"
                 Scale="1"
                 Padding="5"
+                Clicked="ScaleButton"
             >
                 <ImageButton.GestureRecognizers>
                     <TapGestureRecognizer
@@ -82,6 +83,7 @@
                                         HorizontalOptions="Center"
                                         Scale="1"
                                         Margin="25, 0, 25, 0"
+                                        Clicked="ScaleButton"
                                     >
                                         <ImageButton.GestureRecognizers>
                                             <TapGestureRecognizer
@@ -104,6 +106,7 @@
                                         Scale="1"
                                         Padding="1"
                                         Margin="25, 0, 25, 0"
+                                        Clicked="ScaleButton"
                                     >
                                         <ImageButton.GestureRecognizers>
                                             <TapGestureRecognizer

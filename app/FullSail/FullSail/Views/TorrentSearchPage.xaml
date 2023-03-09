@@ -178,6 +178,7 @@
                                         BorderColor="White"
                                         HorizontalOptions="Center"
                                         Scale="1"
+                                        Clicked="ScaleButton"
                                     >
                                         <ImageButton.GestureRecognizers>
                                             <TapGestureRecognizer
@@ -201,6 +202,7 @@
                                         HorizontalOptions="Center"
                                         Scale="1"
                                         Padding="1"
+                                        Clicked="ScaleButton"
                                     />
                                     <ImageButton VerticalOptions="CenterAndExpand"
                                         Grid.Row="1"
@@ -215,6 +217,7 @@
                                         HorizontalOptions="Center"
                                         Scale="1"
                                         Padding="1"
+                                        Clicked="ScaleButton"
                                     />
                                     <ImageButton VerticalOptions="CenterAndExpand"
                                         Grid.Row="0"
@@ -229,6 +232,7 @@
                                         HorizontalOptions="Center"
                                         Scale="1"
                                         Padding="1"
+                                        Clicked="ScaleButton"
                                     />
                                 </Grid>
 
