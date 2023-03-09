@@ -94,7 +94,6 @@ def _get_file_metadata(directory, extensions, media_files=[], get_duration=True,
                         "name": file_path.replace(media_root, ""),
                         "duration": None,
                     })
-                print(f"Processed: {file_path.replace(media_root, '')}")
         else:
             _get_file_metadata(file_path, extensions,
                                media_files, get_duration)
@@ -130,7 +129,6 @@ def _get_files_in_folder(directory, extensions) -> List:
                         "duration": None,
                         "isFile": True,
                     })
-                print(f"Processed: {file_path.replace(media_root, '')}")
         else:
             media_files.append({
                 "name": file_path.replace(media_root, ""),
