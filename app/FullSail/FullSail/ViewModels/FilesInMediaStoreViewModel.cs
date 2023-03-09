@@ -11,8 +11,7 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
 {
     public async Task Refresh(string folderName = "media-root")
     {
-        FetchingData = true;
-        NotFetchingData = false;
+        ToggleIsFetchingData();
 
         if (folderName == "media-root")
         {
@@ -23,21 +22,7 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
         MediaFiles = await FullSailClientSingleton.GetMediaFilesInFolder(folderName);
         FilteredMediaFiles = MediaFiles;
 
-        FetchingData = false;
-        NotFetchingData = true;
-    }
-    private bool fetchingData = true;
-
-    public bool FetchingData
-    {
-        get { return fetchingData; }
-        set { SetProperty(ref fetchingData, value); }
-    }
-    private bool notFetchingData = false;
-    public bool NotFetchingData
-    {
-        get { return notFetchingData; }
-        set { SetProperty(ref notFetchingData, value); }
+        ToggleIsFetchingData();
     }
     private Stack<MediaFile> folderPath = new();
 
@@ -54,9 +39,7 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
         set { SetProperty(ref mediaFiles, value); }
     }
 
-    private List<MediaFile> filteredMediaFiles = new()
-    {
-    };
+    private List<MediaFile> filteredMediaFiles = new();
 
     public List<MediaFile> FilteredMediaFiles
     {
@@ -99,4 +82,22 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
             await Refresh(folder.FullPath);
         }
     });
+    private void ToggleIsFetchingData()
+    {
+        FetchingData = !FetchingData;
+        NotFetchingData = !NotFetchingData;
+    }
+    private bool fetchingData = false;
+
+    public bool FetchingData
+    {
+        get { return fetchingData; }
+        set { SetProperty(ref fetchingData, value); }
+    }
+    private bool notFetchingData = true;
+    public bool NotFetchingData
+    {
+        get { return notFetchingData; }
+        set { SetProperty(ref notFetchingData, value); }
+    }
 }

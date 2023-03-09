@@ -34,15 +34,14 @@
             />
         </HorizontalStackLayout>
         <ActivityIndicator 
-                x:Name="activityIndicator"
                 IsVisible="{Binding FetchingData}"
                 IsRunning="{Binding FetchingData}"
+                Color="{StaticResource Primary}"
                 />
         <ScrollView 
             IsVisible="{Binding NotFetchingData}"
             VerticalOptions="FillAndExpand" 
-            Margin="20" 
-            x:Name="scrollView">
+            Margin="20">
             <StackLayout BindableLayout.ItemsSource="{Binding FilteredMediaFiles}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type Models:MediaFile}">

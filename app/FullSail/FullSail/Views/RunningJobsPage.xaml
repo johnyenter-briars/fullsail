@@ -27,7 +27,15 @@
                 </ImageButton.GestureRecognizers>
             </ImageButton>
         </HorizontalStackLayout>
-        <ScrollView VerticalOptions="FillAndExpand" Margin="20">
+        <ActivityIndicator 
+                IsVisible="{Binding FetchingData}"
+                IsRunning="{Binding FetchingData}"
+                Color="{StaticResource Primary}"
+                />
+        <ScrollView 
+            IsVisible="{Binding NotFetchingData}"
+            VerticalOptions="FillAndExpand" 
+            Margin="20">
             <StackLayout BindableLayout.ItemsSource="{Binding Jobs}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type x:String}">

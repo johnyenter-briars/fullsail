@@ -22,7 +22,16 @@
             </StackLayout>
         </HorizontalStackLayout>
 
-        <ScrollView VerticalOptions="FillAndExpand" Margin="20">
+        <ActivityIndicator 
+                IsVisible="{Binding FetchingData}"
+                IsRunning="{Binding FetchingData}"
+                Color="{StaticResource Primary}"
+                />
+
+        <ScrollView
+            IsVisible="{Binding NotFetchingData}"
+            VerticalOptions="FillAndExpand" 
+            Margin="20">
             <StackLayout BindableLayout.ItemsSource="{Binding SearchResults}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type Models:TorrentSearchResult}">
