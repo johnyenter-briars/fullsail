@@ -11,6 +11,9 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
 {
     public async Task Refresh(string folderName = "media-root")
     {
+        FetchingData = true;
+        NotFetchingData = false;
+
         if (folderName == "media-root")
         {
             FolderPath.Clear();
@@ -19,6 +22,22 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
 
         MediaFiles = await FullSailClientSingleton.GetMediaFilesInFolder(folderName);
         FilteredMediaFiles = MediaFiles;
+
+        FetchingData = false;
+        NotFetchingData = true;
+    }
+    private bool fetchingData = true;
+
+    public bool FetchingData
+    {
+        get { return fetchingData; }
+        set { SetProperty(ref fetchingData, value); }
+    }
+    private bool notFetchingData = false;
+    public bool NotFetchingData
+    {
+        get { return notFetchingData; }
+        set { SetProperty(ref notFetchingData, value); }
     }
     private Stack<MediaFile> folderPath = new();
 

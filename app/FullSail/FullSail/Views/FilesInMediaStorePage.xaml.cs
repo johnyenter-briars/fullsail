@@ -1,3 +1,4 @@
+using CommunityToolkit.Maui.Views;
 using FullSail.ViewModels;
 
 namespace FullSail.Views;
@@ -14,8 +15,7 @@ public partial class FilesInMediaStorePage : ContentPage
         Task.Run(async () =>
         {
             var bc = (FilesInMediaStoreViewModel)BindingContext;
-
-            await bc?.Refresh();
+            await bc.Refresh();
         });
     }
 }

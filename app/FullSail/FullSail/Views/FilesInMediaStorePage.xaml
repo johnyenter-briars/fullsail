@@ -7,7 +7,7 @@
     x:DataType="{x:Type ViewModels:FilesInMediaStoreViewModel}"
     Title="Files in Media Store">
     <StackLayout>
-        <HorizontalStackLayout>
+        <HorizontalStackLayout >
             <ImageButton VerticalOptions="CenterAndExpand"
                 BackgroundColor="{StaticResource Cyan100Accent}"
                 Aspect="AspectFit"
@@ -33,7 +33,16 @@
                 SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
             />
         </HorizontalStackLayout>
-        <ScrollView VerticalOptions="FillAndExpand" Margin="20">
+        <ActivityIndicator 
+                x:Name="activityIndicator"
+                IsVisible="{Binding FetchingData}"
+                IsRunning="{Binding FetchingData}"
+                />
+        <ScrollView 
+            IsVisible="{Binding NotFetchingData}"
+            VerticalOptions="FillAndExpand" 
+            Margin="20" 
+            x:Name="scrollView">
             <StackLayout BindableLayout.ItemsSource="{Binding FilteredMediaFiles}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type Models:MediaFile}">
