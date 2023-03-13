@@ -2,7 +2,6 @@ from typing import List
 from bs4 import BeautifulSoup as bs
 import requests
 import re
-
 from models import SearchResult
 
 
