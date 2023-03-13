@@ -1,6 +1,5 @@
 from typing import List
 from bs4 import BeautifulSoup as bs
-import pyperclip as pc
 import requests
 import re
 
