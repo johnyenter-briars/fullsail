@@ -1,15 +1,12 @@
-import json
 import asyncio
 import logging
 from typing import List
-from mediatransfer import media_files, subtitle_files
+from mediatransfer import subtitle_files
 import fsconfig
 from mediatransfer import send_file
 from aiohttp import web
 from magnetlinkscraper import t1337x_search
 from magnetlinkscraper import solidtorrent_search
-from distutils.util import strtobool
-from concurrent.futures import ThreadPoolExecutor
 from mediatransfer.deletefilemediasystem import delete_file_mediasystem
 from mediatransfer.listfiles import list_media_files_in_folder, list_sub_files_in_folder
 from mediatransfer.listfilesmediasystem import list_files_mediasystem
