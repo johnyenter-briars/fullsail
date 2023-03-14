@@ -15,11 +15,11 @@ public class FullSailClient
 {
 
     private string _apiKey = "";
-    private string _hostName = "192.168.0.8";
+    private string _hostName = "";
     private int _port = 8082;
     private static readonly HttpClient _httpClient = new()
     {
-        Timeout = new TimeSpan(0, 0, 100),
+        Timeout = new TimeSpan(0, 1, 100),
     };
     private static readonly JsonSerializerSettings JsonSettings =
             new JsonSerializerSettings
