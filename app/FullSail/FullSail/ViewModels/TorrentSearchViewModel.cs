@@ -27,7 +27,7 @@ internal class TorrentSearchViewModel : BaseViewModel
         get { return selectedSearchSite.ToString(); }
         set
         {
-            Enum.TryParse(value, out TorrentSearchWebsite website);
+            _ = Enum.TryParse(value, out TorrentSearchWebsite website);
             SetProperty(ref selectedSearchSite, website);
         }
     }

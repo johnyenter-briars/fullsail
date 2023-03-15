@@ -9,6 +9,7 @@ namespace FullSail.Models
     public enum TorrentSearchWebsite
     {
         t1337x,
-        solid
+        solid,
+        piratebay,
     }
 }
