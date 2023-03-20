@@ -1,6 +1,7 @@
 import asyncio
 import logging
 from typing import List
+from magnetlinkscraper.piratebay import piratebay_search
 from mediatransfer import subtitle_files
 import fsconfig
 from mediatransfer import send_file
@@ -8,7 +9,7 @@ from aiohttp import web
 from magnetlinkscraper import t1337x_search
 from magnetlinkscraper import solidtorrent_search
 from mediatransfer.deletefilemediasystem import delete_file_mediasystem
-from mediatransfer.listfiles import list_media_files_in_folder, list_sub_files_in_folder
+from mediatransfer.listfilesmediastore import list_media_files_in_folder, list_sub_files_in_folder
 from mediatransfer.listfilesmediasystem import list_files_mediasystem
 
 from qbittorrentinterface import delete_torrent, get_running_torrents, pause_torrent, add_torrent, resume_torrent
@@ -144,6 +145,8 @@ async def _search_torrents(request):
         results = t1337x_search(search_term)
     elif torrent_site == "solid":
         results = solidtorrent_search(search_term)
+    elif torrent_site == "piratebay":
+        results = piratebay_search(search_term)
 
     return web.json_response(results)
 
