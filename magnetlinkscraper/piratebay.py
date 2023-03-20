@@ -6,7 +6,7 @@ from models import SearchResult
 
 
 def piratebay_search(query) -> List[SearchResult]:
-    #url = 'https://thepiratebay.org/search.php?q=treasure+planet&all=on&search=Pirate+Search&page=0&orderby='
+    query = query.replace("+", " ")
     url = f'https://tpb.party/search/{query}/1/99/0'
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.2840.71 Safari/539.36'}
