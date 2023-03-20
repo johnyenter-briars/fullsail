@@ -2,14 +2,13 @@ import asyncio
 import logging
 from typing import List
 from magnetlinkscraper.piratebay import piratebay_search
-from mediatransfer import subtitle_files
 import fsconfig
 from mediatransfer import send_file
 from aiohttp import web
 from magnetlinkscraper import t1337x_search
 from magnetlinkscraper import solidtorrent_search
 from mediatransfer.deletefilemediasystem import delete_file_mediasystem
-from mediatransfer.listfilesmediastore import list_media_files_in_folder, list_sub_files_in_folder
+from mediatransfer.listfilesmediastore import list_media_files_in_folder
 from mediatransfer.listfilesmediasystem import list_files_mediasystem
 
 from qbittorrentinterface import delete_torrent, get_running_torrents, pause_torrent, add_torrent, resume_torrent
@@ -55,22 +54,6 @@ async def _list_media_in_folder(request):
     return web.json_response(files)
 
 
-@routes.get('/api/subs/list/{folder}')
-async def _list_media_in_folder(request):
-    folder = request.match_info['folder']
-
-    files = await list_sub_files_in_folder(folder)
-
-    return web.json_response(files)
-
-
-@routes.get('/api/media-system/list')
-async def _list_medimediasystem(request):
-    response = await list_files_mediasystem()
-
-    return web.json_response(response)
-
-
 @routes.delete('/api/media-system/delete')
 async def _delete_files_mediasystem(request):
     r = await request.json()
@@ -80,13 +63,6 @@ async def _delete_files_mediasystem(request):
     await delete_file_mediasystem(file_name)
 
     return web.json_response({"message": "file deleted"})
-
-
-@routes.get('/api/media/list/subs')
-async def _list_subs(request):
-    response = await subtitle_files()
-
-    return web.json_response(response)
 
 
 @routes.get('/api/torrents/list')
