@@ -54,6 +54,13 @@ async def _list_media_in_folder(request):
     return web.json_response(files)
 
 
+@routes.get('/api/media-system/list')
+async def _list_medimediasystem(request):
+    response = await list_files_mediasystem()
+
+    return web.json_response(response)
+
+
 @routes.delete('/api/media-system/delete')
 async def _delete_files_mediasystem(request):
     r = await request.json()
