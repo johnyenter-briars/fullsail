@@ -1,6 +1,7 @@
 import asyncio
 import logging
 from typing import List
+from magnetlinkscraper.piratebay import piratebay_search
 from mediatransfer import subtitle_files
 import fsconfig
 from mediatransfer import send_file
@@ -144,6 +145,8 @@ async def _search_torrents(request):
         results = t1337x_search(search_term)
     elif torrent_site == "solid":
         results = solidtorrent_search(search_term)
+    elif torrent_site == "piratebay":
+        results = piratebay_search(search_term)
 
     return web.json_response(results)
 
