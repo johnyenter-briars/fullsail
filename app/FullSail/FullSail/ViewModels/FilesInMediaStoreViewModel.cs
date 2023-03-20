@@ -9,8 +9,13 @@ using System.Windows.Input;
 namespace FullSail.ViewModels;
 internal class FilesInMediaStoreViewModel : BaseViewModel
 {
-    public async Task Refresh(string folderName = "media-root")
+    public async Task Refresh(bool hardRefresh = false, string folderName = "media-root")
     {
+        if (MediaFiles.Count > 0 && !hardRefresh)
+        {
+            return;
+        }
+
         ToggleIsFetchingData();
 
         if (folderName == "media-root")
@@ -69,7 +74,7 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
     {
         if ((bool)!mediaFile?.IsFile)
         {
-            await Refresh(mediaFile.FullPath);
+            await Refresh(true, mediaFile.FullPath);
             FolderPath.Push(mediaFile);
         }
     });
@@ -79,7 +84,7 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
         {
             FolderPath.Pop();
             var folder = FolderPath.Peek();
-            await Refresh(folder.FullPath);
+            await Refresh(true, folder.FullPath);
         }
     });
     private void ToggleIsFetchingData()
