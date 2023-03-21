@@ -1,6 +1,6 @@
 import asyncio
 import logging
-from typing import List
+from typing import Awaitable, Callable, List
 from magnetlinkscraper.piratebay import piratebay_search
 import fsconfig
 from mediatransfer import send_file
@@ -10,7 +10,6 @@ from magnetlinkscraper import solidtorrent_search
 from mediatransfer.deletefilemediasystem import delete_file_mediasystem
 from mediatransfer.listfilesmediastore import list_media_files_in_folder
 from mediatransfer.listfilesmediasystem import list_files_mediasystem
-
 from qbittorrentinterface import delete_torrent, get_running_torrents, pause_torrent, add_torrent, resume_torrent
 
 media_transfer_jobs = []
@@ -133,12 +132,21 @@ async def _search_torrents(request):
 
     return web.json_response(results)
 
-
+@web.middleware
+async def api_key_middleware(request: web.Request,
+                     handler: Callable[[web.Request], Awaitable[web.Response]]):
+    api_key = request.headers['x-api-key']
+    
+    if api_key == fsconfig.CONFIG["fullsail-api-key"]:
+        return await handler(request)
+    else:
+        raise web.HTTPUnauthorized
+    
 def start_webinterface(config: dict):
     host_name = fsconfig.CONFIG["fullsail-hostname"]
     port = fsconfig.CONFIG["fullsail-port"]
 
-    app = web.Application()
+    app = web.Application(middlewares=[api_key_middleware])
 
     logging.basicConfig(level=logging.DEBUG)
 
