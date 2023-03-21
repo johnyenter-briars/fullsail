@@ -7,6 +7,9 @@
     "media-system-media-root": "",
     "fullsail-hostname": "",
     "fullsail-port": -1,
+    "fullsail-api-key": "",
+    "fullsail-cert-name": "",
+    "fullsail-key-name": "",
     "qbt-domain-name": "",
     "qbt-port": -1,
     "qbt-version": ""
