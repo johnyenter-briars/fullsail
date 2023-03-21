@@ -1,3 +1,4 @@
+import ssl
 import asyncio
 import logging
 from typing import Awaitable, Callable, List
@@ -150,6 +151,10 @@ def start_webinterface(config: dict):
 
     logging.basicConfig(level=logging.DEBUG)
 
+    ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+    
+    ssl_context.load_cert_chain(fsconfig.CONFIG["fullsail-key.pem"], fsconfig.CONFIG["fullsail-key-name"])
+
     app.add_routes(routes)
 
-    web.run_app(app, host=host_name, port=port)
+    web.run_app(app, ssl_context=ssl_context, host=host_name, port=port)
