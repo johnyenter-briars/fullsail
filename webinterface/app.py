@@ -116,6 +116,10 @@ async def _list_torrents(request):
 
 @routes.post('/api/torrents/add')
 async def _add_torrents(request):
+    if not nord_running()[0]:
+        print("Nord is not running!")
+        raise web.HTTPInternalServerError
+
     r = await request.json()
 
     for magnet_link in r["magnetLinks"]:
@@ -181,6 +185,9 @@ async def api_key_middleware(request: web.Request,
 
 
 def start_webinterface(config: dict):
+    if not nord_running()[0]:
+        raise Exception("Nord is not running!")
+
     host_name = fsconfig.CONFIG["fullsail-hostname"]
     port = fsconfig.CONFIG["fullsail-port"]
 
