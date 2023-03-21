@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -9,6 +10,9 @@ namespace FullSail.ViewModels
 {
     internal class MediaControlViewModel : BaseViewModel
     {
+        private int currSpeed = 0;
+        private int MAX_FASTFORWARD_SPEED = 8;
+        private int MAX_REWIND_SPEED = -8;
         public ICommand EscCommand => new Command<Button>(async (Button button) => { await KodiClientSingleton.InputBackAsync(); });
         public ICommand UpCommand => new Command<Button>(async (Button button) => { await KodiClientSingleton.InputUpAsync(); });
         public ICommand OSDCommand => new Command<Button>(async (Button button) => { await KodiClientSingleton.ShowOSD(); });
@@ -17,6 +21,22 @@ namespace FullSail.ViewModels
         public ICommand RightCommand => new Command<Button>(async (Button button) => { await KodiClientSingleton.InputRightAsync(); });
         public ICommand DownCommand => new Command<Button>(async (Button button) => { await KodiClientSingleton.InputDownAsync(); });
         public ICommand TogglePlayPauseCommand => new Command<Button>(async (Button button) => { await KodiClientSingleton.TogglePlayPausePlayerAsync(); });
+        public ICommand RebootCommand => new Command<Button>(async (Button button) =>
+        {
+            if (await AlertServiceSingleton.ShowConfirmationAsync("Reboot confirmation", "Are you sure you want to reboot?"))
+            {
+                await KodiClientSingleton.PowerReboot();
+            }
+        });
+        public ICommand PowerOffCommand => new Command<Button>(async (Button button) =>
+        {
+            if (await AlertServiceSingleton.ShowConfirmationAsync("Power confirmation", "Are you sure you want to power down?"))
+            {
+                await KodiClientSingleton.PowerOff();
+            }
+        });
+        public ICommand RewindCommand => new Command<Button>(async (Button button) => { await KodiClientSingleton.SetPlayerSpeed(DecSpeed()); });
+        public ICommand FastFowardCommand => new Command<Button>(async (Button button) => { await KodiClientSingleton.SetPlayerSpeed(IncSpeed()); });
         private string searchText = "";
 
         public string SearchText
@@ -33,5 +53,31 @@ namespace FullSail.ViewModels
         {
             await KodiClientSingleton.InputText(searchText);
         });
+        public int IncSpeed()
+        {
+            if (currSpeed <= 1)
+            {
+                currSpeed = 2;
+            }
+            else if (currSpeed != MAX_FASTFORWARD_SPEED)
+            {
+                currSpeed += 2;
+            }
+
+            return currSpeed;
+        }
+        public int DecSpeed()
+        {
+            if (currSpeed >= 1)
+            {
+                currSpeed = -2;
+            }
+            else if (currSpeed != MAX_REWIND_SPEED)
+            {
+                currSpeed -= 2;
+            }
+
+            return currSpeed;
+        }
     }
 }

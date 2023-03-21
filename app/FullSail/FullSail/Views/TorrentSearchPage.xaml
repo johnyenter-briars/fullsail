@@ -8,21 +8,32 @@
     Title="Torrent Search">
 
     <StackLayout>
-        <SearchBar x:Name="searchBar"
-            Placeholder="Search torrents..."
-            SearchCommand="{Binding PerformSearch}"
-            SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" />
 
         <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
-            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand"
+            <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand"
                 RadioButtonGroup.GroupName="Search Site"
                 RadioButtonGroup.SelectedValue="{Binding SelectedSearchSite}">
                 <RadioButton Content="solid" Value="solid" />
                 <RadioButton Content="xt1337" Value="t1337x" />
+                <RadioButton Content="piratebay" Value="piratebay" />
             </StackLayout>
+
+            <SearchBar x:Name="searchBar"
+                Placeholder="Search torrents..."
+                SearchCommand="{Binding PerformSearch}"
+                SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" />
         </HorizontalStackLayout>
 
-        <ScrollView VerticalOptions="FillAndExpand" Margin="20">
+        <ActivityIndicator
+            IsVisible="{Binding FetchingData}"
+            IsRunning="{Binding FetchingData}"
+            Color="{StaticResource Primary}"
+        />
+
+        <ScrollView
+            IsVisible="{Binding NotFetchingData}"
+            VerticalOptions="FillAndExpand"
+            Margin="20">
             <StackLayout BindableLayout.ItemsSource="{Binding SearchResults}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type Models:TorrentSearchResult}">
@@ -51,7 +62,6 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="20" />
-                                        <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
@@ -159,7 +169,7 @@
                                     />
 
                                     <ImageButton
-                                        Grid.Row="0"
+                                        Grid.RowSpan="2"
                                         Grid.Column="4"
                                         BackgroundColor="{StaticResource Cyan200Accent}"
                                         Aspect="AspectFit"
@@ -169,6 +179,7 @@
                                         BorderColor="White"
                                         HorizontalOptions="Center"
                                         Scale="1"
+                                        Clicked="ScaleButton"
                                     >
                                         <ImageButton.GestureRecognizers>
                                             <TapGestureRecognizer
@@ -179,48 +190,6 @@
 
                                     </ImageButton>
 
-                                    <ImageButton VerticalOptions="CenterAndExpand"
-                                        Grid.Row="1"
-                                        Grid.Column="4"
-                                        BackgroundColor="Green"
-                                        Aspect="AspectFit"
-                                        Source="icons8_trash_50.png"
-                                        BorderWidth="1"
-                                        CornerRadius="15"
-                                        BorderColor="White"
-                                        HeightRequest="40"
-                                        HorizontalOptions="Center"
-                                        Scale="1"
-                                        Padding="1"
-                                    />
-                                    <ImageButton VerticalOptions="CenterAndExpand"
-                                        Grid.Row="1"
-                                        Grid.Column="5"
-                                        BackgroundColor="Green"
-                                        Aspect="AspectFit"
-                                        Source="icons8_trash_50.png"
-                                        BorderWidth="1"
-                                        CornerRadius="15"
-                                        BorderColor="White"
-                                        HeightRequest="40"
-                                        HorizontalOptions="Center"
-                                        Scale="1"
-                                        Padding="1"
-                                    />
-                                    <ImageButton VerticalOptions="CenterAndExpand"
-                                        Grid.Row="0"
-                                        Grid.Column="5"
-                                        BackgroundColor="Green"
-                                        Aspect="AspectFit"
-                                        Source="icons8_trash_50.png"
-                                        BorderWidth="1"
-                                        CornerRadius="15"
-                                        BorderColor="White"
-                                        HeightRequest="40"
-                                        HorizontalOptions="Center"
-                                        Scale="1"
-                                        Padding="1"
-                                    />
                                 </Grid>
 
                             </StackLayout>

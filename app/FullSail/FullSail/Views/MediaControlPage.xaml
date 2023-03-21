@@ -31,6 +31,7 @@
             x:Name="esc"
             Command="{Binding EscCommand }"
             CommandParameter="{x:Reference esc}"
+            Clicked="ScaleButton"
         />
 
         <Button
@@ -42,6 +43,7 @@
             x:Name="up"
             Command="{Binding UpCommand }"
             CommandParameter="{x:Reference up}"
+            Clicked="ScaleButton"
         />
 
         <Button
@@ -53,6 +55,7 @@
             x:Name="osd"
             Command="{Binding OSDCommand }"
             CommandParameter="{x:Reference osd}"
+            Clicked="ScaleButton"
         />
 
         <Button
@@ -64,6 +67,7 @@
             x:Name="left"
             Command="{Binding LeftCommand }"
             CommandParameter="{x:Reference left}"
+            Clicked="ScaleButton"
         />
 
         <Button
@@ -76,6 +80,7 @@
             x:Name="enter"
             Command="{Binding EnterCommand }"
             CommandParameter="{x:Reference enter}"
+            Clicked="ScaleButton"
         />
 
         <Button
@@ -88,6 +93,20 @@
             x:Name="right"
             Command="{Binding RightCommand}"
             CommandParameter="{x:Reference right}"
+            Clicked="ScaleButton"
+        />
+
+        <Button
+            Margin="25, 25, 25, 25"
+            Grid.Row="2"
+            Grid.Column="0"
+            BackgroundColor="{StaticResource Yellow100Accent}"
+            TextColor="white"
+            ImageSource="icons8_power_off_button_50.png"
+            x:Name="powerOff"
+            Command="{Binding PowerOffCommand }"
+            CommandParameter="{x:Reference powerOff}"
+            Clicked="ScaleButton"
         />
 
         <Button
@@ -100,6 +119,20 @@
             x:Name="down"
             Command="{Binding DownCommand }"
             CommandParameter="{x:Reference down}"
+            Clicked="ScaleButton"
+        />
+
+        <Button
+            Margin="25, 25, 25, 25"
+            Grid.Row="2"
+            Grid.Column="2"
+            BackgroundColor="{StaticResource Yellow100Accent}"
+            TextColor="white"
+            ImageSource="icons8_restart_50.png"
+            x:Name="powerReboot"
+            Command="{Binding RebootCommand }"
+            CommandParameter="{x:Reference powerReboot}"
+            Clicked="ScaleButton"
         />
 
         <Slider
@@ -126,9 +159,11 @@
             Grid.Row="5"
             Grid.Column="0"
             BackgroundColor="{StaticResource Primary}"
+            Command="{Binding RewindCommand }"
             TextColor="white"
             ImageSource="icons8_rewind_50.png"
             x:Name="rewind"
+            Clicked="ScaleButton"
         />
         <Button
             Margin="20, 20, 20, 20"
@@ -140,6 +175,7 @@
             x:Name="playpause"
             Command="{Binding TogglePlayPauseCommand }"
             CommandParameter="{x:Reference playpause}"
+            Clicked="ScaleButton"
         />
         <Button
             Margin="20, 20, 20, 20"
@@ -148,8 +184,10 @@
             Grid.Column="2"
             BackgroundColor="{StaticResource Primary}"
             TextColor="white"
+            Command="{Binding FastFowardCommand }"
             ImageSource="icons8_fast_forward_50.png"
             x:Name="fastfoward"
+            Clicked="ScaleButton"
         />
 
         <Frame
@@ -179,6 +217,7 @@
             TextColor="white"
             ImageSource="icons8_enter_mac_key_50.png"
             Command="{Binding EnterTextCommand}"
+            Clicked="ScaleButton"
         />
 
     </Grid>

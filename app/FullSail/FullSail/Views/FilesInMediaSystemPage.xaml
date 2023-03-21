@@ -7,18 +7,9 @@
     x:DataType="{x:Type ViewModels:FilesInMediaSystemViewModel}"
     Title="Files In Media-System">
     <StackLayout>
-        <SearchBar x:Name="searchBar"
-            Placeholder="Filter..."
-            SearchCommand="{Binding PerformSearch}"
-            SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" />
-
-
-        <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
-            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand"
-                RadioButtonGroup.GroupName="Include Duration">
-                <RadioButton Content="solid" Value="solid" />
-                <RadioButton Content="xt1337" Value="t1337x" />
-            </StackLayout>
+        <HorizontalStackLayout
+            Margin="5, 0, 5, 0"
+            >
             <ImageButton VerticalOptions="CenterAndExpand"
                 BackgroundColor="{StaticResource Blue100Accent}"
                 Aspect="AspectFit"
@@ -29,16 +20,30 @@
                 HeightRequest="40"
                 HorizontalOptions="Center"
                 Scale="1"
-                Padding="5"
+                Clicked="ScaleButton"
             >
                 <ImageButton.GestureRecognizers>
                     <TapGestureRecognizer
-                        Command="{Binding RefreshCommand }"
+                        Command="{Binding RefreshCommand}"
                     />
                 </ImageButton.GestureRecognizers>
             </ImageButton>
+            <SearchBar x:Name="searchBar"
+                Placeholder="Filter..."
+                SearchCommand="{Binding PerformSearch}"
+                SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" />
+
         </HorizontalStackLayout>
-        <ScrollView VerticalOptions="FillAndExpand" Margin="20">
+
+        <ActivityIndicator 
+                IsVisible="{Binding FetchingData}"
+                IsRunning="{Binding FetchingData}"
+                Color="{StaticResource Primary}"
+                />
+        <ScrollView 
+            IsVisible="{Binding NotFetchingData}"
+            VerticalOptions="FillAndExpand" 
+            Margin="20">
             <StackLayout BindableLayout.ItemsSource="{Binding FilteredMediaFiles}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type Models:MediaFile}">
@@ -71,9 +76,11 @@
                                         BorderWidth="1"
                                         CornerRadius="15"
                                         BorderColor="White"
+                                        HeightRequest="40"
                                         HorizontalOptions="Center"
                                         Scale="1"
-                                        Margin="25, 0, 25, 0"
+                                        Margin="25, 10, 25, 0"
+                                        Clicked="ScaleButton"
                                     >
                                         <ImageButton.GestureRecognizers>
                                             <TapGestureRecognizer
@@ -95,7 +102,8 @@
                                         HorizontalOptions="Center"
                                         Scale="1"
                                         Padding="1"
-                                        Margin="25, 0, 25, 0"
+                                        Margin="25, 10, 25, 0"
+                                        Clicked="ScaleButton"
                                     >
                                         <ImageButton.GestureRecognizers>
                                             <TapGestureRecognizer

@@ -9,8 +9,15 @@ using System.Windows.Input;
 namespace FullSail.ViewModels;
 internal class FilesInMediaStoreViewModel : BaseViewModel
 {
-    public async Task Refresh(string folderName = "media-root")
+    public async Task Refresh(bool hardRefresh = false, string folderName = "media-root")
     {
+        if (MediaFiles.Count > 0 && !hardRefresh)
+        {
+            return;
+        }
+
+        ToggleIsFetchingData();
+
         if (folderName == "media-root")
         {
             FolderPath.Clear();
@@ -19,6 +26,8 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
 
         MediaFiles = await FullSailClientSingleton.GetMediaFilesInFolder(folderName);
         FilteredMediaFiles = MediaFiles;
+
+        ToggleIsFetchingData();
     }
     private Stack<MediaFile> folderPath = new();
 
@@ -35,9 +44,7 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
         set { SetProperty(ref mediaFiles, value); }
     }
 
-    private List<MediaFile> filteredMediaFiles = new()
-    {
-    };
+    private List<MediaFile> filteredMediaFiles = new();
 
     public List<MediaFile> FilteredMediaFiles
     {
@@ -67,7 +74,7 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
     {
         if ((bool)!mediaFile?.IsFile)
         {
-            await Refresh(mediaFile.FullPath);
+            await Refresh(true, mediaFile.FullPath);
             FolderPath.Push(mediaFile);
         }
     });
@@ -77,7 +84,25 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
         {
             FolderPath.Pop();
             var folder = FolderPath.Peek();
-            await Refresh(folder.FullPath);
+            await Refresh(true, folder.FullPath);
         }
     });
+    private void ToggleIsFetchingData()
+    {
+        FetchingData = !FetchingData;
+        NotFetchingData = !NotFetchingData;
+    }
+    private bool fetchingData = false;
+
+    public bool FetchingData
+    {
+        get { return fetchingData; }
+        set { SetProperty(ref fetchingData, value); }
+    }
+    private bool notFetchingData = true;
+    public bool NotFetchingData
+    {
+        get { return notFetchingData; }
+        set { SetProperty(ref notFetchingData, value); }
+    }
 }

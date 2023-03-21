@@ -28,7 +28,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
-		<AssemblyVersion>1.0.0.3</AssemblyVersion>
+		<AssemblyVersion>1.0.1.0</AssemblyVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -73,7 +73,10 @@
 		<None Remove="Resources\Images\icons8_play_pause_48.png" />
 		<None Remove="Resources\Images\icons8_play_pause_48_2.png" />
 		<None Remove="Resources\Images\icons8_play_pause_96.png" />
+		<None Remove="Resources\Images\icons8_power_off_button_50.png" />
 		<None Remove="Resources\Images\icons8_progress_indicator_50.png" />
+		<None Remove="Resources\Images\icons8_reboot_50.png" />
+		<None Remove="Resources\Images\icons8_restart_50.png" />
 		<None Remove="Resources\Images\icons8_rewind_50.png" />
 		<None Remove="Resources\Images\icons8_right_arrow_60.png" />
 		<None Remove="Resources\Images\icons8_right_arrow_64.png" />
@@ -95,6 +98,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="AlohaKit.Animations" Version="1.0.0" />
+		<PackageReference Include="CommunityToolkit.Maui" Version="5.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
 	</ItemGroup>

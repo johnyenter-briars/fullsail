@@ -10,11 +10,20 @@ namespace FullSail.ViewModels;
 
 public class FilesInMediaSystemViewModel : BaseViewModel
 {
-    public async Task Refresh()
+    public async Task Refresh(bool hardRefresh = false)
     {
+        if (MediaFiles.Count > 0 && !hardRefresh)
+        {
+            return;
+        }
+
+        ToggleIsFetchingData();
+
         MediaFiles = await FullSailClientSingleton.GetMediaFilesInMediaSystem();
-        FilteredMediaFiles = MediaFiles;
+        FilteredMediaFiles = MediaFiles.OrderBy(f => f.Name).ToList();
         SearchText = "";
+
+        ToggleIsFetchingData();
     }
     private string searchText = "";
 
@@ -23,7 +32,7 @@ public class FilesInMediaSystemViewModel : BaseViewModel
         get { return searchText; }
         set { SetProperty(ref searchText, value); }
     }
-    public ICommand RefreshCommand => new Command(async () => { await Refresh(); });
+    public ICommand RefreshCommand => new Command(async () => { await Refresh(hardRefresh: true); });
     private List<MediaFile> mediaFiles = new();
     public List<MediaFile> MediaFiles
     {
@@ -57,11 +66,28 @@ public class FilesInMediaSystemViewModel : BaseViewModel
 
             await AlertServiceSingleton.ShowAlertAsync("Success", "Media-System file deleted successfully");
 
-            await Refresh();
+            await Refresh(hardRefresh: true);
         }
     });
     public ICommand PlayFile => new Command<MediaFile>(async (mediaFile) =>
     {
         await KodiClientSingleton.PlayFile(mediaFile.Name);
     });
+    private void ToggleIsFetchingData()
+    {
+        FetchingData = !FetchingData;
+        NotFetchingData = !NotFetchingData;
+    }
+    private bool fetchingData = false;
+    public bool FetchingData
+    {
+        get { return fetchingData; }
+        set { SetProperty(ref fetchingData, value); }
+    }
+    private bool notFetchingData = true;
+    public bool NotFetchingData
+    {
+        get { return notFetchingData; }
+        set { SetProperty(ref notFetchingData, value); }
+    }
 }

@@ -12,13 +12,10 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <HorizontalStackLayout>
-            <Label Text="{Binding BuildVersion}" FontSize="Medium"
-                LineBreakMode="WordWrap"
-                FontAttributes="Bold"
-            />
-
-        </HorizontalStackLayout>
+        <Label Text="{Binding BuildVersion}" FontSize="Medium"
+            LineBreakMode="WordWrap"
+            FontAttributes="Bold"
+        />
 
         <ScrollView VerticalOptions="FillAndExpand" Grid.Row="1">
             <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
@@ -31,7 +28,15 @@
                     BackgroundColor="Black"
                 >
                     <StackLayout>
-                        <Label Text="Domain name / Ip Address" FontSize="Medium" />
+                        <Label 
+                            Text="Media-Store" 
+                            TextDecorations="Underline"
+                            TextColor="{StaticResource Cyan200Accent}"
+                            HorizontalOptions="Center"
+                            FontSize="Large"
+                            FontAttributes="Bold"
+                            />
+                        <Label Text="Domain Mame / Ip Address" FontSize="Medium" />
                         <Entry TextColor="BlueViolet" x:Name="IpAddress" Text="{Binding HostName}"
                             Placeholder="IP address"
                             HeightRequest="40"
@@ -61,27 +66,35 @@
                     BackgroundColor="Black"
                 >
                     <StackLayout>
-                        <Label Text="Kodi Hostname" FontSize="Medium" />
+                        <Label 
+                            Text="Media-System" 
+                            TextColor="{StaticResource Cyan200Accent}"
+                            TextDecorations="Underline"
+                            HorizontalOptions="Center"
+                            FontSize="Large"
+                            FontAttributes="Bold"
+                            />
+                        <Label Text="Domain Name / Ip Address" FontSize="Medium" />
                         <Entry TextColor="BlueViolet" x:Name="KodiHostname"
                             Text="{Binding KodiHostname}"
                             Placeholder="API Key"
                             HeightRequest="40"
                         />
 
-                        <Label Text="Kodi Port" FontSize="Medium" />
+                        <Label Text="Port" FontSize="Medium" />
                         <Entry TextColor="BlueViolet" x:Name="KodiPort" Text="{Binding KodiPort}"
                             Placeholder="API Key"
                             HeightRequest="40"
                         />
 
-                        <Label Text="Kodi Username" FontSize="Medium" />
+                        <Label Text="Kodi API Username" FontSize="Medium" />
                         <Entry TextColor="BlueViolet" x:Name="KodiUsername"
                             Text="{Binding KodiUsername}"
                             Placeholder="API Key"
                             HeightRequest="40"
                         />
 
-                        <Label Text="Kodi Password" FontSize="Medium" />
+                        <Label Text="Kodi API Password" FontSize="Medium" />
                         <Entry TextColor="BlueViolet" x:Name="KodiPassword"
                             Text="{Binding KodiPassword}"
                             Placeholder="API Key"
@@ -93,7 +106,9 @@
 
                 <Button x:Name="saveChangesBtn" Text="Save Changes"
                     Command="{Binding SaveChangesCommand}"
-                    HorizontalOptions="FillAndExpand" />
+                    HorizontalOptions="FillAndExpand"
+                    Clicked="ScaleButton"
+                />
             </StackLayout>
         </ScrollView>
     </Grid>

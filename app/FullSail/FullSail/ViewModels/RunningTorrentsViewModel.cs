@@ -11,9 +11,11 @@ internal class RunningTorrentsViewModel : BaseViewModel
 {
     public async Task Refresh()
     {
-        var foo = await FullSailClientSingleton.GetRunningTorrents();
+        ToggleIsFetchingData();
+        var response = await FullSailClientSingleton.GetRunningTorrents();
 
-        RunningTorrents = foo.RunningTorrents;
+        RunningTorrents = response.RunningTorrents;
+        ToggleIsFetchingData();
     }
     public ICommand RefreshCommand => new Command(async () => { await Refresh(); });
 
@@ -53,4 +55,21 @@ internal class RunningTorrentsViewModel : BaseViewModel
             await Refresh();
         }
     });
+    private void ToggleIsFetchingData()
+    {
+        FetchingData = !FetchingData;
+        NotFetchingData = !NotFetchingData;
+    }
+    private bool fetchingData = false;
+    public bool FetchingData
+    {
+        get { return fetchingData; }
+        set { SetProperty(ref fetchingData, value); }
+    }
+    private bool notFetchingData = true;
+    public bool NotFetchingData
+    {
+        get { return notFetchingData; }
+        set { SetProperty(ref notFetchingData, value); }
+    }
 }
