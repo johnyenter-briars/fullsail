@@ -153,7 +153,7 @@ def start_webinterface(config: dict):
 
     ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
     
-    ssl_context.load_cert_chain(fsconfig.CONFIG["fullsail-key.pem"], fsconfig.CONFIG["fullsail-key-name"])
+    ssl_context.load_cert_chain(fsconfig.CONFIG["fullsail-cert-name"], fsconfig.CONFIG["fullsail-key-name"])
 
     app.add_routes(routes)
 
