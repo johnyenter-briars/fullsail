@@ -1,6 +1,7 @@
 import ssl
 import asyncio
 import logging
+import subprocess
 from typing import Awaitable, Callable, List
 from magnetlinkscraper.piratebay import piratebay_search
 import fsconfig
@@ -16,6 +17,41 @@ from qbittorrentinterface import delete_torrent, get_running_torrents, pause_tor
 media_transfer_jobs = []
 
 routes = web.RouteTableDef()
+
+
+def nord_running():
+    output = subprocess.check_output(
+        f'nordvpn status | grep Status',
+        shell=True,  # Let this run in the shell
+        stderr=subprocess.STDOUT
+    )
+
+    nord_status = str(output).split(": ")[1]
+
+    country = ""
+    connected = False
+    if "Connected" in nord_status:
+        output = subprocess.check_output(
+            f'nordvpn status | grep Country',
+            shell=True,  # Let this run in the shell
+            stderr=subprocess.STDOUT
+        )
+
+        country = str(output).split(": ")[1].replace(
+            "\\n", "").replace("'", "")
+        connected = True
+
+    return (connected, country)
+
+
+@routes.get('/api/healthcheck')
+async def _health_check(request):
+    connected, country = nord_running()
+
+    return web.json_response({
+        "nordStatus": connected,
+        "country": country,
+    })
 
 
 @routes.post('/api/mediatransfer/start')
@@ -81,6 +117,10 @@ async def _list_torrents(request):
 
 @routes.post('/api/torrents/add')
 async def _add_torrents(request):
+    if not nord_running()[0]:
+        print("Nord is not running!")
+        raise web.HTTPInternalServerError
+
     r = await request.json()
 
     for magnet_link in r["magnetLinks"]:
@@ -133,27 +173,35 @@ async def _search_torrents(request):
 
     return web.json_response(results)
 
+
 @web.middleware
 async def api_key_middleware(request: web.Request,
-                     handler: Callable[[web.Request], Awaitable[web.Response]]):
+                             handler: Callable[[web.Request], Awaitable[web.Response]]):
     api_key = request.headers['x-api-key']
-    
+
     if api_key == fsconfig.CONFIG["fullsail-api-key"]:
         return await handler(request)
     else:
         raise web.HTTPUnauthorized
-    
+
+
 def start_webinterface(config: dict):
+    if not nord_running()[0]:
+        raise Exception("Nord is not running!")
+
     host_name = fsconfig.CONFIG["fullsail-hostname"]
     port = fsconfig.CONFIG["fullsail-port"]
 
     app = web.Application(middlewares=[api_key_middleware])
 
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
+    asyncssh_logger = logging.getLogger("asyncssh")
+    asyncssh_logger.setLevel(logging.WARNING)
 
     ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-    
-    ssl_context.load_cert_chain(fsconfig.CONFIG["fullsail-cert-name"], fsconfig.CONFIG["fullsail-key-name"])
+
+    ssl_context.load_cert_chain(
+        fsconfig.CONFIG["fullsail-cert-name"], fsconfig.CONFIG["fullsail-key-name"])
 
     app.add_routes(routes)
 
