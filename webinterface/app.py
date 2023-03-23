@@ -37,7 +37,8 @@ def nord_running():
             stderr=subprocess.STDOUT
         )
 
-        country = str(output).split(": ")[1].replace("\\n", "").replace("'", "")
+        country = str(output).split(": ")[1].replace(
+            "\\n", "").replace("'", "")
         connected = True
 
     return (connected, country)
