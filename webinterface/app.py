@@ -193,7 +193,9 @@ def start_webinterface(config: dict):
 
     app = web.Application(middlewares=[api_key_middleware])
 
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.INFO)
+    asyncssh_logger = logging.getLogger("asyncssh")
+    asyncssh_logger.setLevel(logging.WARNING)
 
     ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
 
