@@ -4,3 +4,4 @@ json-tricks==3.16.1
 jsonpickle==3.0.1
 requests==2.28.2
 asyncssh==2.13.1
+psutil==5.9.4

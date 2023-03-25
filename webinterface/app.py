@@ -1,3 +1,5 @@
+import psutil
+import os
 import ssl
 import asyncio
 import logging
@@ -48,9 +50,14 @@ def nord_running():
 async def _health_check(request):
     connected, country = nord_running()
 
+    cpu_usage = psutil.cpu_percent()
+    gb_memory = psutil.virtual_memory()[3]/1000000000
+
     return web.json_response({
         "nordStatus": connected,
         "country": country,
+        "cpuUsed": cpu_usage,
+        "memoryUsed": f"{round(gb_memory, 1)} GB",
     })
 
 

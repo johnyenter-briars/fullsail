@@ -7,7 +7,7 @@ using System.Runtime.CompilerServices;
 namespace FullSail.ViewModels;
 public class BaseViewModel : INotifyPropertyChanged
 {
-    protected FullSailClient FullSailClientSingleton = DependencyService.Get<FullSailClient>();
+    protected readonly FullSailClient FullSailClientSingleton = DependencyService.Get<FullSailClient>();
     protected KodiClient KodiClientSingleton = DependencyService.Get<KodiClient>();
     protected AlertService AlertServiceSingleton = DependencyService.Get<AlertService>();
     bool isBusy = false;

@@ -57,6 +57,14 @@
         </Tab>
     </FlyoutItem>
     <FlyoutItem 
+                Title="Health Check" 
+                Icon="icons8_heart_with_pulse_50.png"
+                >
+        <Tab>
+            <ShellContent  Route="healthCheck" ContentTemplate="{DataTemplate local:HealthCheckPage}" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem 
                 Title="Settings" 
                 Icon="icons8_automatic_50.png"
                 >

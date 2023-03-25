@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 namespace FullSail;
 public class FullSailClient
 {
-
     private string _apiKey = "";
     private string _hostName = "";
     private int _port = 8082;
@@ -156,6 +155,10 @@ public class FullSailClient
         };
 
         return await FullSailRequest<UpdateTorrentsRequest, UpdateTorrentsResponse>(body, $"torrents/delete", HttpMethod.Post);
+    }
+    public async Task<HealthCheckResponse> HealthCheck()
+    {
+        return await FullSailRequest<HealthCheckResponse>("healthcheck", HttpMethod.Get);
     }
     public FullSailClient UpdateSettings(string hostname, int port, string apiKey)
     {

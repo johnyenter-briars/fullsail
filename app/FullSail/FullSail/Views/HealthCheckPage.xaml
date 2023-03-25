@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FullSail.Views.HealthCheckPage"
+    xmlns:ViewModels="clr-namespace:FullSail.ViewModels"
+    xmlns:Models="clr-namespace:FullSail.Models"
+    x:DataType="{x:Type ViewModels:HealthCheckViewModel}"
+    Title="Health Check">
+    <StackLayout>
+        <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+            <ImageButton VerticalOptions="CenterAndExpand"
+                BackgroundColor="{StaticResource Blue100Accent}"
+                Aspect="AspectFit"
+                Source="icons8_update_left_rotation_50.png"
+                BorderWidth="1"
+                CornerRadius="15"
+                BorderColor="White"
+                HeightRequest="40"
+                HorizontalOptions="Center"
+                Scale="1"
+                Padding="5"
+                Clicked="ScaleButton"
+            >
+                <ImageButton.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding RefreshCommand }"
+                    />
+                </ImageButton.GestureRecognizers>
+            </ImageButton>
+        </HorizontalStackLayout>
+        <ActivityIndicator
+            IsVisible="{Binding FetchingData}"
+            IsRunning="{Binding FetchingData}"
+            Color="{StaticResource Primary}"
+        />
+        <Frame
+            BorderColor="#CF9FFF"
+            HasShadow="False"
+            Padding="10"
+            Margin="0, 5, 0, 5"
+            Grid.ColumnSpan="2"
+            BackgroundColor="Black"
+            IsVisible="{Binding NotFetchingData}"
+        >
+            <StackLayout
+                Margin="0,3,0, 0"
+                Orientation="Vertical">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="75" />
+                        <RowDefinition Height="75" />
+                        <RowDefinition Height="75" />
+                        <RowDefinition Height="75" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+
+                    <ImageButton VerticalOptions="CenterAndExpand"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        BackgroundColor="{StaticResource Blue300Accent}"
+                        Aspect="AspectFit"
+                        Source="icons8_nordvpn_50.png"
+                        BorderWidth="1"
+                        CornerRadius="15"
+                        BorderColor="White"
+                        HeightRequest="40"
+                        HorizontalOptions="Center"
+                        Margin="0, 0, 0, 0"
+                        Padding="0, 0, 0, 0"
+                        Scale="1.5"
+                    />
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="0, 0, 0, 0"
+                        Padding="0, 0, 0, 0"
+                        Text="{Binding NordStatus}"
+                        FontSize="20"
+                        VerticalOptions="Center"
+                    />
+
+                    <ImageButton VerticalOptions="CenterAndExpand"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        BackgroundColor="{StaticResource Blue100Accent}"
+                        Aspect="AspectFit"
+                        Source="icons8_earth_planet_50.png"
+                        BorderWidth="1"
+                        CornerRadius="15"
+                        BorderColor="White"
+                        HeightRequest="40"
+                        HorizontalOptions="Center"
+                        Margin="0, 0, 0, 0"
+                        Padding="0, 0, 0, 0"
+                        Scale="1.5"
+                    />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="0, 0, 0, 0"
+                        Padding="0, 0, 0, 0"
+                        Text="{Binding Country}"
+                        FontSize="20"
+                        VerticalOptions="Center"
+                    />
+                    <ImageButton VerticalOptions="CenterAndExpand"
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        BackgroundColor="{StaticResource Cyan200Accent}"
+                        Aspect="AspectFit"
+                        Source="icons8_processor_50.png"
+                        BorderWidth="1"
+                        CornerRadius="15"
+                        BorderColor="White"
+                        HeightRequest="40"
+                        HorizontalOptions="Center"
+                        Margin="0, 0, 0, 0"
+                        Padding="0, 0, 0, 0"
+                        Scale="1.5"
+                    />
+                    <Label
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="0, 0, 0, 0"
+                        Padding="0, 0, 0, 0"
+                        Text="{Binding CpuUsed}"
+                        FontSize="20"
+                        VerticalOptions="Center"
+                    />
+                    <ImageButton VerticalOptions="CenterAndExpand"
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        BackgroundColor="{StaticResource Cyan100Accent}"
+                        Aspect="AspectFit"
+                        Source="icons8_memory_slot_50.png"
+                        BorderWidth="1"
+                        CornerRadius="15"
+                        BorderColor="White"
+                        HeightRequest="40"
+                        HorizontalOptions="Center"
+                        Margin="0, 0, 0, 0"
+                        Padding="0, 0, 0, 0"
+                        Scale="1.5"
+                    />
+                    <Label
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Margin="0, 0, 0, 0"
+                        Padding="0, 0, 0, 0"
+                        Text="{Binding MemoryUsed}"
+                        FontSize="20"
+                        VerticalOptions="Center"
+                    />
+
+                </Grid>
+
+            </StackLayout>
+        </Frame>
+
+    </StackLayout>
+</ContentPage>
