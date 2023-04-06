@@ -15,5 +15,6 @@ namespace FullSail.Models
         public string ParentFolder => FullPath.Replace($"/{ShortName}", "");
         public int? Duration { get; set; } = 15;
         public bool IsFile { get; set; }
+        public bool IsFolder => !IsFile; 
     }
 }
