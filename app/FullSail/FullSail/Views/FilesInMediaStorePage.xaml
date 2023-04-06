@@ -16,7 +16,7 @@
                 Source="icons8_left_arrow_60.png"
                 BorderWidth="1"
                 CornerRadius="15"
-                BorderColor="White"
+                
                 HeightRequest="40"
                 HorizontalOptions="Center"
                 Margin="0, 0, 0, 0"
@@ -65,6 +65,22 @@
                                     LineBreakMode="WordWrap"
                                     FontAttributes="Bold"
                                     MaxLines="2" />
+                                <ImageButton VerticalOptions="CenterAndExpand"
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        BackgroundColor="{StaticResource Yellow100Accent}"
+                                        Aspect="AspectFit"
+                                        Source="icons8_clock_50.png"
+                                        BorderWidth="1"
+                                        CornerRadius="15"
+                                        
+                                        HeightRequest="40"
+                                        HorizontalOptions="Center"
+                                        Scale="0.7"
+                                        Margin="0, 0, 0, 0"
+                                        Padding="0, 0, 0, 0"
+                                        Clicked="ScaleButton"
+                                    />
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
@@ -86,7 +102,7 @@
                                         Source="icons8_clock_50.png"
                                         BorderWidth="1"
                                         CornerRadius="15"
-                                        BorderColor="White"
+                                        
                                         HeightRequest="40"
                                         HorizontalOptions="Center"
                                         Scale="0.7"
@@ -112,7 +128,7 @@
                                         Source="icons8_file_50.png"
                                         BorderWidth="1"
                                         CornerRadius="15"
-                                        BorderColor="White"
+                                        
                                         HeightRequest="40"
                                         HorizontalOptions="Center"
                                         Scale="0.7"
@@ -131,16 +147,37 @@
                                     />
 
                                     <ImageButton
-                                        Grid.RowSpan="2"
+                                        Grid.Row="0"
                                         Grid.Column="2"
-                                        BackgroundColor="{StaticResource Cyan200Accent}"
+                                        BackgroundColor="{StaticResource Yellow300Accent}"
                                         Aspect="AspectFit"
-                                        Source="icons8_send_file_50.png"
+                                        Source="icons8_move_up_row_50.png"
                                         BorderWidth="1"
                                         CornerRadius="15"
-                                        BorderColor="White"
+                                        Padding="3, 3, 3, 3"
                                         HorizontalOptions="Center"
                                         Scale="1"
+                                        Clicked="ScaleButton"
+                                    >
+                                        <ImageButton.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:FilesInMediaStoreViewModel}}, Path=OpenFolder}"
+                                                CommandParameter="{Binding}"
+                                            />
+                                        </ImageButton.GestureRecognizers>
+                                    </ImageButton>
+
+                                    <ImageButton
+                                        Grid.Row="1"
+                                        Grid.Column="2"
+                                        BackgroundColor="{StaticResource Primary}"
+                                        Aspect="AspectFit"
+                                        Source="icons8_data_transfer_50.png"
+                                        BorderWidth="1"
+                                        CornerRadius="15"
+                                        HorizontalOptions="Center"
+                                        Scale="1"
+                                        Padding="3, 3, 3, 3"
                                         Clicked="ScaleButton"
                                     >
                                         <ImageButton.GestureRecognizers>
@@ -149,17 +186,18 @@
                                                 CommandParameter="{Binding}"
                                             />
                                         </ImageButton.GestureRecognizers>
-
                                     </ImageButton>
+
                                     <ImageButton
-                                        Grid.Row="1"
+                                        Grid.RowSpan="2"
                                         Grid.Column="3"
-                                        BackgroundColor="{StaticResource Primary}"
+                                        BackgroundColor="{StaticResource Cyan200Accent}"
                                         Aspect="AspectFit"
-                                        Source="icons8_right_arrow_60.png"
+                                        Source="icons8_enter_50.png"
                                         BorderWidth="1"
                                         CornerRadius="15"
-                                        BorderColor="White"
+                                        
+                                        Padding="7, 0, 7, 0"
                                         HorizontalOptions="Center"
                                         Scale="1"
                                         Clicked="ScaleButton"
