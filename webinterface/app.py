@@ -11,6 +11,7 @@ from mediatransfer import send_file
 from aiohttp import web
 from magnetlinkscraper import t1337x_search
 from magnetlinkscraper import solidtorrent_search
+from mediatransfer.deletefilemediastore import delete_item
 from mediatransfer.deletefilemediasystem import delete_file_mediasystem
 from mediatransfer.listfilesmediastore import list_media_files_in_folder
 from mediatransfer.listfilesmediasystem import list_files_mediasystem
@@ -95,6 +96,18 @@ async def _list_media_in_folder(request):
     files = await list_media_files_in_folder(folder)
 
     return web.json_response(files)
+
+@routes.delete('/api/media/delete')
+async def _delete_media_file(request):
+    r = await request.json()
+
+    file_name = r["fileName"]
+
+    await delete_item(file_name)
+
+    return web.json_response({
+        "message": "file deleted"
+    })
 
 
 @routes.get('/api/media-system/list')
