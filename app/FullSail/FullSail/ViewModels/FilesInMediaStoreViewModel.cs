@@ -78,6 +78,19 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
             FolderPath.Push(mediaFile);
         }
     });
+    public ICommand DeleteMediaFile => new Command<MediaFile>(async (mediaFile) =>
+    {
+        bool deleteFile = await AlertServiceSingleton.ShowConfirmationAsync("Confirm", "Are you SURE you want to delete this item from the Media-Store?", "Yes", "No");
+
+        if (deleteFile)
+        {
+            await FullSailClientSingleton.DeleteFile(mediaFile.Name);
+
+            await AlertServiceSingleton.ShowAlertAsync("Success", "Media-Store item deleted successfully");
+
+            await Refresh(hardRefresh: true);
+        }
+    });
     public ICommand GoBack => new Command(async () =>
     {
         if (folderPath.Count > 1)

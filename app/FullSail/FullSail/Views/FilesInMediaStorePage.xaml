@@ -68,11 +68,12 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
 
                                     <Label
                                         Grid.Row="0"
-                                        Grid.ColumnSpan="3"
+                                        Grid.ColumnSpan="4"
                                         Text="{Binding ShortName, StringFormat='{0:F0}'}"
                                         LineBreakMode="WordWrap"
                                         FontAttributes="Bold"
@@ -81,6 +82,27 @@
                                     <ImageButton
                                         Grid.Row="1"
                                         Grid.Column="0"
+                                        BackgroundColor="Red"
+                                        Aspect="AspectFit"
+                                        Source="icons8_trash_50.png"
+                                        BorderWidth="1"
+                                        CornerRadius="15"
+                                        Padding="3, 3, 3, 3"
+                                        HorizontalOptions="Center"
+                                        Scale="1"
+                                        Clicked="ScaleButton"
+                                    >
+                                        <ImageButton.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:FilesInMediaStoreViewModel}}, Path=DeleteMediaFile}"
+                                                CommandParameter="{Binding}"
+                                            />
+                                        </ImageButton.GestureRecognizers>
+                                    </ImageButton>
+
+                                    <ImageButton
+                                        Grid.Row="1"
+                                        Grid.Column="1"
                                         BackgroundColor="{StaticResource Yellow300Accent}"
                                         Aspect="AspectFit"
                                         Source="icons8_move_up_row_50.png"
@@ -101,7 +123,7 @@
 
                                     <ImageButton
                                         Grid.Row="1"
-                                        Grid.Column="1"
+                                        Grid.Column="2"
                                         BackgroundColor="{StaticResource Primary}"
                                         Aspect="AspectFit"
                                         Source="icons8_data_transfer_50.png"
@@ -122,7 +144,7 @@
 
                                     <ImageButton
                                         Grid.Row="1"
-                                        Grid.Column="2"
+                                        Grid.Column="3"
                                         BackgroundColor="{StaticResource Cyan200Accent}"
                                         Aspect="AspectFit"
                                         Source="icons8_enter_50.png"
