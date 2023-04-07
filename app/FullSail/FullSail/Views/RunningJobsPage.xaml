@@ -14,7 +14,7 @@
                 Source="icons8_update_left_rotation_50.png"
                 BorderWidth="1"
                 CornerRadius="15"
-                BorderColor="White"
+                
                 HeightRequest="40"
                 HorizontalOptions="Center"
                 Scale="1"

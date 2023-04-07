@@ -28,7 +28,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
-		<AssemblyVersion>1.0.2.0</AssemblyVersion>
+		<AssemblyVersion>1.0.1.0</AssemblyVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -56,27 +56,29 @@
 		<None Remove="Resources\Images\icons8_controls_64.png" />
 		<None Remove="Resources\Images\icons8_database_export_50.png" />
 		<None Remove="Resources\Images\icons8_data_pending_50.png" />
-		<None Remove="Resources\Images\icons8_data_transfer_50.png" />
 		<None Remove="Resources\Images\icons8_downloading_updates_50.png" />
 		<None Remove="Resources\Images\icons8_down_arrow_60.png" />
 		<None Remove="Resources\Images\icons8_down_button_50.png" />
-		<None Remove="Resources\Images\icons8_enter_50.png" />
+		<None Remove="Resources\Images\icons8_earth_planet_50.png" />
 		<None Remove="Resources\Images\icons8_enter_mac_key_50.png" />
 		<None Remove="Resources\Images\icons8_fast_forward_30.png" />
 		<None Remove="Resources\Images\icons8_fast_forward_50.png" />
 		<None Remove="Resources\Images\icons8_file_50.png" />
+		<None Remove="Resources\Images\icons8_heart_with_pulse_50.png" />
 		<None Remove="Resources\Images\icons8_laptop_play_video_64.png" />
 		<None Remove="Resources\Images\icons8_left_arrow_60.png" />
-		<None Remove="Resources\Images\icons8_move_up_row_50.png" />
+		<None Remove="Resources\Images\icons8_memory_slot_50.png" />
 		<None Remove="Resources\Images\icons8_music_album_50.png" />
 		<None Remove="Resources\Images\icons8_music_album_50_pink.png" />
 		<None Remove="Resources\Images\icons8_music_album_50_purple.png" />
+		<None Remove="Resources\Images\icons8_nordvpn_50.png" />
 		<None Remove="Resources\Images\icons8_pause_button_50.png" />
 		<None Remove="Resources\Images\icons8_play_pause_24.png" />
 		<None Remove="Resources\Images\icons8_play_pause_48.png" />
 		<None Remove="Resources\Images\icons8_play_pause_48_2.png" />
 		<None Remove="Resources\Images\icons8_play_pause_96.png" />
 		<None Remove="Resources\Images\icons8_power_off_button_50.png" />
+		<None Remove="Resources\Images\icons8_processor_50.png" />
 		<None Remove="Resources\Images\icons8_progress_indicator_50.png" />
 		<None Remove="Resources\Images\icons8_reboot_50.png" />
 		<None Remove="Resources\Images\icons8_restart_50.png" />
@@ -121,7 +123,7 @@
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\HealthCheckPage.xaml">
-			<Generator>MSBuild:Compile</Generator>
+		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 		<MauiXaml Update="Views\MediaControlPage.xaml">
 			<Generator>MSBuild:Compile</Generator>

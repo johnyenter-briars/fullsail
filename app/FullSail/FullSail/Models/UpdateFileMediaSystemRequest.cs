@@ -8,4 +8,5 @@ namespace FullSail.Models;
 internal class UpdateFileMediaSystemRequest
 {
     public string FileName { get; set; }
+    public string Destination { get; set; }
 }

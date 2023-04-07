@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace FullSail.ViewModels;
-internal class FilesInMediaStoreViewModel : BaseViewModel
+
+[QueryProperty(nameof(MovingFileFullName), nameof(MovingFileFullName))]
+internal class MovingFileViewModel : BaseViewModel
 {
     public async Task Refresh(bool hardRefresh = false, string folderName = "media-root")
     {
@@ -29,6 +31,13 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
         FilteredMediaFiles = MediaFiles;
 
         ToggleIsFetchingData();
+    }
+    private string movingFileFullName = "";
+
+    public string MovingFileFullName
+    {
+        get { return movingFileFullName; }
+        set { SetProperty(ref movingFileFullName, value); }
     }
     private Stack<MediaFile> folderPath = new();
 
@@ -53,22 +62,24 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
         set { SetProperty(ref filteredMediaFiles, value); }
     }
 
-    public ICommand PerformSearch => new Command<string>((string query) =>
+    public ICommand MoveItemToHere => new Command<MediaFile>(async (mediaFile) =>
     {
-        var filtered = mediaFiles.Where(f => f.Name.ToLower().Contains(query.ToLower())).ToList();
-
-        FilteredMediaFiles = filtered;
-    });
-    public ICommand ClearSearchText => new Command(() =>
-    {
-        FilteredMediaFiles = mediaFiles;
-    });
-    public ICommand SendFile => new Command<MediaFile>(async (mediaFile) =>
-    {
-        if ((bool)(mediaFile?.IsFile))
+        if (mediaFile.FullPath == movingFileFullName)
         {
-            await FullSailClientSingleton.SendFile(mediaFile.Name);
-            AlertServiceSingleton.ShowAlert("Success", "File Sending Job Scheduled");
+            await AlertServiceSingleton.ShowAlertAsync("Not Allowed", "You can't request an item to move into itself!");
+            await Shell.Current.GoToAsync("..");
+            return;
+        }
+
+        bool moveFile = await AlertServiceSingleton.ShowConfirmationAsync("Confirm", $"Are you SURE you want to move item: {MovingFileFullName} to here?", "Yes", "No");
+
+        if (moveFile)
+        {
+            await FullSailClientSingleton.MoveFile(MovingFileFullName, mediaFile.Name);
+
+            await AlertServiceSingleton.ShowAlertAsync("Success", "Media-Store item moved successfully");
+
+            await Shell.Current.GoToAsync("..");
         }
     });
     public ICommand OpenFolder => new Command<MediaFile>(async (mediaFile) =>
@@ -77,23 +88,6 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
         {
             await Refresh(true, mediaFile.FullPath);
             FolderPath.Push(mediaFile);
-        }
-    });
-    public ICommand MoveItem => new Command<MediaFile>(async (mediaFile) =>
-    {
-        await Shell.Current.GoToAsync($@"{nameof(MovingFilePage)}?{nameof(MovingFileViewModel.MovingFileFullName)}={mediaFile.Name}");
-    });
-    public ICommand DeleteMediaFile => new Command<MediaFile>(async (mediaFile) =>
-    {
-        bool deleteFile = await AlertServiceSingleton.ShowConfirmationAsync("Confirm", "Are you SURE you want to delete this item from the Media-Store?", "Yes", "No");
-
-        if (deleteFile)
-        {
-            await FullSailClientSingleton.DeleteFile(mediaFile.Name);
-
-            await AlertServiceSingleton.ShowAlertAsync("Success", "Media-Store item deleted successfully");
-
-            await Refresh(hardRefresh: true);
         }
     });
     public ICommand GoBack => new Command(async () =>

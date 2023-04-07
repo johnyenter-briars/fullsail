@@ -14,7 +14,7 @@
                 Source="icons8_update_left_rotation_50.png"
                 BorderWidth="1"
                 CornerRadius="15"
-                BorderColor="White"
+                
                 HeightRequest="40"
                 HorizontalOptions="Center"
                 Scale="1"
@@ -67,7 +67,7 @@
                         Source="icons8_nordvpn_50.png"
                         BorderWidth="1"
                         CornerRadius="15"
-                        BorderColor="White"
+                        
                         HeightRequest="40"
                         HorizontalOptions="Center"
                         Margin="0, 0, 0, 0"
@@ -92,7 +92,7 @@
                         Source="icons8_earth_planet_50.png"
                         BorderWidth="1"
                         CornerRadius="15"
-                        BorderColor="White"
+                        
                         HeightRequest="40"
                         HorizontalOptions="Center"
                         Margin="0, 0, 0, 0"
@@ -116,7 +116,7 @@
                         Source="icons8_processor_50.png"
                         BorderWidth="1"
                         CornerRadius="15"
-                        BorderColor="White"
+                        
                         HeightRequest="40"
                         HorizontalOptions="Center"
                         Margin="0, 0, 0, 0"
@@ -140,7 +140,7 @@
                         Source="icons8_memory_slot_50.png"
                         BorderWidth="1"
                         CornerRadius="15"
-                        BorderColor="White"
+                        
                         HeightRequest="40"
                         HorizontalOptions="Center"
                         Margin="0, 0, 0, 0"

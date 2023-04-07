@@ -121,6 +121,25 @@ public class FullSailClient
 
         return await FullSailRequest<UpdateFileMediaSystemRequest, UpdateFileMediaSystemResponse>(body, $"mediatransfer/start", HttpMethod.Post);
     }
+    public async Task<UpdateFileMediaSystemResponse> DeleteFile(string fileName)
+    {
+        var body = new UpdateFileMediaSystemRequest
+        {
+            FileName = fileName,
+        };
+
+        return await FullSailRequest<UpdateFileMediaSystemRequest, UpdateFileMediaSystemResponse>(body, $"media/delete", HttpMethod.Delete);
+    }
+    public async Task<UpdateFileMediaSystemResponse> MoveFile(string fileName, string destination)
+    {
+        var body = new UpdateFileMediaSystemRequest
+        {
+            FileName = fileName,
+            Destination = destination,
+        };
+
+        return await FullSailRequest<UpdateFileMediaSystemRequest, UpdateFileMediaSystemResponse>(body, $"media/move", HttpMethod.Post);
+    }
     public async Task<UpdateFileMediaSystemResponse> GetRunningJobs()
     {
         return await FullSailRequest<UpdateFileMediaSystemResponse>($"mediatransfer/listjobs", HttpMethod.Get);
