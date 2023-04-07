@@ -15,6 +15,7 @@ from mediatransfer.deletefilemediastore import delete_item
 from mediatransfer.deletefilemediasystem import delete_file_mediasystem
 from mediatransfer.listfilesmediastore import list_media_files_in_folder
 from mediatransfer.listfilesmediasystem import list_files_mediasystem
+from mediatransfer.movefilemediastore import move_item
 from qbittorrentinterface import delete_torrent, get_running_torrents, pause_torrent, add_torrent, resume_torrent
 
 media_transfer_jobs = []
@@ -107,6 +108,19 @@ async def _delete_media_file(request):
 
     return web.json_response({
         "message": "file deleted"
+    })
+
+@routes.post('/api/media/move')
+async def _move_media_file(request):
+    r = await request.json()
+
+    file_name = r["fileName"]
+    destination = r["destination"]
+
+    moved_successfully = await move_item(file_name, destination)
+
+    return web.json_response({
+        "message": f"Moved successfully: {moved_successfully}"
     })
 
 
