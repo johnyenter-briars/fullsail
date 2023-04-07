@@ -1,3 +1,4 @@
+import shutil
 import os
 import subprocess
 from typing import List
@@ -12,7 +13,7 @@ async def delete_item(item):
     if os.path.isfile(full_path):
         os.remove(full_path)
     elif os.path.isdir(full_path):
-        os.rmdir(full_path)
+        shutil.rmtree(full_path)
     
 
 
