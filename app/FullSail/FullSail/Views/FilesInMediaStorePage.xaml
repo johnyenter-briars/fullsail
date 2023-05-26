@@ -5,7 +5,7 @@
     xmlns:ViewModels="clr-namespace:FullSail.ViewModels"
     xmlns:Models="clr-namespace:FullSail.Models"
     x:DataType="{x:Type ViewModels:FilesInMediaStoreViewModel}"
-    Title="Files in Media Store">
+    Title="{Binding CurrentFolder}">
     <StackLayout>
         <Grid>
             <Grid.RowDefinitions>

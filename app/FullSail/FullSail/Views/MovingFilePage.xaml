@@ -6,7 +6,7 @@
     xmlns:converters="clr-namespace:FullSail.Converters"
     xmlns:Models="clr-namespace:FullSail.Models"
     x:DataType="{x:Type ViewModels:MovingFileViewModel}"
-    Title="Select Folder to Move Item To">
+    Title="{Binding CurrentFolder}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:MaxFontSizeConverter x:Key="MaxFontSizeConverter" />

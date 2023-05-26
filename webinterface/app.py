@@ -7,7 +7,7 @@ import subprocess
 from typing import Awaitable, Callable, List
 from magnetlinkscraper.piratebay import piratebay_search
 import fsconfig
-from mediatransfer import send_file
+from mediatransfer import send_file_to_mediasystem
 from aiohttp import web
 from magnetlinkscraper import t1337x_search
 from magnetlinkscraper import solidtorrent_search
@@ -16,6 +16,7 @@ from mediatransfer.deletefilemediasystem import delete_file_mediasystem
 from mediatransfer.listfilesmediastore import list_media_files_in_folder
 from mediatransfer.listfilesmediasystem import list_files_mediasystem
 from mediatransfer.movefilemediastore import move_item
+from mediatransfer.sendfile import send_file_to_laptop
 from qbittorrentinterface import delete_torrent, get_running_torrents, pause_torrent, add_torrent, resume_torrent
 
 media_transfer_jobs = []
@@ -68,9 +69,14 @@ async def _start_job(request):
     r = await request.json()
 
     file_name = r["fileName"]
+    computerDestination = r["computerDestination"]
 
-    media_transfer_jobs.append(
-        (asyncio.create_task(send_file(file_name)), file_name))
+    if computerDestination == "laptop":
+        media_transfer_jobs.append(
+            (asyncio.create_task(send_file_to_laptop(file_name)), f"{file_name}-{computerDestination}"))
+    elif computerDestination == "mediaSystem":
+        media_transfer_jobs.append(
+            (asyncio.create_task(send_file_to_mediasystem(file_name)), f"{file_name}-{computerDestination}"))
 
     return web.json_response({
         "numberRunningJobs": len(media_transfer_jobs)
@@ -98,6 +104,7 @@ async def _list_media_in_folder(request):
 
     return web.json_response(files)
 
+
 @routes.delete('/api/media/delete')
 async def _delete_media_file(request):
     r = await request.json()
@@ -109,6 +116,7 @@ async def _delete_media_file(request):
     return web.json_response({
         "message": "file deleted"
     })
+
 
 @routes.post('/api/media/move')
 async def _move_media_file(request):
