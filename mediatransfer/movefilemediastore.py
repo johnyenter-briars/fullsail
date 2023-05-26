@@ -12,9 +12,12 @@ async def move_item(item_name, destination):
     full_path_destination = f"{media_root}{destination}"
 
     if not os.path.exists(full_path_destination) or not os.path.exists(full_path_item):
+        print(f"os.path.exists(full_path_destination): {os.path.exists(full_path_destination)}")
+        print(f"os.path.exists(full_path_item): {os.path.exists(full_path_item)}")
         return False
     
     if not os.path.isdir(full_path_destination):
+        print(f"os.path.isdir(full_path_destination): {os.path.isdir(full_path_destination)}")
         return False
 
     shutil.move(full_path_item, full_path_destination)

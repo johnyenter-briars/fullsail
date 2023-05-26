@@ -1,4 +1,3 @@
-
 {
     "media-system-username": "",
     "media-system-password": "",
@@ -12,5 +11,9 @@
     "fullsail-key-name": "",
     "qbt-domain-name": "",
     "qbt-port": -1,
-    "qbt-version": ""
+    "qbt-version": "",
+    "laptop-media-root": "",
+    "laptop-username": "",
+    "laptop-password": "",
+    "laptop-localip": ""
 }

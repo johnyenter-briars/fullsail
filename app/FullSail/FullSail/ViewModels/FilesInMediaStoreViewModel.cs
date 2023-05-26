@@ -74,7 +74,11 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
 	{
 		if ((bool)(mediaFile?.IsFile))
 		{
-			await FullSailClientSingleton.SendFile(mediaFile.Name);
+			var choice = await AlertServiceSingleton.ShowConfirmationAsync("Send to computer:", "Laptop", "Media-System");
+
+			var destination = choice ? ComputerDestination.Laptop : ComputerDestination.MediaStore;
+
+			await FullSailClientSingleton.SendFile(mediaFile.Name, destination);
 			AlertServiceSingleton.ShowAlert("Success", "File Sending Job Scheduled");
 		}
 	});

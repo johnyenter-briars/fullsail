@@ -82,9 +82,16 @@ internal class MovingFileViewModel : BaseViewModel
 
 		if (moveFile)
 		{
-			await FullSailClientSingleton.MoveFile(MovingFileFullName, mediaFile.Name);
+			var response = await FullSailClientSingleton.MoveFile(MovingFileFullName, mediaFile.Name);
 
-			await AlertServiceSingleton.ShowAlertAsync("Success", "Media-Store item moved successfully");
+			if (response.Message.ToLower().Contains("false"))
+			{
+				await AlertServiceSingleton.ShowAlertAsync("Failure", "Media-Store item was NOT moved successfully");
+			}
+			else
+			{
+				await AlertServiceSingleton.ShowAlertAsync("Success", "Media-Store item moved successfully");
+			}
 
 			await Shell.Current.GoToAsync("..");
 		}
