@@ -112,7 +112,7 @@ public class FullSailClient
 
 		return await FullSailRequest<UpdateFileMediaSystemRequest, UpdateFileMediaSystemResponse>(body, $"media-system/delete", HttpMethod.Delete);
 	}
-	public async Task<UpdateFileMediaSystemResponse> SendFile(string fileNamePlusDirectory, ComputerDestination computerDestination)
+	public async Task<UpdateFileMediaSystemResponse> SendFile(string fileNamePlusDirectory, string computerDestination)
 	{
 		var body = new UpdateFileMediaSystemRequest
 		{

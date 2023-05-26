@@ -71,10 +71,10 @@ async def _start_job(request):
     file_name = r["fileName"]
     computerDestination = r["computerDestination"]
 
-    if computerDestination == "Laptop":
+    if computerDestination == "laptop":
         media_transfer_jobs.append(
             (asyncio.create_task(send_file_to_laptop(file_name)), f"{file_name}-{computerDestination}"))
-    elif computerDestination == "MediaSystem":
+    elif computerDestination == "mediaSystem":
         media_transfer_jobs.append(
             (asyncio.create_task(send_file_to_mediasystem(file_name)), f"{file_name}-{computerDestination}"))
 
