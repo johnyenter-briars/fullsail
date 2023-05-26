@@ -76,7 +76,7 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
 		{
 			var choice = await AlertServiceSingleton.ShowConfirmationAsync("Send to computer:", "", "Laptop", "Media-System");
 
-			var destination = choice ? "laptop" : "mediaStore";
+			var destination = choice ? "laptop" : "mediaSystem";
 
 			await FullSailClientSingleton.SendFile(mediaFile.Name, destination);
 			AlertServiceSingleton.ShowAlert("Success", "File Sending Job Scheduled");
