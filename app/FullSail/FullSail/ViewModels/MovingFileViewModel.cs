@@ -44,7 +44,12 @@ internal class MovingFileViewModel : BaseViewModel
 	public string MovingFileFullName
 	{
 		get { return movingFileFullName; }
-		set { SetProperty(ref movingFileFullName, value); }
+		set
+		{
+			var test = Uri.UnescapeDataString(value);
+
+			SetProperty(ref movingFileFullName, test);
+		}
 	}
 	private Stack<MediaFile> folderPath = new();
 

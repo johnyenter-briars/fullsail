@@ -93,7 +93,7 @@ internal class FilesInMediaStoreViewModel : BaseViewModel
 	});
 	public ICommand MoveItem => new Command<MediaFile>(async (mediaFile) =>
 	{
-		await Shell.Current.GoToAsync($@"{nameof(MovingFilePage)}?{nameof(MovingFileViewModel.MovingFileFullName)}={mediaFile.Name}");
+		await Shell.Current.GoToAsync($@"{nameof(MovingFilePage)}?{nameof(MovingFileViewModel.MovingFileFullName)}={Uri.EscapeDataString(mediaFile.Name)}");
 	});
 	public ICommand DeleteMediaFile => new Command<MediaFile>(async (mediaFile) =>
 	{
