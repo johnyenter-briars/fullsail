@@ -4,7 +4,7 @@
     x:Class="FullSail.Views.MovingFilePage"
     xmlns:ViewModels="clr-namespace:FullSail.ViewModels"
     xmlns:converters="clr-namespace:FullSail.Converters"
-    xmlns:Models="clr-namespace:FullSail.Models"
+    xmlns:Models="clr-namespace:FullSail.Shared.Models;assembly=FullSail.Shared"
     x:DataType="{x:Type ViewModels:MovingFileViewModel}"
     Title="{Binding CurrentFolder}">
     <ContentPage.Resources>

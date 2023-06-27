@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FullSail.Models;
+namespace FullSail.Shared.Models;
 public class UpdateFileMediaSystemResponse
 {
-    public string Message { get; set; }
-    public List<string> Jobs { get; set; }
+	public string Message { get; set; }
+	public List<string> Jobs { get; set; }
 }

@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="FullSail.Views.RunningJobsPage"
     xmlns:ViewModels="clr-namespace:FullSail.ViewModels"
-    xmlns:Models="clr-namespace:FullSail.Models"
+    xmlns:Models="clr-namespace:FullSail.Shared.Models;assembly=FullSail.Shared"
     x:DataType="{x:Type ViewModels:RunningsJobsViewModel}"
     Title="Running Jobs">
     <StackLayout>

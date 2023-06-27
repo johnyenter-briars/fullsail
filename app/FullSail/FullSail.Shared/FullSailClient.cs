@@ -1,4 +1,4 @@
-﻿using FullSail.Models;
+﻿using FullSail.Shared.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace FullSail;
+namespace FullSail.Shared;
 public class FullSailClient
 {
 	private string _apiKey = "";

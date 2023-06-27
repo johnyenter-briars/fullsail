@@ -1,4 +1,5 @@
 ﻿using FullSail.Managers;
+using FullSail.Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,45 +8,45 @@ using System.Runtime.CompilerServices;
 namespace FullSail.ViewModels;
 public class BaseViewModel : INotifyPropertyChanged
 {
-    protected readonly FullSailClient FullSailClientSingleton = DependencyService.Get<FullSailClient>();
-    protected KodiClient KodiClientSingleton = DependencyService.Get<KodiClient>();
-    protected AlertService AlertServiceSingleton = DependencyService.Get<AlertService>();
-    bool isBusy = false;
-    public bool IsBusy
-    {
-        get { return isBusy; }
-        set { SetProperty(ref isBusy, value); }
-    }
+	protected readonly FullSailClient FullSailClientSingleton = DependencyService.Get<FullSailClient>();
+	protected KodiClient KodiClientSingleton = DependencyService.Get<KodiClient>();
+	protected AlertService AlertServiceSingleton = DependencyService.Get<AlertService>();
+	bool isBusy = false;
+	public bool IsBusy
+	{
+		get { return isBusy; }
+		set { SetProperty(ref isBusy, value); }
+	}
 
-    string title = string.Empty;
-    public string Title
-    {
-        get { return title; }
-        set { SetProperty(ref title, value); }
-    }
+	string title = string.Empty;
+	public string Title
+	{
+		get { return title; }
+		set { SetProperty(ref title, value); }
+	}
 
-    protected bool SetProperty<T>(ref T backingStore, T value,
-        [CallerMemberName] string propertyName = "",
-        Action onChanged = null)
-    {
-        if (EqualityComparer<T>.Default.Equals(backingStore, value))
-            return false;
+	protected bool SetProperty<T>(ref T backingStore, T value,
+		[CallerMemberName] string propertyName = "",
+		Action onChanged = null)
+	{
+		if (EqualityComparer<T>.Default.Equals(backingStore, value))
+			return false;
 
-        backingStore = value;
-        onChanged?.Invoke();
-        OnPropertyChanged(propertyName);
-        return true;
-    }
+		backingStore = value;
+		onChanged?.Invoke();
+		OnPropertyChanged(propertyName);
+		return true;
+	}
 
-    #region INotifyPropertyChanged
-    public event PropertyChangedEventHandler PropertyChanged;
-    protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-    {
-        var changed = PropertyChanged;
-        if (changed == null)
-            return;
+	#region INotifyPropertyChanged
+	public event PropertyChangedEventHandler PropertyChanged;
+	protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
+	{
+		var changed = PropertyChanged;
+		if (changed == null)
+			return;
 
-        changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
-    }
-    #endregion
+		changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
+	}
+	#endregion
 }

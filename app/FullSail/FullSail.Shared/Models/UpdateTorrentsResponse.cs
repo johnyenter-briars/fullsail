@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FullSail.Models;
-
-public class AddTorrentsRequest
+namespace FullSail.Shared.Models;
+public class UpdateTorrentsResponse
 {
-    public List<string> MagnetLinks { get; set; }
+	public string Message { get; set; }
 }

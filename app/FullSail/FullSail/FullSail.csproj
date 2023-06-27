@@ -15,7 +15,7 @@
 		<ApplicationTitle>FullSail</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.fullsail</ApplicationId>
+		<ApplicationId>com.jyb.fullsail</ApplicationId>
 		<ApplicationIdGuid>02ecef9a-9957-4782-850e-2eeca2df9858</ApplicationIdGuid>
 
 		<!-- Versions -->
@@ -105,6 +105,10 @@
 		<PackageReference Include="CommunityToolkit.Maui" Version="5.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\FullSail.Shared\FullSail.Shared.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
