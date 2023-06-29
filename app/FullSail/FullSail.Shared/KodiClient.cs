@@ -10,80 +10,80 @@ namespace FullSail.Shared;
 
 public class KodiClient
 {
-	private static readonly HttpClient client = new HttpClient();
-	private string _hostName;
-	private int _port;
-	private string _username;
-	private string _password;
+    private static readonly HttpClient client = new HttpClient();
+    private string _hostName;
+    private int _port;
+    private string _username;
+    private string _password;
 
-	private async Task PostRequestAsync(string requestObject)
-	{
-		var requestBody = new StringContent(requestObject);
-		requestBody.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+    private async Task PostRequestAsync(string requestObject)
+    {
+        var requestBody = new StringContent(requestObject);
+        requestBody.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-		var credential = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{_username}:{_password}"));
-		client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credential);
+        var credential = Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes($"{_username}:{_password}"));
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", credential);
 
-		var request = new HttpRequestMessage(HttpMethod.Post, $"http://{_hostName}:{_port}/jsonrpc");
-		request.Content = requestBody;
+        var request = new HttpRequestMessage(HttpMethod.Post, $"http://{_hostName}:{_port}/jsonrpc");
+        request.Content = requestBody;
 
-		var response = await client.SendAsync(request);
-		response.EnsureSuccessStatusCode();
+        var response = await client.SendAsync(request);
+        response.EnsureSuccessStatusCode();
 
-		var jsonBody = await response.Content.ReadAsStringAsync();
-	}
+        var jsonBody = await response.Content.ReadAsStringAsync();
+    }
 
-	public async Task PowerOff()
-	{
-		var requestObject = @"
+    public async Task PowerOff()
+    {
+        var requestObject = @"
             {
                 ""jsonrpc"": ""2.0"",
                 ""method"": ""System.Shutdown"",
                 ""id"": 1
             }";
 
-		await PostRequestAsync(requestObject);
-	}
+        await PostRequestAsync(requestObject);
+    }
 
-	public async Task ShowOSD()
-	{
-		var requestObject = @"
+    public async Task ShowOSD()
+    {
+        var requestObject = @"
             {
                 ""jsonrpc"": ""2.0"",
                 ""method"": ""Input.ShowOSD"",
                 ""id"": 1
             }";
 
-		await PostRequestAsync(requestObject);
-	}
+        await PostRequestAsync(requestObject);
+    }
 
-	public async Task PowerSuspend()
-	{
-		var requestObject = @"
+    public async Task PowerSuspend()
+    {
+        var requestObject = @"
             {
                 ""jsonrpc"": ""2.0"",
                 ""method"": ""System.Suspend"",
                 ""id"": 1
             }";
 
-		await PostRequestAsync(requestObject);
-	}
+        await PostRequestAsync(requestObject);
+    }
 
-	public async Task PowerReboot()
-	{
-		var requestObject = @"
+    public async Task PowerReboot()
+    {
+        var requestObject = @"
             {
                 ""jsonrpc"": ""2.0"",
                 ""method"": ""System.Reboot"",
                 ""id"": 1
             }";
 
-		await PostRequestAsync(requestObject);
-	}
+        await PostRequestAsync(requestObject);
+    }
 
-	public async Task SetPlayerSpeed(int speed)
-	{
-		var requestObject = $@"
+    public async Task SetPlayerSpeed(int speed)
+    {
+        var requestObject = $@"
             {{
                 ""jsonrpc"": ""2.0"",
                 ""id"": 1,
@@ -94,12 +94,12 @@ public class KodiClient
                 }}
             }}";
 
-		await PostRequestAsync(requestObject);
-	}
+        await PostRequestAsync(requestObject);
+    }
 
-	public async Task InputSendText(string text)
-	{
-		var requestObject = $@"
+    public async Task InputSendText(string text)
+    {
+        var requestObject = $@"
             {{
                 ""jsonrpc"": ""2.0"",
                 ""id"": 1,
@@ -110,12 +110,12 @@ public class KodiClient
                 }}
             }}";
 
-		await PostRequestAsync(requestObject);
-	}
+        await PostRequestAsync(requestObject);
+    }
 
-	public async Task InputText(string text)
-	{
-		var requestObject = $@"
+    public async Task InputText(string text)
+    {
+        var requestObject = $@"
             {{
                 ""jsonrpc"": ""2.0"",
                 ""id"": 1,
@@ -126,11 +126,11 @@ public class KodiClient
                 }}
             }}";
 
-		await PostRequestAsync(requestObject);
-	}
-	public async Task SeekPlayerAsync(int percentage)
-	{
-		var requestObject = $@"
+        await PostRequestAsync(requestObject);
+    }
+    public async Task SeekPlayerAsync(int percentage)
+    {
+        var requestObject = $@"
     {{
         ""jsonrpc"": ""2.0"",
         ""id"": 1,
@@ -142,12 +142,12 @@ public class KodiClient
             }}
         }}
     }}";
-		await PostRequestAsync(requestObject);
-	}
+        await PostRequestAsync(requestObject);
+    }
 
-	public async Task SetVolumeAsync(int volumePercentage)
-	{
-		var requestObject = $@"
+    public async Task SetVolumeAsync(int volumePercentage)
+    {
+        var requestObject = $@"
     {{
         ""jsonrpc"": ""2.0"",
         ""id"": 1,
@@ -156,89 +156,89 @@ public class KodiClient
             ""volume"": {volumePercentage}
         }}
     }}";
-		await PostRequestAsync(requestObject);
-	}
+        await PostRequestAsync(requestObject);
+    }
 
-	public async Task InputSelectAsync()
-	{
-		var requestObject = $@"
+    public async Task InputSelectAsync()
+    {
+        var requestObject = $@"
     {{
         ""jsonrpc"": ""2.0"",
         ""id"": 1,
         ""method"": ""Input.Select""
     }}";
-		await PostRequestAsync(requestObject);
-	}
+        await PostRequestAsync(requestObject);
+    }
 
-	public async Task InputBackAsync()
-	{
-		var requestObject = $@"
+    public async Task InputBackAsync()
+    {
+        var requestObject = $@"
     {{
         ""jsonrpc"": ""2.0"",
         ""id"": 1,
         ""method"": ""Input.Back""
     }}";
-		await PostRequestAsync(requestObject);
-	}
+        await PostRequestAsync(requestObject);
+    }
 
-	public async Task InputExecuteActionAsync()
-	{
-		var requestObject = $@"
+    public async Task InputExecuteActionAsync()
+    {
+        var requestObject = $@"
     {{
         ""jsonrpc"": ""2.0"",
         ""id"": 1,
         ""method"": ""Input.ExecuteAction""
     }}";
-		await PostRequestAsync(requestObject);
-	}
+        await PostRequestAsync(requestObject);
+    }
 
-	public async Task InputLeftAsync()
-	{
-		var requestObject = $@"
+    public async Task InputLeftAsync()
+    {
+        var requestObject = $@"
     {{
         ""jsonrpc"": ""2.0"",
         ""id"": 1,
         ""method"": ""Input.Left""
     }}";
-		await PostRequestAsync(requestObject);
-	}
+        await PostRequestAsync(requestObject);
+    }
 
-	public async Task InputRightAsync()
-	{
-		var requestObject = $@"
+    public async Task InputRightAsync()
+    {
+        var requestObject = $@"
     {{
         ""jsonrpc"": ""2.0"",
         ""id"": 1,
         ""method"": ""Input.Right""
     }}";
-		await PostRequestAsync(requestObject);
-	}
+        await PostRequestAsync(requestObject);
+    }
 
-	public async Task InputDownAsync()
-	{
-		var requestObject = $@"
+    public async Task InputDownAsync()
+    {
+        var requestObject = $@"
     {{
         ""jsonrpc"": ""2.0"",
         ""id"": 1,
         ""method"": ""Input.Down""
     }}";
-		await PostRequestAsync(requestObject);
-	}
+        await PostRequestAsync(requestObject);
+    }
 
-	public async Task InputUpAsync()
-	{
-		var requestObject = $@"
+    public async Task InputUpAsync()
+    {
+        var requestObject = $@"
     {{
         ""jsonrpc"": ""2.0"",
         ""id"": 1,
         ""method"": ""Input.Up""
     }}";
-		await PostRequestAsync(requestObject);
-	}
+        await PostRequestAsync(requestObject);
+    }
 
-	public async Task StopPlayerAsync()
-	{
-		var requestObject = $@"
+    public async Task StopPlayerAsync()
+    {
+        var requestObject = $@"
     {{
         ""jsonrpc"": ""2.0"",
         ""id"": 1,
@@ -247,12 +247,12 @@ public class KodiClient
             ""playerid"": 1
         }}
     }}";
-		await PostRequestAsync(requestObject);
-	}
+        await PostRequestAsync(requestObject);
+    }
 
-	public async Task TogglePlayPausePlayerAsync()
-	{
-		var requestObject = $@"
+    public async Task TogglePlayPausePlayerAsync()
+    {
+        var requestObject = $@"
         {{
             ""jsonrpc"": ""2.0"",
             ""id"": 1,
@@ -262,11 +262,11 @@ public class KodiClient
             }}
         }}";
 
-		await PostRequestAsync(requestObject);
-	}
-	public async Task PlayFile(string fileName)
-	{
-		var requestObject = $@"
+        await PostRequestAsync(requestObject);
+    }
+    public async Task PlayFile(string fileName)
+    {
+        var requestObject = $@"
         {{
             ""jsonrpc"": ""2.0"",
             ""id"": 1,
@@ -278,14 +278,14 @@ public class KodiClient
             }}
         }}";
 
-		await PostRequestAsync(requestObject);
-	}
-	public KodiClient UpdateSettings(string hostname, int port, string username, string password)
-	{
-		_hostName = hostname;
-		_port = port;
-		_username = username;
-		_password = password;
-		return this;
-	}
+        await PostRequestAsync(requestObject);
+    }
+    public KodiClient UpdateSettings(string hostname, int port, string username, string password)
+    {
+        _hostName = hostname;
+        _port = port;
+        _username = username;
+        _password = password;
+        return this;
+    }
 }

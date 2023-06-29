@@ -1,3 +1,4 @@
+using FullSail.Shared;
 using FullSail.WebUi.Client;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;

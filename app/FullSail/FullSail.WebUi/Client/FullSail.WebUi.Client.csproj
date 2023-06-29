@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\FullSail.Shared\FullSail.Shared.csproj" />
     <ProjectReference Include="..\Shared\FullSail.WebUi.Shared.csproj" />
   </ItemGroup>
 

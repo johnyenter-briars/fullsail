@@ -8,6 +8,6 @@ using System.Threading.Tasks;
 namespace FullSail.Shared.Models;
 public class QBTResponse
 {
-	[JsonProperty("running_torrents")]
-	public List<QBTFile> RunningTorrents { get; set; }
+    [JsonProperty("running_torrents")]
+    public List<QBTFile> RunningTorrents { get; set; }
 }

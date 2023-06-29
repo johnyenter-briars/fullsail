@@ -1,4 +1,6 @@
 ﻿@page "/mediacontrol"
+@inject HttpClient Http
+
 <style>
     body {
     display: flex;
@@ -158,7 +160,7 @@ i.top {
             <div class="d-flex flex-column rounded-bg py-3 px-4 justify-content-center align-items-center">
                 <i class="fas fa-plus py-3 control-icon"></i>
                 <span class="label py-3">Volume</span>
-                <i class="fas fa-minus py-3 control-icon"></i>
+                <i class="fas fa-minus py-3 control-icon" @onclick="IncrementCount"></i>
             </div>
         </div>
 
@@ -185,4 +187,13 @@ i.top {
 </body>
 
 </html>
+@code {
+    private int currentCount = 0;
+
+    private async Task IncrementCount()
+    {
+        //await kodiClient.InputDownAsync();
+        await Http.PostAsync("WeatherForecast", new StringContent("test"));
+    }
+}
 
