@@ -4,7 +4,7 @@
     x:Class="FullSail.Views.MediaControlPage"
     xmlns:ViewModels="clr-namespace:FullSail.ViewModels"
     xmlns:Behaviors="clr-namespace:FullSail.Behaviors"
-    xmlns:Models="clr-namespace:FullSail.Models"
+    xmlns:Models="clr-namespace:FullSail.Shared.Models;assembly=FullSail.Shared"
     x:DataType="{x:Type ViewModels:MediaControlViewModel}"
     Title="Media Control">
     <Grid>

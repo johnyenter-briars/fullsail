@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FullSail.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,46 +9,46 @@ using System.Windows.Input;
 namespace FullSail.Behaviors;
 public class TextChangedBehavior : Behavior<Editor>
 {
-    public static readonly BindableProperty CommandProperty = BindableProperty.Create(
-        nameof(Command),
-        typeof(ICommand),
-        typeof(TextChangedBehavior),
-        null);
+	public static readonly BindableProperty CommandProperty = BindableProperty.Create(
+		nameof(Command),
+		typeof(ICommand),
+		typeof(TextChangedBehavior),
+		null);
 
-    public ICommand Command
-    {
-        get
-        {
-            return (ICommand)GetValue(CommandProperty);
-        }
-        set
-        {
-            SetValue(CommandProperty, value);
-        }
-    }
+	public ICommand Command
+	{
+		get
+		{
+			return (ICommand)GetValue(CommandProperty);
+		}
+		set
+		{
+			SetValue(CommandProperty, value);
+		}
+	}
 
-    protected override void OnAttachedTo(Editor editor)
-    {
-        editor.TextChanged += OnTextChanged;
-        base.OnAttachedTo(editor);
-    }
+	protected override void OnAttachedTo(Editor editor)
+	{
+		editor.TextChanged += OnTextChanged;
+		base.OnAttachedTo(editor);
+	}
 
-    protected override void OnDetachingFrom(Editor editor)
-    {
-        editor.TextChanged -= OnTextChanged;
-        base.OnDetachingFrom(editor);
-    }
+	protected override void OnDetachingFrom(Editor editor)
+	{
+		editor.TextChanged -= OnTextChanged;
+		base.OnDetachingFrom(editor);
+	}
 
-    private void OnTextChanged(object sender, TextChangedEventArgs e)
-    {
-        // I know this is horrible - and breaking the pattern of MVVM, but it's currently 2AM and I wish to return to the sweet bosom of morbius
-        if (!string.IsNullOrEmpty(e.NewTextValue))
-        {
-            var kodiClient = DependencyService.Get<KodiClient>();
+	private void OnTextChanged(object sender, TextChangedEventArgs e)
+	{
+		// I know this is horrible - and breaking the pattern of MVVM, but it's currently 2AM and I wish to return to the sweet bosom of morbius
+		if (!string.IsNullOrEmpty(e.NewTextValue))
+		{
+			var kodiClient = DependencyService.Get<KodiClient>();
 
-            Task.Run(async () => await kodiClient.InputText(e.NewTextValue));
-        }
-        /*
+			Task.Run(async () => await kodiClient.InputText(e.NewTextValue));
+		}
+		/*
         The above code SHOULD be:
             if (Command != null && Command.CanExecute(e.NewTextValue))
             {
@@ -58,5 +59,5 @@ public class TextChangedBehavior : Behavior<Editor>
                 <Behaviors:TextChangedBehavior Command="{Binding EnterTextChangedCommand}"/>
             </Editor.Behaviors>
         */
-    }
+	}
 }
