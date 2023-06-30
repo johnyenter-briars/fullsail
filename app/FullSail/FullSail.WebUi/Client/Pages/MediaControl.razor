@@ -164,14 +164,14 @@ i.top {
 
         <div class="d-flex flex-row justify-content-center">
             <div class="menu-grid">
+                <div class="d-flex flex-column align-items-center" @onclick='() => InputCommand("escape")'>
+                    <i class="fas fa-arrow-left"></i>
+                </div>
                 <div class="d-flex flex-column align-items-center" @onclick='() => InputCommand("reboot")'>
                     <i class="fas fa-power-off active"></i>
                 </div>
                 <div class="d-flex flex-column align-items-center" @onclick='() => InputCommand("osd")'>
                     <i class="fas fa-cog"></i>
-                </div>
-                <div class="d-flex flex-column align-items-center" @onclick='() => InputCommand("escape")'>
-                    <i class="fas fa-arrow-left"></i>
                 </div>
             </div>
         </div>
@@ -199,10 +199,10 @@ i.top {
             <div class="circle ok-inner position-absolute">
                 <i style="font-size: 40px" class="fas fa-check" @onclick='() => InputCommand("enter")'></i>
             </div>
-            <i style="font-size: 80px" class="fas fa-caret-right position-absolute control-icon right" @onclick='() => InputCommand("right")'></i>
-            <i style="font-size: 80px" class="fas fa-caret-right position-absolute control-icon bottom" @onclick='() => InputCommand("down")'></i>
-            <i style="font-size: 80px" class="fas fa-caret-right position-absolute control-icon left" @onclick='() => InputCommand("left")'></i>
-            <i style="font-size: 80px" class="fas fa-caret-right position-absolute control-icon top" @onclick='() => InputCommand("up")'></i>
+            <i style="font-size: 85px" class="fas fa-caret-right position-absolute control-icon right" @onclick='() => InputCommand("right")'></i>
+            <i style="font-size: 85px" class="fas fa-caret-right position-absolute control-icon bottom" @onclick='() => InputCommand("down")'></i>
+            <i style="font-size: 85px" class="fas fa-caret-right position-absolute control-icon left" @onclick='() => InputCommand("left")'></i>
+            <i style="font-size: 85px" class="fas fa-caret-right position-absolute control-icon top" @onclick='() => InputCommand("up")'></i>
         </div>
 
         <div class="d-flex flex-row justify-content-between mt-5 pt-4 px-3">
