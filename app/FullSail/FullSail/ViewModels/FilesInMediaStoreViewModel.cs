@@ -1,4 +1,4 @@
-﻿using FullSail.Models;
+﻿using FullSail.Shared.Models;
 using FullSail.Views;
 using System;
 using System.Collections.Generic;
