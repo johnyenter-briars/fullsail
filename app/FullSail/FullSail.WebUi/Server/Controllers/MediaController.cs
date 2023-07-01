@@ -75,14 +75,14 @@ public class MediaController : ControllerBase
         await _kodiClient.SetPlayerSpeed(speed);
     }
     [HttpPost("sendtext")]
-    public async Task SendText()
+    public async Task SendText([FromQuery] string text)
     {
-        await _kodiClient.InputSendText("test");
+        await _kodiClient.InputSendText(text);
     }
     [HttpPost("sendtextchanged")]
-    public async Task SendTextChanged()
+    public async Task SendTextChanged([FromQuery] string text)
     {
-        await _kodiClient.InputText("test");
+        await _kodiClient.InputText(text);
     }
     [HttpPost("volume")]
     public async Task Volume([FromQuery] int percentVolume)
