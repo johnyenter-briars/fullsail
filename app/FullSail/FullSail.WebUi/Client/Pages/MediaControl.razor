@@ -4,7 +4,10 @@
 
 <style>
 * {
-      touch-action: manipulation;
+    touch-action: manipulation;
+}
+.no-double-tap {
+    touch-action: manipulation;
 }
 body {
     display: flex;
@@ -206,10 +209,10 @@ i.top {
             <div class="circle ok-inner position-absolute">
                 <i style="font-size: 40px" class="fas fa-check" @onclick='() => InputCommand("enter")'></i>
             </div>
-            <i style="font-size: 85px" class="fas fa-caret-right position-absolute control-icon right" @onclick='() => InputCommand("right")'></i>
-            <i style="font-size: 85px" class="fas fa-caret-right position-absolute control-icon bottom" @onclick='() => InputCommand("down")'></i>
-            <i style="font-size: 85px" class="fas fa-caret-right position-absolute control-icon left" @onclick='() => InputCommand("left")'></i>
-            <i style="font-size: 85px" class="fas fa-caret-right position-absolute control-icon top" @onclick='() => InputCommand("up")'></i>
+            <i style="font-size: 85px" class="no-double-tap fas fa-caret-right position-absolute control-icon right" @onclick='() => InputCommand("right")'></i>
+            <i style="font-size: 85px" class="no-double-tap fas fa-caret-right position-absolute control-icon bottom" @onclick='() => InputCommand("down")'></i>
+            <i style="font-size: 85px" class="no-double-tap fas fa-caret-right position-absolute control-icon left" @onclick='() => InputCommand("left")'></i>
+            <i style="font-size: 85px" class="no-double-tap fas fa-caret-right position-absolute control-icon top" @onclick='() => InputCommand("up")'></i>
         </div>
 
         <div class="d-flex flex-row justify-content-between mt-5 pt-4 px-3">
