@@ -3,6 +3,9 @@
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 
 <style>
+.disable-dbl-tap-zoom {
+  touch-action: manipulation;
+}
 body {
     display: flex;
     justify-content: center;
@@ -227,6 +230,13 @@ i.top {
             @onkeydown="@Enter"
             @oninput="(e)=> InputValue = e.Value?.ToString()"
             type="text" id="ip2"/>
+            <button>plain button</button>
+
+        <button class="disable-dbl-tap-zoom">button with disabled double-tap zoom</button>
+
+        <p>A <b>plain</b> paragraph. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
+
+        <p class="disable-dbl-tap-zoom">A paragraph <b>with disabled double-tap zoom</b>. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
     </div>
 </body>
 
