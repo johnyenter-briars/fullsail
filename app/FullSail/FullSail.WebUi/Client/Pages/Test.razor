@@ -3,9 +3,6 @@
 @inject Blazored.LocalStorage.ILocalStorageService localStorage
 
 <style>
-.no-double-tap {
-    touch-action: manipulation;
-}
 body {
     display: flex;
     justify-content: center;
@@ -162,7 +159,7 @@ i.top {
     <title>No double tap</title>
     <style>
         .no-double-tap {
-          touch-action: manipulation;
+          touch-action: manipulation !important;
         }
     </style>
 </head>
