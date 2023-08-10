@@ -222,12 +222,6 @@ i.top {
         <br />
         <input type="range" class="slider" min="0" max="100" id="myRange" @bind="sliderValue" @oninput="HandleSliderChange" />
         <br />
-        <input 
-            value="@InputValue"
-            @onkeydown="@Enter"
-            @oninput="(e)=> InputValue = e.Value?.ToString()"
-            type="text" id="ip2"/>
-            <button>plain button</button>
     </div>
 </body>
 </html>
