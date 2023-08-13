@@ -18,6 +18,7 @@ from mediatransfer.listfilesmediasystem import list_files_mediasystem
 from mediatransfer.movefilemediastore import move_item
 from mediatransfer.sendfile import send_file_to_laptop
 from qbittorrentinterface import delete_torrent, get_running_torrents, pause_torrent, add_torrent, resume_torrent
+from subtitle_api import SubtitleAPI
 
 media_transfer_jobs = []
 
@@ -159,7 +160,7 @@ async def _list_torrents(request):
 
 @routes.post('/api/torrents/add')
 async def _add_torrents(request):
-    if not nord_running()[0]:
+    if fsconfig.CONFIG["check-nord"] and not nord_running()[0]:
         print("Nord is not running!")
         raise web.HTTPInternalServerError
 
@@ -215,6 +216,15 @@ async def _search_torrents(request):
 
     return web.json_response(results)
 
+@routes.get('/api/search/subtitle')
+async def _search_subtitles(request):
+    subscene = SubtitleAPI('english') # pass languages you want to have in results
+
+    subscene.movie(title='Tenet',year=2020,release_type='bluray')
+    subscene.download()
+
+    return web.json_response(None)
+
 
 @web.middleware
 async def api_key_middleware(request: web.Request,
@@ -228,7 +238,7 @@ async def api_key_middleware(request: web.Request,
 
 
 def start_webinterface(config: dict):
-    if not nord_running()[0]:
+    if fsconfig.CONFIG["check-nord"] and not nord_running()[0]:
         raise Exception("Nord is not running!")
 
     host_name = fsconfig.CONFIG["fullsail-hostname"]
