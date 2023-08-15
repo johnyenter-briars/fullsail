@@ -228,10 +228,14 @@ async def _download_subtitle(request):
 
 
 
-@routes.get('/api/search/subtitle/{search_term}')
+@routes.get('/api/search/subtitle/{type}/{search_term}')
 async def _search_subtitles(request):
     search_term = request.match_info['search_term']
-    results = open_subtitles_search(search_term)
+    type = request.match_info['type']
+    if type == "opensubtitles":
+        results = open_subtitles_search(search_term)
+    else:
+        results = []
 
     return web.json_response(results)
 
