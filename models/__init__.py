@@ -1,2 +1,3 @@
-from models.searchresult import SearchResult
+from models.magnetlinksearchresult import MagnetLinkSearchResult
+from models.subtitlesearchresult import SubtitleSearchResult
 from models.qbtfile import QBTFile

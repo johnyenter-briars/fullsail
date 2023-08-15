@@ -1,7 +1,7 @@
 import json
 
 
-class SearchResult(dict):
+class MagnetLinkSearchResult(dict):
     def __init__(self, magnet_link, number_seeders=None, number_leechers=None, name=None, number_downloads=None, size=None, date_posted=None) -> None:
         dict.__init__(self, magnet_link=magnet_link,
                       number_seeders=number_seeders,

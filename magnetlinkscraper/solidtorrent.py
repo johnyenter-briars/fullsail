@@ -2,10 +2,10 @@ from typing import List
 from bs4 import BeautifulSoup as bs
 import requests
 import re
-from models import SearchResult
+from models import MagnetLinkSearchResult
 
 
-def solidtorrent_search(query) -> List[SearchResult]:
+def solidtorrent_search(query) -> List[MagnetLinkSearchResult]:
     url = 'https://solidtorrents.net/search?q='+query
 
     headers = {
@@ -65,6 +65,6 @@ def solidtorrent_search(query) -> List[SearchResult]:
         if b is not None and "/torrents/" in b:
             names.append(link.text)
 
-    return [SearchResult(magnet_link, number_seeders, number_leechers, name, download, size, date_posted) for
+    return [MagnetLinkSearchResult(magnet_link, number_seeders, number_leechers, name, download, size, date_posted) for
             magnet_link, number_seeders, number_leechers, name, download, size, date_posted in
             zip(magnet_links, seeders, leechers, names, downloads, sizes, date_posteds)]

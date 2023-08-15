@@ -18,6 +18,7 @@ from mediatransfer.listfilesmediasystem import list_files_mediasystem
 from mediatransfer.movefilemediastore import move_item
 from mediatransfer.sendfile import send_file_to_laptop
 from qbittorrentinterface import delete_torrent, get_running_torrents, pause_torrent, add_torrent, resume_torrent
+from subtitle_api.opensubtitles import open_subtitles_download, open_subtitles_search
 
 media_transfer_jobs = []
 
@@ -159,7 +160,7 @@ async def _list_torrents(request):
 
 @routes.post('/api/torrents/add')
 async def _add_torrents(request):
-    if not nord_running()[0]:
+    if fsconfig.CONFIG["check-nord"] and not nord_running()[0]:
         print("Nord is not running!")
         raise web.HTTPInternalServerError
 
@@ -201,7 +202,7 @@ async def _delete_torrents(request):
     return web.json_response({"message": "torrents deleted"})
 
 
-@routes.get('/api/search/{torrent_site}/{search_term}')
+@routes.get('/api/search/magnetlink/{torrent_site}/{search_term}')
 async def _search_torrents(request):
     search_term = request.match_info['search_term']
     torrent_site = request.match_info['torrent_site']
@@ -212,6 +213,29 @@ async def _search_torrents(request):
         results = solidtorrent_search(search_term)
     elif torrent_site == "piratebay":
         results = piratebay_search(search_term)
+
+    return web.json_response(results)
+
+@routes.post('/api/subtitle/download/{type}/{link}')
+async def _download_subtitle(request):
+    subtitle_type = request.match_info['type']
+    link = request.match_info['link']
+
+    if subtitle_type == "opensubtitles":
+        open_subtitles_download(link)
+
+    return web.json_response({"message": "man I hope this works"})
+
+
+
+@routes.get('/api/search/subtitle/{type}/{search_term}')
+async def _search_subtitles(request):
+    search_term = request.match_info['search_term']
+    type = request.match_info['type']
+    if type == "opensubtitles":
+        results = open_subtitles_search(search_term)
+    else:
+        results = []
 
     return web.json_response(results)
 
@@ -228,7 +252,7 @@ async def api_key_middleware(request: web.Request,
 
 
 def start_webinterface(config: dict):
-    if not nord_running()[0]:
+    if fsconfig.CONFIG["check-nord"] and not nord_running()[0]:
         raise Exception("Nord is not running!")
 
     host_name = fsconfig.CONFIG["fullsail-hostname"]
