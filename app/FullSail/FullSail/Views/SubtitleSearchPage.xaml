@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FullSail.Views.SubtitleSearchPage"
+    xmlns:ViewModels="clr-namespace:FullSail.ViewModels"
+    xmlns:Models="clr-namespace:FullSail.Shared.Models;assembly=FullSail.Shared"
+    x:DataType="{x:Type ViewModels:SubTitleSearchViewModel}"
+    Title="Subtitle Search">
+
+    <StackLayout>
+
+        <HorizontalStackLayout HorizontalOptions="CenterAndExpand">
+            <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand"
+                RadioButtonGroup.GroupName="Search Site"
+                RadioButtonGroup.SelectedValue="{Binding SelectedSearchSite}">
+                <RadioButton Content="opensubtitles" Value="opensubtitles" />
+            </StackLayout>
+
+            <SearchBar x:Name="searchBar"
+                Placeholder="Search subtitles..."
+                SearchCommand="{Binding PerformSearch}"
+                SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}" />
+        </HorizontalStackLayout>
+
+        <ActivityIndicator
+            IsVisible="{Binding FetchingData}"
+            IsRunning="{Binding FetchingData}"
+            Color="{StaticResource Primary}"
+        />
+
+        <ScrollView
+            IsVisible="{Binding NotFetchingData}"
+            VerticalOptions="FillAndExpand"
+            Margin="20">
+            <StackLayout BindableLayout.ItemsSource="{Binding SearchResults}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type Models:SubtitleSearchResult}">
+                        <Frame
+                            BorderColor="#CF9FFF"
+                            HasShadow="False"
+                            Padding="10"
+                            Margin="0, 5, 0, 5"
+                            Grid.ColumnSpan="2"
+                            BackgroundColor="Black"
+                        >
+                            <StackLayout
+                                Margin="0,3,0, 0"
+                                Orientation="Vertical">
+
+
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                <Label
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="3"
+                                    Text="{Binding Name}"
+                                    LineBreakMode="WordWrap"
+                                    FontAttributes="Bold"
+                                    MaxLines="2" />
+
+
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        Margin="0, 0, 0, 0"
+                                        Padding="0, 0, 0, 0"
+                                        Text="{Binding DatePosted}"
+                                        FontSize="11"
+                                        VerticalOptions="Center"
+                                    />
+
+                                    <ImageButton
+                                        Grid.RowSpan="2"
+                                        Grid.Column="4"
+                                        BackgroundColor="{StaticResource Cyan200Accent}"
+                                        Aspect="AspectFit"
+                                        Source="icons8_torrent_50.png"
+                                        BorderWidth="1"
+                                        CornerRadius="15"
+                                        
+                                        HorizontalOptions="Center"
+                                        Scale="1"
+                                        Clicked="ScaleButton"
+                                    >
+                                        <ImageButton.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:SubTitleSearchViewModel}}, Path=DownloadSubtitleCommand  }"
+                                                CommandParameter="{Binding}"
+                                            />
+                                        </ImageButton.GestureRecognizers>
+
+                                    </ImageButton>
+
+                                </Grid>
+
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+        </ScrollView>
+
+    </StackLayout>
+
+</ContentPage>

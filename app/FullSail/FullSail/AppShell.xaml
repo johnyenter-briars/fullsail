@@ -50,11 +50,19 @@
         </Tab>
     </FlyoutItem>
     <FlyoutItem 
-                Title="Search" 
+                Title="Torrent Search" 
                 Icon="icons8_search_more_50.png"
                 >
         <Tab>
             <ShellContent  Route="torrentSearch" ContentTemplate="{DataTemplate local:TorrentSearchPage}" />
+        </Tab>
+    </FlyoutItem>
+    <FlyoutItem 
+                Title="Subtitle Search" 
+                Icon="icons8_subtitle_better_64.png"
+                >
+        <Tab>
+            <ShellContent  Route="subtitleSearch" ContentTemplate="{DataTemplate local:SubtitleSearchPage}" />
         </Tab>
     </FlyoutItem>
     <FlyoutItem 
