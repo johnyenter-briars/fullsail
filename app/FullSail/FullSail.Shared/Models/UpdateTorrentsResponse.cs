@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FullSail.Shared.Models;
-public class UpdateTorrentsResponse
+public class UpdateTorrentsResponse : FullSailResponse
 {
-	public string Message { get; set; }
 }

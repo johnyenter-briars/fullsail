@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FullSail.Shared.Models;
-public class UpdateFileMediaSystemResponse : FullSailResponse
+
+public enum SubtitleSearchWebsite
 {
-    public List<string> Jobs { get; set; }
+    opensubtitles,
 }
