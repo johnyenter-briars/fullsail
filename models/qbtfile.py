@@ -255,4 +255,3 @@ def current_torrents_response_from_dict(s: Any) -> List[QBTFile]:
 
 def current_torrents_response_to_dict(x: List[QBTFile]) -> Any:
     return from_list(lambda x: to_class(QBTFile, x), x)
-

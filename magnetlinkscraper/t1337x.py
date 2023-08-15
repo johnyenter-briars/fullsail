@@ -3,10 +3,10 @@ from bs4 import BeautifulSoup as bs
 import requests
 import re
 
-from models import SearchResult
+from models import MagnetLinkSearchResult
 
 
-def t1337x_search(query) -> List[SearchResult]:
+def t1337x_search(query) -> List[MagnetLinkSearchResult]:
     url = 'https://1337x.to/search/'+query+'/1/'
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.2840.71 Safari/539.36'}
@@ -30,20 +30,20 @@ def t1337x_search(query) -> List[SearchResult]:
             magnet_links.append(magnet_link)
             names.append(a_tag.text)
             downloads.append(None)
-    
-    for td in soup.find_all('td', {'class':'coll-2 seeds'}):
+
+    for td in soup.find_all('td', {'class': 'coll-2 seeds'}):
         seeders.append(td.text)
 
-    for td in soup.find_all('td', {'class':'coll-3 leeches'}):
+    for td in soup.find_all('td', {'class': 'coll-3 leeches'}):
         leechers.append(td.text)
 
-    for td in soup.find_all('td', {'class':'coll-date'}):
+    for td in soup.find_all('td', {'class': 'coll-date'}):
         date_posteds.append(td.text)
-    
-    for td in soup.find_all('td', {'class':'coll-4 size mob-user'}):
+
+    for td in soup.find_all('td', {'class': 'coll-4 size mob-user'}):
         sizes.append(td.next)
-    
-    return [SearchResult(magnet_link, number_seeders, number_leechers, name, download, size, date_posted) for
+
+    return [MagnetLinkSearchResult(magnet_link, number_seeders, number_leechers, name, download, size, date_posted) for
             magnet_link, number_seeders, number_leechers, name, download, size, date_posted in
             zip(magnet_links, seeders, leechers, names, downloads, sizes, date_posteds)]
 
@@ -59,4 +59,3 @@ def get_magnet_link(ch_url):
         b = link.get('href')
         if re.match("^magnet:", b):
             return b
-

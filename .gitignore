@@ -7,3 +7,5 @@ test.json
 *.pyc
 cache.json
 *.pem
+run.bat
+temp/

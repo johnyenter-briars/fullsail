@@ -18,7 +18,7 @@ from mediatransfer.listfilesmediasystem import list_files_mediasystem
 from mediatransfer.movefilemediastore import move_item
 from mediatransfer.sendfile import send_file_to_laptop
 from qbittorrentinterface import delete_torrent, get_running_torrents, pause_torrent, add_torrent, resume_torrent
-from subtitle_api import SubtitleAPI
+from subtitle_api.opensubtitles import open_subtitles_search
 
 media_transfer_jobs = []
 
@@ -202,7 +202,7 @@ async def _delete_torrents(request):
     return web.json_response({"message": "torrents deleted"})
 
 
-@routes.get('/api/search/{torrent_site}/{search_term}')
+@routes.get('/api/search/magnetlink/{torrent_site}/{search_term}')
 async def _search_torrents(request):
     search_term = request.match_info['search_term']
     torrent_site = request.match_info['torrent_site']
@@ -216,14 +216,13 @@ async def _search_torrents(request):
 
     return web.json_response(results)
 
-@routes.get('/api/search/subtitle')
+
+@routes.get('/api/search/subtitle/{search_term}')
 async def _search_subtitles(request):
-    subscene = SubtitleAPI('english') # pass languages you want to have in results
+    search_term = request.match_info['search_term']
+    results = open_subtitles_search(search_term)
 
-    subscene.movie(title='Tenet',year=2020,release_type='bluray')
-    subscene.download()
-
-    return web.json_response(None)
+    return web.json_response(results)
 
 
 @web.middleware

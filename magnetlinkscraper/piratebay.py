@@ -2,10 +2,10 @@ from typing import List
 from bs4 import BeautifulSoup as bs
 import requests
 import re
-from models import SearchResult
+from models import MagnetLinkSearchResult
 
 
-def piratebay_search(query) -> List[SearchResult]:
+def piratebay_search(query) -> List[MagnetLinkSearchResult]:
     query = query.replace("+", " ")
     url = f'https://tpb.party/search/{query}/1/99/0'
     headers = {
@@ -52,6 +52,6 @@ def piratebay_search(query) -> List[SearchResult]:
         size = f"{size_split[2]} {size_split[3]}"
         sizes.append(size)
 
-    return [SearchResult(magnet_link, number_seeders, number_leechers, name, download, size, date_posted) for
+    return [MagnetLinkSearchResult(magnet_link, number_seeders, number_leechers, name, download, size, date_posted) for
             magnet_link, number_seeders, number_leechers, name, download, size, date_posted in
             zip(magnet_links, seeders, leechers, names, downloads, sizes, date_posteds)]
