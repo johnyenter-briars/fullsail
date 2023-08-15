@@ -18,7 +18,7 @@ from mediatransfer.listfilesmediasystem import list_files_mediasystem
 from mediatransfer.movefilemediastore import move_item
 from mediatransfer.sendfile import send_file_to_laptop
 from qbittorrentinterface import delete_torrent, get_running_torrents, pause_torrent, add_torrent, resume_torrent
-from subtitle_api.opensubtitles import open_subtitles_search
+from subtitle_api.opensubtitles import open_subtitles_download, open_subtitles_search
 
 media_transfer_jobs = []
 
@@ -215,6 +215,17 @@ async def _search_torrents(request):
         results = piratebay_search(search_term)
 
     return web.json_response(results)
+
+@routes.post('/api/subtitle/download/{type}/{link}')
+async def _download_subtitle(request):
+    subtitle_type = request.match_info['type']
+    link = request.match_info['link']
+
+    if subtitle_type == "opensubtitles":
+        open_subtitles_download(link)
+
+    return web.json_response({"message": "man I hope this works"})
+
 
 
 @routes.get('/api/search/subtitle/{search_term}')

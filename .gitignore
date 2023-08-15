@@ -9,3 +9,4 @@ cache.json
 *.pem
 run.bat
 temp/
+subs/
