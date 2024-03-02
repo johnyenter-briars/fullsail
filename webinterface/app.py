@@ -37,7 +37,6 @@ def vpn_running() -> Tuple[bool, str]:
         stderr=subprocess.STDOUT
     )
 
-    vpn_status = str(ps_output).split(": ")[1]
     proton_running = "protonvpn" in str(ps_output)
 
     if not proton_running:
