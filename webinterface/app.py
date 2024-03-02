@@ -19,40 +19,43 @@ from mediatransfer.movefilemediastore import move_item
 from mediatransfer.sendfile import send_file_to_laptop
 from qbittorrentinterface import delete_torrent, get_running_torrents, pause_torrent, add_torrent, resume_torrent
 from subtitle_api.opensubtitles import open_subtitles_download, open_subtitles_search
+from types import Tuple
+import re
 
 media_transfer_jobs = []
 
 routes = web.RouteTableDef()
 
 
-def nord_running():
-    output = subprocess.check_output(
-        f'nordvpn status | grep Status',
-        shell=True,  # Let this run in the shell
+def vpn_running() -> Tuple[bool, str]:
+    country = ""
+    connected = False
+
+    ps_output = subprocess.check_output(
+        f'ps -aux | grep openvpn',
+        shell=True, 
         stderr=subprocess.STDOUT
     )
 
-    nord_status = str(output).split(": ")[1]
+    vpn_status = str(ps_output).split(": ")[1]
+    proton_running = "protonvpn" in str(ps_output)
 
-    country = ""
-    connected = False
-    if "Connected" in nord_status:
-        output = subprocess.check_output(
-            f'nordvpn status | grep Country',
-            shell=True,  # Let this run in the shell
-            stderr=subprocess.STDOUT
-        )
+    if not proton_running:
+        return (False, country)
 
-        country = str(output).split(": ")[1].replace(
-            "\\n", "").replace("'", "")
-        connected = True
+    pattern = r'--config ([a-zA-Z0-9-]+)\.'
 
-    return (connected, country)
+    match = re.search(pattern, ps_output.decode())
 
+    if match:
+        vpn_location = match.group(1).split('-')[0]
+        return (True, vpn_location)
+    else:
+        return (False, "")
 
 @routes.get('/api/healthcheck')
 async def _health_check(request):
-    connected, country = nord_running()
+    connected, country = vpn_running()
 
     cpu_usage = psutil.cpu_percent()
     gb_memory = psutil.virtual_memory()[3]/1000000000
@@ -160,8 +163,8 @@ async def _list_torrents(request):
 
 @routes.post('/api/torrents/add')
 async def _add_torrents(request):
-    if fsconfig.CONFIG["check-nord"] and not nord_running()[0]:
-        print("Nord is not running!")
+    if fsconfig.CONFIG["check-vpn"] and not vpn_running()[0]:
+        print("VPN is not running!")
         raise web.HTTPInternalServerError
 
     r = await request.json()
@@ -252,8 +255,8 @@ async def api_key_middleware(request: web.Request,
 
 
 def start_webinterface(config: dict):
-    if fsconfig.CONFIG["check-nord"] and not nord_running()[0]:
-        raise Exception("Nord is not running!")
+    if fsconfig.CONFIG["check-vpn"] and not vpn_running()[0]:
+        raise Exception("VPN is not running!")
 
     host_name = fsconfig.CONFIG["fullsail-hostname"]
     port = fsconfig.CONFIG["fullsail-port"]
