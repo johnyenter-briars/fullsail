@@ -19,7 +19,7 @@ from mediatransfer.movefilemediastore import move_item
 from mediatransfer.sendfile import send_file_to_laptop
 from qbittorrentinterface import delete_torrent, get_running_torrents, pause_torrent, add_torrent, resume_torrent
 from subtitle_api.opensubtitles import open_subtitles_download, open_subtitles_search
-from types import Tuple
+from typing import Tuple
 import re
 
 media_transfer_jobs = []
