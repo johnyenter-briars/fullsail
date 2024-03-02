@@ -50,7 +50,7 @@ def vpn_running() -> Tuple[bool, str]:
         vpn_location = match.group(1).split('-')[0]
 
         try:
-            subprocess.check_output(['ping', '-c', '1', '-W', '2', '8.8.8.8'])
+            subprocess.run(['ping', '-c', '3', '8.8.8.8'], check=True)
             return (True, vpn_location)
         except subprocess.CalledProcessError:
             return (False, "")
