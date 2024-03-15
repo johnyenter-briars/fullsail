@@ -65,9 +65,9 @@
         var username = await localStorage.GetItemAsStringAsync("username");
         var password = await localStorage.GetItemAsStringAsync("password");
 
-        kodiApiSettings.hostname = hostname;
+        kodiApiSettings.hostname = hostname.Replace("\"", "");
         kodiApiSettings.port = port;
-        kodiApiSettings.username = username;
-        kodiApiSettings.password = password;
+        kodiApiSettings.username = username.Replace("\"", "");
+        kodiApiSettings.password = password.Replace("\"", "");
     }
 }
