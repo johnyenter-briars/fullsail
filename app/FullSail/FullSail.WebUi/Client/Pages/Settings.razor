@@ -58,4 +58,16 @@
             await localStorage.SetItemAsync("password", kodiApiSettings.password);
         }
     }
+    protected override async Task OnInitializedAsync()
+    {
+        var hostname = await localStorage.GetItemAsStringAsync("hostname");
+        var port = await localStorage.GetItemAsync<int>("port");
+        var username = await localStorage.GetItemAsStringAsync("username");
+        var password = await localStorage.GetItemAsStringAsync("password");
+
+        kodiApiSettings.hostname = hostname;
+        kodiApiSettings.port = port;
+        kodiApiSettings.username = username;
+        kodiApiSettings.password = password;
+    }
 }
