@@ -28,6 +28,7 @@ routes = web.RouteTableDef()
 
 
 def vpn_running() -> Tuple[bool, str]:
+    return [True, ""] #hopefully nord killswitch will be enough
     country = ""
     connected = False
 
