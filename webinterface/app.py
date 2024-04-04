@@ -27,36 +27,30 @@ media_transfer_jobs = []
 routes = web.RouteTableDef()
 
 
-def vpn_running() -> Tuple[bool, str]:
-    return [True, ""] #hopefully nord killswitch will be enough
-    country = ""
-    connected = False
-
-    ps_output = subprocess.check_output(
-        f'ps -aux | grep openvpn',
-        shell=True, 
+def nord_running() -> Tuple[bool, str]:
+    output = subprocess.check_output(
+        f'nordvpn status | grep Status',
+        shell=True,  # Let this run in the shell
         stderr=subprocess.STDOUT
     )
 
-    proton_running = "protonvpn" in str(ps_output)
+    nord_status = str(output).split(": ")[1]
 
-    if not proton_running:
-        return (False, country)
+    country = ""
+    connected = False
+    if "Connected" in nord_status:
+        output = subprocess.check_output(
+            f'nordvpn status | grep Country',
+            shell=True,  # Let this run in the shell
+            stderr=subprocess.STDOUT
+        )
 
-    pattern = r'--config ([a-zA-Z0-9-]+)\.'
+        country = str(output).split(": ")[1].replace(
+            "\\n", "").replace("'", "")
+        connected = True
 
-    match = re.search(pattern, ps_output.decode())
+    return (connected, country)
 
-    if match:
-        vpn_location = match.group(1).split('-')[0]
-
-        try:
-            subprocess.run(['ping', '-c', '3', '8.8.8.8'], check=True)
-            return (True, vpn_location)
-        except subprocess.CalledProcessError:
-            return (False, "")
-    else:
-        return (False, "")
 
 @routes.get('/api/healthcheck')
 async def _health_check(request):
