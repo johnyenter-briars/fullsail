@@ -27,7 +27,7 @@ media_transfer_jobs = []
 routes = web.RouteTableDef()
 
 
-def nord_running() -> Tuple[bool, str]:
+def vpn_running() -> Tuple[bool, str]:
     output = subprocess.check_output(
         f'nordvpn status | grep Status',
         shell=True,  # Let this run in the shell
